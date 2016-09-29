@@ -1,6 +1,6 @@
 package test.edu.training.first.action;
 
-import edu.training.first.Exception.IncorrectTriagleException;
+import edu.training.first.exception.IncorrectTriagleException;
 import edu.training.first.action.Checker;
 import edu.training.first.entity.Point;
 import edu.training.first.entity.Triangle;

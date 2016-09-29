@@ -1,6 +1,6 @@
 package edu.training.first.action;
 
-import edu.training.first.Exception.IncorrectTriagleException;
+import edu.training.first.exception.IncorrectTriagleException;
 import edu.training.first.entity.Triangle;
 
 /**
@@ -26,9 +26,10 @@ public class Checker {
         if (!Checker.checkTriangle(triangle)){
             throw new IncorrectTriagleException(triangle + " is not correct.");
         }
-        double sideFirst = TriangleAction.calculateSide(triangle.getPointFirst(), triangle.getPointSecond());
-        double sideSecond = TriangleAction.calculateSide(triangle.getPointFirst(), triangle.getPointThird());
-        double sideThird = TriangleAction.calculateSide(triangle.getPointThird(), triangle.getPointSecond());
+        TriangleAction triangleAction = new TriangleAction();
+        double sideFirst = triangleAction.calculateSide(triangle.getPointFirst(), triangle.getPointSecond());
+        double sideSecond = triangleAction.calculateSide(triangle.getPointFirst(), triangle.getPointThird());
+        double sideThird = triangleAction.calculateSide(triangle.getPointThird(), triangle.getPointSecond());
         if (sideFirst * sideFirst + sideSecond * sideSecond == sideThird * sideThird ||
                 sideFirst * sideFirst + sideThird * sideThird == sideSecond * sideSecond ||
                 sideThird * sideThird + sideSecond * sideSecond == sideFirst * sideFirst) {

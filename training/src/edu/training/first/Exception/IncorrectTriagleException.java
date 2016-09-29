@@ -1,4 +1,4 @@
-package edu.training.first.Exception;
+package edu.training.first.exception;
 
 /**
  * Created by Dell on 26.09.2016.
