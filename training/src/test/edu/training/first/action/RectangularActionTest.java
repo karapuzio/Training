@@ -1,10 +1,9 @@
 package test.edu.training.first.action;
 
-import edu.training.first.exception.IncorrectTriagleException;
 import edu.training.first.action.Checker;
 import edu.training.first.entity.Point;
 import edu.training.first.entity.Triangle;
-import org.apache.logging.log4j.LogManager;
+import edu.training.first.exception.IncorrectTriagleException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,8 +11,6 @@ import org.junit.Test;
  * Created by Dell on 26.09.2016.
  */
 public class RectangularActionTest {
-    private static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger(RectangularActionTest.class);
-
     @Test
     public void checkRectangularTest(){
         Point pointFirst = new Point(0, 0);
