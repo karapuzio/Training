@@ -1,5 +1,8 @@
 package edu.training.second.entity;
 
+import edu.training.second.type.TypeCovering;
+import edu.training.second.type.TypeDough;
+
 /**
  * Created by Dell on 25.09.2016.
  */

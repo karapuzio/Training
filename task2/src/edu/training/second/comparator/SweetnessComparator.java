@@ -1,4 +1,6 @@
-package edu.training.second.entity;
+package edu.training.second.comparator;
+
+import edu.training.second.entity.Sweetness;
 
 import java.util.Comparator;
 

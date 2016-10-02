@@ -1,5 +1,7 @@
 package edu.training.second.entity;
 
+import edu.training.second.type.TypeCandy;
+
 /**
  * Created by Dell on 25.09.2016.
  */

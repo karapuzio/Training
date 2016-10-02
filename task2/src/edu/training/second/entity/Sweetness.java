@@ -41,7 +41,7 @@ public abstract class Sweetness {
 
     @Override
     public String toString() {
-        return "Candies{" +
+        return "Sweetness{" +
                 "weightPerUnit=" + weightPerUnit +
                 ", sugary=" + sugary +
                 ", calorific=" + calorific +

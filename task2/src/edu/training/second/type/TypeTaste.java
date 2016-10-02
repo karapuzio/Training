@@ -1,4 +1,4 @@
-package edu.training.second.entity;
+package edu.training.second.type;
 
 /**
  * Created by Dell on 25.09.2016.

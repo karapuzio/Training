@@ -1,8 +1,11 @@
 package edu.training.second.action;
 
+import edu.training.second.comparator.SweetnessComparator;
 import edu.training.second.entity.ChristmasPresent;
 import edu.training.second.entity.Sweetness;
 import edu.training.second.exception.ParametrException;
+
+import java.util.Collections;
 
 /**
  * Created by Dell on 25.09.2016.
@@ -23,5 +26,10 @@ public class PresentAction {
             }
         }
         throw new ParametrException("Do not find candy. Not correct bounds!");
+    }
+
+    public void sortBySugary(ChristmasPresent christmasPresent){
+        SweetnessComparator comparator = new SweetnessComparator();
+        Collections.sort(christmasPresent.getPresent(), comparator);
     }
 }
