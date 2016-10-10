@@ -5,14 +5,10 @@ import edu.training.second.type.TypeCandy;
 /**
  * Created by Dell on 25.09.2016.
  */
-public class Candies extends Sweetness{
+public class Candy extends Sweetness{
     private TypeCandy typeCandy;
 
-    public Candies(){
-        this(30, 10, 10, TypeCandy.CARAMEL);
-    }
-
-    public Candies(int weightPerUnit, int sugary, int calorific, TypeCandy typeCandy) {
+    public Candy(int weightPerUnit, int sugary, int calorific, TypeCandy typeCandy) {
         super(weightPerUnit, sugary, calorific);
         this.typeCandy = typeCandy;
     }
@@ -27,7 +23,7 @@ public class Candies extends Sweetness{
 
     @Override
     public String toString() {
-        return "Candies{" +
+        return "Candy{" +
                 super.toString() +
                 ", typeCandy=" + typeCandy +
                 '}';

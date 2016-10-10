@@ -1,5 +1,7 @@
 candy 30 20 60 caramel
 cooke 10 90 120 dry simple
-zephyr 35 37 85 glazed cream
+zephyr 35 37 85 cream glazed
 candy 50 20 40 jelly
-zephyr 35 27 85 semiglazed walnut
+asdf  asdfsadf
+sdfa ddfga
+zephyr 35 27 85 walnut semiglazed

@@ -3,7 +3,7 @@ package edu.training.second.action;
 import edu.training.second.comparator.SweetnessComparator;
 import edu.training.second.entity.ChristmasPresent;
 import edu.training.second.entity.Sweetness;
-import edu.training.second.exception.ParametrException;
+import edu.training.second.exception.ParameterException;
 
 import java.util.Collections;
 
@@ -19,13 +19,13 @@ public class PresentAction {
         return weight;
     }
 
-    public Sweetness findCandy(ChristmasPresent christmasPresent, int lowerLevel, int topLevel) throws ParametrException{
+    public Sweetness findCandy(ChristmasPresent christmasPresent, int lowerLevel, int topLevel) throws ParameterException {
         for (Sweetness sweetness : christmasPresent.getPresent()){
             if (sweetness.getSugary() >= lowerLevel && sweetness.getSugary() <= topLevel){
                 return sweetness;
             }
         }
-        throw new ParametrException("Do not find candy. Not correct bounds!");
+        throw new ParameterException("Do not find candy. Not correct bounds!");
     }
 
     public void sortBySugary(ChristmasPresent christmasPresent){

@@ -11,10 +11,6 @@ public class Zephyr extends Sweetness{
     private TypeCovering covering;
     private TypeTaste taste;
 
-    public Zephyr(){
-        this(50, 25, 20, TypeCovering.SEMIGLAZED, TypeTaste.CAPPUCCINO);
-    }
-
     public Zephyr(int weightPerUnit, int sugary, int calorific, TypeCovering covering, TypeTaste taste) {
         super(weightPerUnit, sugary, calorific);
         this.covering = covering;

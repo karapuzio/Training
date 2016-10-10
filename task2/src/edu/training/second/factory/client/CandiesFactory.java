@@ -1,6 +1,7 @@
 package edu.training.second.factory.client;
 
-import edu.training.second.entity.Candies;
+import edu.training.second.entity.Candy;
+import edu.training.second.exception.ParameterException;
 import edu.training.second.type.TypeCandy;
 
 /**
@@ -8,16 +9,18 @@ import edu.training.second.type.TypeCandy;
  */
 public class CandiesFactory extends AbstractSweetnessFactory{
     @Override
-    public Candies createSweetness(String[] paramenters) {
+    public Candy createSweetness(String... parameters) throws ParameterException {
+        Candy candy;
         try {
-            int weight = Integer.parseInt(paramenters[1]);
-            int sugary = Integer.parseInt(paramenters[2]);
-            int calorific = Integer.parseInt(paramenters[3]);
-            TypeCandy typeCandy = TypeCandy.valueOf(paramenters[4].toUpperCase());
-            return new Candies(weight, sugary, calorific, typeCandy);
+            int weight = Integer.parseInt(parameters[weightParameter]);
+            int sugary = Integer.parseInt(parameters[sugaryParameter]);
+            int calorific = Integer.parseInt(parameters[calorificParameter]);
+            TypeCandy typeCandy = TypeCandy.valueOf(parameters[typeCandyParameter].toUpperCase());
+            candy = new Candy(weight, sugary, calorific, typeCandy);
         }
         catch (IndexOutOfBoundsException | IllegalArgumentException ex){
-            return new Candies();
+            throw new ParameterException("Not correct candy.");
         }
+        return candy;
     }
 }

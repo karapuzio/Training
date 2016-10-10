@@ -2,8 +2,8 @@ package test.edu.training.second.action;
 
 import edu.training.second.action.PresentAction;
 import edu.training.second.entity.ChristmasPresent;
-import junit.framework.Assert;
 import org.junit.Test;
+import org.junit.Assert;
 
 /**
  * Created by Dell on 03.10.2016.
@@ -13,18 +13,21 @@ public class PresentCalculateWeightTest {
 
     @Test
     public void checkPresentCalculateWeightTrue(){
-        ChristmasPresent christmasPresent = new ChristmasPresent("test/test1.txt");
+        String fileName = "test/test1.txt";
+        ChristmasPresent christmasPresent = new ChristmasPresent(fileName);
         presentAction = new PresentAction();
         int actual = presentAction.calculateWeight(christmasPresent);
-        Assert.assertEquals(actual, 160);
+        int expected = 90;
+        Assert.assertEquals(actual, expected);
     }
-
 
     @Test
     public void checkPresentCalculateWeightFalse(){
-        ChristmasPresent christmasPresent = new ChristmasPresent("test/test2.txt");
+        String fileName = "test/test1.txt";
+        ChristmasPresent christmasPresent = new ChristmasPresent(fileName);
         presentAction = new PresentAction();
         int actual = presentAction.calculateWeight(christmasPresent);
-        Assert.assertNotSame(actual, 100);
+        int expected = 100;
+        Assert.assertNotSame(actual, expected);
     }
 }
