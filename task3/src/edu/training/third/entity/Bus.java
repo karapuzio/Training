@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Bus extends Thread{
     private Route route;
     private AtomicInteger numberOfPeople;
-    public static final int maxNumberOfPeople = 80;
+    public static final int MAX_NUMBER_OF_PEOPLE = 80;
     private static final BusStopAction BUS_STOP_ACTION = new BusStopAction();
     private static final Logger LOGGER = LogManager.getLogger(Bus.class);
 

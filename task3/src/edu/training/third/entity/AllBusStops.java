@@ -21,10 +21,10 @@ public class AllBusStops {
     }
 
     public static AllBusStops getInstance(){
-        if (!instanceCreated.get()){
+        if (!instanceCreated.getAndSet(true)){
             lock.lock();
             try{
-                if (!instanceCreated.getAndSet(true)){
+                if (instance == null){
                     instance = new AllBusStops(BusStopsReader.busStopsReader(FILE_NAME));
                 }
             }

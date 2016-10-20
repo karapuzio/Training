@@ -29,8 +29,8 @@ public class BusStopAction {
             {
                 numberPeopleEnterTheBus = new Random().nextInt(busStop.getNumberOfPeople().get());
             }
-            if (bus.getNumberOfPeople().get() - numberPeopleLeaveTheBus + numberPeopleEnterTheBus > Bus.maxNumberOfPeople){
-                numberPeopleEnterTheBus = Bus.maxNumberOfPeople - bus.getNumberOfPeople().get() + numberPeopleLeaveTheBus;
+            if (bus.getNumberOfPeople().get() - numberPeopleLeaveTheBus + numberPeopleEnterTheBus > Bus.MAX_NUMBER_OF_PEOPLE){
+                numberPeopleEnterTheBus = Bus.MAX_NUMBER_OF_PEOPLE - bus.getNumberOfPeople().get() + numberPeopleLeaveTheBus;
             }
             bus.setNumberOfPeople(new AtomicInteger(bus.getNumberOfPeople().get() - numberPeopleLeaveTheBus + numberPeopleEnterTheBus));
             busStop.setNumberOfPeople(new AtomicInteger(busStop.getNumberOfPeople().get() + numberPeopleLeaveTheBus - numberPeopleEnterTheBus));

@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Demo {
     private static final Logger LOGGER = LogManager.getLogger(Demo.class);
-    private static final int numberOfBuses = 5;
+    private static final int NUMBER_OF_BUSES = 5;
     private static final int MAX_LENGTH_ROUTE = 20;
 
     public static void main(String... args){
@@ -28,7 +28,7 @@ public class Demo {
         int numberOfAllStops = busStops.size();
         List<Bus> buses = new ArrayList<>();
         Random random = new Random();
-        for (int i = 0; i < numberOfBuses; i++){
+        for (int i = 0; i < NUMBER_OF_BUSES; i++){
             int lengthRoute = random.nextInt(MAX_LENGTH_ROUTE);
             List<BusStop> busStopsList = new ArrayList<>();
             for (int j = 0; j < lengthRoute; j++){
@@ -36,7 +36,7 @@ public class Demo {
                 busStopsList.add(busStops.get(index));
             }
             Route route = new Route(busStopsList);
-            buses.add(new Bus(route, new AtomicInteger(random.nextInt(Bus.maxNumberOfPeople))));
+            buses.add(new Bus(route, new AtomicInteger(random.nextInt(Bus.MAX_NUMBER_OF_PEOPLE))));
         }
         for (Bus bus : buses){
             bus.start();
