@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://edu.com/Candies"
+        xmlns:tns="http://edu.com/Candies"
+        elementFormDefault="qualified">
+
+    <element name="sweetness" type="tns:sweetness" abstract="true" />
+    <element name="candy" type="tns:candy" substitutionGroup="tns:sweetness" />
+
+    <element name="candies">
+        <complexType>
+            <sequence>
+                <element ref="tns:sweetness"
+                         minOccurs="1"
+                         maxOccurs="unbounded" />
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="sweetness">
+        <sequence>
+            <element name="energy" type="positiveInteger" />
+            <element name="type" type="tns:type" />
+            <element name="ingredient_list" type="tns:ingredient_list" />
+            <element name="value" type="tns:value" />
+            <element name="production" type="string" />
+        </sequence>
+    </complexType>
+
+    <complexType name="candy">
+        <complexContent>
+            <extension base="tns:sweetness">
+                <sequence>
+                    <element name="type" type="tns:type" />
+                </sequence>
+                <attribute name="id" type="tns:id" use="required" />
+                <attribute name="name" type="string" use="optional" default="Mars"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    
+    <simpleType name="id">
+        <restriction base="ID">
+            <pattern value="([a-zA-Z])[a-zA-Z0-9]{7,19}"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="type">
+        <restriction base="string">
+            <enumeration value="CHOCOLATE" />
+            <enumeration value="JELLY" />
+            <enumeration value="LOLLIPOP" />
+            <enumeration value="CARAMEL" />
+        </restriction>
+    </simpleType>
+
+    <complexType name="ingredient_list">
+        <sequence>
+            <element name="ingredient" type="tns:ingredient" />
+        </sequence>
+    </complexType>
+
+    <simpleType name="ingredient">
+        <restriction base="string">
+            <enumeration value="MILK" />
+            <enumeration value="SUGAR" />
+            <enumeration value="LECITHIN" />
+            <enumeration value="COCOA" />
+            <enumeration value="BUTTER" />
+            <enumeration value="SYRUP" />
+            <enumeration value="FRUIT_JUICE" />
+            <enumeration value="EGGS" />
+        </restriction>
+    </simpleType>
+
+    <complexType name="value">
+        <sequence>
+            <element name="proteins" type="positiveInteger" />
+            <element name="fats" type="positiveInteger" />
+            <element name="carbohydrates" type="positiveInteger" />
+        </sequence>
+    </complexType>
+</schema>

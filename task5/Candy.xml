@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <candies>
+        <candy id="1" name="ChocolateNugauti">
+            <energy>420</energy>
+            <type>CHOCOLATE</type>
+            <ingredient_list>
+                <ingredient>MILK</ingredient>
+                <ingredient>EGGS</ingredient>
+                <ingredient>SUGAR</ingredient>
+                <ingredient>COCOA</ingredient>
+                <ingredient>BUTTER</ingredient>
+                <ingredient>LECITHIN</ingredient>
+            </ingredient_list>
+            <value>
+                <proteins>20</proteins>
+                <fats>40</fats>
+                <carbohydrates>45</carbohydrates>
+            </value>
+            <production>Cote D'or</production>
+        </candy>
+       <candy id="3" name="CrazyBee">
+            <energy>300</energy>
+            <type>JELLY</type>
+            <ingredient_list>
+                <ingredient>MILK</ingredient>
+                <ingredient>EGGS</ingredient>
+                <ingredient>SUGAR</ingredient>
+                <ingredient>FRUIT_JUICE</ingredient>
+                <ingredient>LECITHIN</ingredient>
+                <ingredient>SYRUP</ingredient>
+            </ingredient_list>
+            <value>
+                <proteins>20</proteins>
+                <fats>40</fats>
+              <carbohydrates>45</carbohydrates>
+            </value>
+        <production>Cote D'or</production>
+    </candy>
+    </candies>
