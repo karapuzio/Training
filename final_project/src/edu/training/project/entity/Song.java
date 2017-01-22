@@ -1,6 +1,7 @@
 package edu.training.project.entity;
 
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +18,9 @@ public class Song {
 
     private List<MusicGenre> genres;
     private List<Comment> comments;
+
+    public Song(){
+    }
 
     public Song(int id, String name, Date releaseDate, int numberOfOrders, String pathToDemo, String pathToText, int musicalGenreId, int discountForSong, double cost) {
         this.id = id;

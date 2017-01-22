@@ -5,6 +5,7 @@ import edu.training.project.dao.pool.ConnectionPool;
 import edu.training.project.entity.Order;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -22,7 +23,7 @@ public class OrderDAO {
             statement = connection.prepareStatement(SQL_ADD_ORDER);
             statement.setInt(1, order.getId());
             statement.setDouble(2, order.getCost());
-            statement.setDate(3, order.getDateOfOrder());
+            statement.setDate(3, new Date(order.getDateOfOrder().getTime()));
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Exception in DAO : add genre.");

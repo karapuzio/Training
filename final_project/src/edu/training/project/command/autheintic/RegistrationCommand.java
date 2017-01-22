@@ -2,7 +2,6 @@ package edu.training.project.command.autheintic;
 
 import edu.training.project.command.AbstractCommand;
 import edu.training.project.command.exception.ServiceException;
-import edu.training.project.controller.ConfigurationManager;
 import edu.training.project.dao.UserDAO;
 import edu.training.project.dao.exception.DAOException;
 import edu.training.project.entity.User;
@@ -23,7 +22,8 @@ public class RegistrationCommand extends AbstractCommand {
     private static final String PARAM_NAME_EMAIL = "email";
     private static final int MAX_LOGIN_LENGTH = 45;
     private static final int MAX_PASS_LENGTH = 20;
-
+    private static final String JSP_ERROR = "/jsp/error.jsp";
+    private static final String JSP_MAIN = "/jsp/home.jsp";
 
     @Override
     public String execute(HttpServletRequest request) throws ServiceException {
@@ -38,7 +38,7 @@ public class RegistrationCommand extends AbstractCommand {
                 || !pass.equals(confirmPass) || pass.length() > MAX_PASS_LENGTH) {
             throw new ServiceException("Service error : not correct parameters for login.");
         }
-        LOGGER.log(Level.DEBUG, "Check is succeeded");
+        LOGGER.log(Level.DEBUG, "Check is succeeded " + login + " " + pass + " " + confirmPass + " " + email);
         try {
             UserDAO userDAO = new UserDAO();
             User userCheck = userDAO.getUserByLogin(login);
@@ -50,8 +50,13 @@ public class RegistrationCommand extends AbstractCommand {
             user.setEmail(email);
             user.setPassword(pass);
 
+            LOGGER.log(Level.DEBUG, "User to add " + user);
+
             userDAO.addUser(user);
-            page = ConfigurationManager.getProperty("path.page.main");
+
+            LOGGER.log(Level.DEBUG, "Added ser " + user);
+            //page = ConfigurationManager.getProperty("path.page.main");
+            page = JSP_MAIN;
         } catch (DAOException e) {
             throw new ServiceException("Service error: registration is failed", e);
         }

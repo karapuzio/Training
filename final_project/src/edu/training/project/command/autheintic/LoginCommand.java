@@ -2,10 +2,10 @@ package edu.training.project.command.autheintic;
 
 import edu.training.project.command.AbstractCommand;
 import edu.training.project.command.exception.ServiceException;
-import edu.training.project.controller.ConfigurationManager;
 import edu.training.project.dao.UserDAO;
 import edu.training.project.dao.exception.DAOException;
 import edu.training.project.entity.User;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,6 +20,8 @@ public class LoginCommand extends AbstractCommand {
     private static final String PARAM_NAME_PASSWORD = "password";
     private static final int MAX_LOGIN_LENGTH = 45;
     private static final int MAX_PASS_LENGTH = 20;
+    private static final String JSP_ERROR = "/jsp/error.jsp";
+    private static final String JSP_MAIN = "/jsp/home.jsp";
 
     @Override
     public String execute(HttpServletRequest request) throws ServiceException{
@@ -33,14 +35,20 @@ public class LoginCommand extends AbstractCommand {
         }
         try {
             UserDAO userDAO = new UserDAO();
+            LOGGER.log(Level.DEBUG, "Begin execute login command" + " " + login + " " + pass);
             User user = userDAO.getUserByLogin(login);
+            LOGGER.log(Level.DEBUG, "Check login ans password" + user + " " + login + " " + pass);
             if (user == null) {
                 //  throw new
             }
             if (!user.getPassword().equals(pass)){
+                //page = JSP_ERROR;
+                //return page;
                 //TO DO
             }
-            page = ConfigurationManager.getProperty("path.page.main");
+            page = JSP_MAIN;
+            //page = ConfigurationManager.getProperty("path.page.main");
+            LOGGER.log(Level.DEBUG, "Page " + page);
         /*    HttpSession session = request.getSession(true);
             session.setAttribute(USER_ID_SESSION_ATTRIBUTE, user.getId());
             session.setAttribute(USER_STATUS_SESSION_ATTRIBUTE, user.getStatus());

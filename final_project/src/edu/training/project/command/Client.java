@@ -3,6 +3,7 @@ package edu.training.project.command;
 import edu.training.project.command.autheintic.LoginCommand;
 import edu.training.project.command.autheintic.LogoutCommand;
 import edu.training.project.command.autheintic.RegistrationCommand;
+import edu.training.project.command.song.SearchCommand;
 import edu.training.project.command.song.SongAddCommand;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -58,6 +59,13 @@ public class Client {
             case REGISTRATION:
                 LOGGER.log(Level.DEBUG, "Choose registration command.");
                 command = new RegistrationCommand();
+                break;
+            case SEARCH:
+                command = new SearchCommand();
+                break;
+            case EN:
+                break;
+            case NL:
                 break;
         }
         return command;

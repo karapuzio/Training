@@ -6,12 +6,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link rel="stylesheet" type="text/css" href="css/bootstrap.css"> -->
-
-    <!-- Website CSS style -->
-    <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
-
     <link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/style.css" />" rel="stylesheet">
 
     <title>Registration</title>
 </head>
@@ -22,7 +18,7 @@
                 <h1 class="text-center">Welcome to Music Center</h1>
             </div>
             <div class="modal-body">
-                <form name="RegistrationForm" class="modal-body" method="post" action="controller">
+                <form name="RegistrationForm" class="modal-body" method="post" action="/controller">
 
                     <input type="hidden" name="command" value="registration" />
 

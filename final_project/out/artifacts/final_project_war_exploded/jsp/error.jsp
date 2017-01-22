@@ -12,6 +12,9 @@
 <f:setBundle basename="locale" var="locale"/>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/style.css" />" rel="stylesheet">
     <title>Error page</title>
 </head>
 <body>

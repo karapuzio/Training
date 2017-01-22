@@ -21,6 +21,8 @@ import java.io.IOException;
 @WebServlet("/controller")
 public class Controller extends HttpServlet{
     private static final Logger LOGGER = LogManager.getLogger(Controller.class);
+    private static final String JSP_ERROR = "/jsp/error.jsp";
+    private static final String JSP_MAIN = "/jsp/home.jsp";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,12 +32,12 @@ public class Controller extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        //request.getRequestDispatcher("/jsp/home.jsp").forward(request, response);
     }
 
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response)
             throws ServletException, IOException {
-
         LOGGER.log(Level.DEBUG, "Enter to process Request");
         String page = null;
         // define commands, coming from JSP
@@ -49,16 +51,17 @@ public class Controller extends HttpServlet{
             page = command.execute(request);
             // method return answer page
             // page = null;
+            LOGGER.log(Level.DEBUG, "Page " + page);
             if (page != null) {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
                 // call answer page on request
                 dispatcher.forward(request, response);
             } else {
                 // install page with the error message
-                page = ConfigurationManager.getProperty("path.page.index");
-                request.getSession().setAttribute("nullPage",
-                        MessageManager.getProperty("message.nullpage"));
-                response.sendRedirect(request.getContextPath() + page);
+                //page = ConfigurationManager.getProperty("path.page.index");
+                //request.getSession().setAttribute("nullPage",
+                  //      MessageManager.getProperty("message.nullpage"));
+                response.sendRedirect(request.getContextPath() + JSP_ERROR);
             }
         }
         catch (ServiceException e){

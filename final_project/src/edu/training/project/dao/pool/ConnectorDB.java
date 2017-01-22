@@ -1,5 +1,9 @@
 package edu.training.project.dao.pool;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,7 +14,8 @@ import java.util.Properties;
  */
 
 class ConnectorDB {
-    private static final String url = "jdbc:mysql://localhost:3306/music_center";
+    private static final Logger LOGGER = LogManager.getLogger(ConnectorDB.class);
+    private static final String URL = "jdbc:mysql://localhost:3306/music_center";
     private static Properties prop = new Properties();
 
     static {
@@ -23,7 +28,9 @@ class ConnectorDB {
     }
 
     public Connection getConnection() throws SQLException {
-        Connection connection = DriverManager.getConnection(url, prop);
+        LOGGER.log(Level.DEBUG, "Get connection with DB");
+        Connection connection = DriverManager.getConnection(URL, prop);
+        LOGGER.log(Level.DEBUG, "Get connection with DB " + connection);
         return connection;
     }
 }
