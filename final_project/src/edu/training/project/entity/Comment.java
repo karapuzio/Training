@@ -5,7 +5,11 @@ package edu.training.project.entity;
  */
 public class Comment {
     private int id;
+    private int like;
     private String content;
+
+    public Comment(){
+    }
 
     public Comment(int id, String content) {
         this.id = id;

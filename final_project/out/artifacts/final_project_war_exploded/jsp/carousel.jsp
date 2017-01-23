@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<f:setLocale value="${requestScope.selectedLanguage}"/>
+<f:setLocale value="${requestScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
 <html>
 <head>

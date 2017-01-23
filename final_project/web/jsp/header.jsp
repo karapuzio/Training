@@ -36,11 +36,13 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <form class="navbar-form navbar-left" method="POST" action="/controller">
-                    <input type="hidden" name="command" value="EN"/>
+                    <input type="hidden" name="command" value="language_change"/>
+                    <input type="hidden" name="language" value="EN"/>
                     <input type="submit" class="btn btn-block btn-mg btn-link" value="EN"/>
                 </form>
                 <form class="navbar-form navbar-left" method="POST" action="/controller">
-                    <input type="hidden" name="command" value="NL"/>
+                    <input type="hidden" name="command" value="language_change"/>
+                    <input type="hidden" name="language" value="NL"/>
                     <input type="submit" class="btn btn-block btn-mg btn-link" value="NL"/>
                 </form>
                 <li><a href="basket.jsp"><span class="glyphicon glyphicon-log-in"></span> Basket</a></li>

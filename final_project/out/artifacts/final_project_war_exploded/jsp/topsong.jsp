@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Dell
-  Date: 22.01.2017
-  Time: 19:17
+  Date: 23.01.2017
+  Time: 12:42
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -15,9 +15,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
     <link href="<c:url value="/css/style.css" />" rel="stylesheet">
-    <title>Administration</title>
+    <title>Top Song</title>
 </head>
 <body>
-    <c:import url="header.jsp" />
+<aside class = "top_chart">
+    <h3> Top songs.</h3>
+    <div class="list-group">
+        <a href="#" class="list-group-item">Anberlin - Feel The Good Drag</a>
+        <a href="#" class="list-group-item">Anberlin - True Fait</a>
+        <a href="#" class="list-group-item">Rise Agains - Savior</a>
+    </div>
+</aside>
 </body>
 </html>

@@ -8,8 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<f:setLocale value="${requestScope.selectedLanguage}"/>
+<%--<c:choose>--%>
+    <%--<c:when test="${languege == 'nl'}">--%>
+        <%--<f:setLocale value="nl"/>--%>
+    <%--</c:when>--%>
+    <%--<c:otherwise>--%>
+        <%--<f:setLocale value="en"/>--%>
+    <%--</c:otherwise>--%>
+<%--</c:choose>--%>
+<%--<c:set var="language" scope="request">en_US</c:set>--%>
+<f:setLocale value="en" scope="session"/>
 <f:setBundle basename="locale" var="locale"/>
+<f:message bundle="${locale}" key="locale.password" var="password"/>
+<f:message bundle="${locale}" key="locale.registration" var="registration"/>
 <html>
 <head>
     <head>
@@ -35,14 +46,14 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="password" class="form-control input-lg" name="password" id="password" placeholder="Password"/>
+                        <input type="password" class="form-control input-lg" name="password" id="password" placeholder=${password}/>
                     </div>
 
                     <div class="form-group">
                         <input type="submit" class="btn btn-block btn-lg btn-primary" value="Login"/>
                     </div>
                     <div class="login-register">
-                        <a href="registration.jsp">Registration</a>
+                        <a href="registration.jsp">${registration}</a>
                     </div>
                 </form>
             </div>

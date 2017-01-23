@@ -1,8 +1,10 @@
 package edu.training.project.command;
 
+import edu.training.project.command.autheintic.LanguageChangeCommand;
 import edu.training.project.command.autheintic.LoginCommand;
 import edu.training.project.command.autheintic.LogoutCommand;
 import edu.training.project.command.autheintic.RegistrationCommand;
+import edu.training.project.command.comment.AddCommentCommand;
 import edu.training.project.command.song.SearchCommand;
 import edu.training.project.command.song.SongAddCommand;
 import org.apache.logging.log4j.Level;
@@ -63,9 +65,11 @@ public class Client {
             case SEARCH:
                 command = new SearchCommand();
                 break;
-            case EN:
+            case LANGUAGE_CHANGE:
+                command = new LanguageChangeCommand();
                 break;
-            case NL:
+            case ADD_COMMENT:
+                command = new AddCommentCommand();
                 break;
         }
         return command;

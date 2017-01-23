@@ -19,5 +19,30 @@
 </head>
 <body>
     <c:import url="header.jsp" />
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div class="col-sm-3 sidenav">
+                <c:import url="carousel.jsp" />
+                <p><a href="#">Link</a></p>
+                <p><a href="#">Link</a></p>
+                <p><a href="#">Link</a></p>
+            </div>
+            <div class="col-sm-6 text-left">
+                <section>
+
+                </section>
+            </div>
+            <div class="col-sm-3 sidenav">
+                <c:import url="topsong.jsp"/>
+                <div class="well">
+                    <p>ADS</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="container-fluid text-center">
+        <p>Footer Text</p>
+    </footer>
 </body>
 </html>

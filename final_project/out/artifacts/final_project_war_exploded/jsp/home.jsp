@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<f:setLocale value="${requestScope.selectedLanguage}"/>
+<f:setLocale value="${requestScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
 <html>
 <head>
@@ -29,7 +29,7 @@
             </div>
             <div class="col-sm-6 text-left">
                 <section>
-                    <form class="navbar-form navbar-left" action="/controller">
+                    <form class="navbar-form navbar-left" action="/controller" method="POST">
                         <input type="hidden" name="command" value="search" />
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" id="search" placeholder="Search">
@@ -66,14 +66,7 @@
                 </section>
             </div>
             <div class="col-sm-3 sidenav">
-                <aside class = "top_chart">
-                    <h3> Top songs.</h3>
-                    <div class="list-group">
-                        <a href="#" class="list-group-item">Anberlin - Feel The Good Drag</a>
-                        <a href="#" class="list-group-item">Anberlin - True Fait</a>
-                        <a href="#" class="list-group-item">Rise Agains - Savior</a>
-                    </div>
-                </aside>
+                <c:import url="topsong.jsp"/>
                 <div class="well">
                     <p>ADS</p>
                 </div>
