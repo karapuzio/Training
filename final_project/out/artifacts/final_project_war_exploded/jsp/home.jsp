@@ -10,12 +10,14 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <f:setLocale value="${requestScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
+<f:message bundle="${locale}" key="locale.musicCenter" var="musicCenter"/>
+<f:message bundle="${locale}" key="locale.search" var="search"/>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
     <link href="<c:url value="/css/style.css" />" rel="stylesheet">
-    <title>Music center</title>
+    <title>${musicCenter}</title>
 </head>
 <body>
     <c:import url="header.jsp" />
@@ -32,7 +34,7 @@
                     <form class="navbar-form navbar-left" action="/controller" method="POST">
                         <input type="hidden" name="command" value="search" />
                         <div class="input-group">
-                            <input type="text" class="form-control" name="search" id="search" placeholder="Search">
+                            <input type="text" class="form-control" name="search" id="search" placeholder=${search}>
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit">
                                     <i class="glyphicon glyphicon-search"></i>
@@ -42,23 +44,22 @@
                     </form>
                     <br><br><br><br>
                     <table class="table table-hover">
-                        <%--<thead>--%>
-                        <%--<tr>--%>
-                            <%--<th></th>--%>
-                            <%--<th></th>--%>
-                            <%--<th>Song</th>--%>
-                            <%--<th>Price</th>--%>
-                            <%--<th>Add</th>--%>
-                        <%--</tr>--%>
-                        <%--</thead>--%>
                         <tbody>
-                        <c:forEach var="song" items="${songs}" varStatus="status">
+                        <c:forEach var="curSong" items="${sessionScope.songs}" varStatus="status">
                             <tr>
-                                <td>  <img src = "img/play.png" alt = "Play demo." height="20" width="20"> </td>
-                                <td>  <img src = "img/pause.png" alt = "Pause demo." height="20" width="20"> </td>
-                                <td><c:out value="${ song.name }" /></td>
-                                <td><c:out value="${ song.cost }" /></td>
-                                <td>  <img src = "img/plus.png" alt = "Add to basket." height="20" width="20"> </td>
+                                <td><a href="controller?command=view_song&songId=${curSong.id}">
+                                    <span class="glyphicon glyphicon-music-alt"></span> ${curSong.performance.name} - ${curSong.name}</a>
+                                </td>
+                                <td>
+                                    <audio controls>
+                                        <%--<source src="audio/music.ogg" type="audio/ogg; codecs=vorbis">--%>
+                                        <source src="/music/3.mp3" type="audio/mpeg">
+                                        <%--<a href="3.mp3">Скачайте музыку</a>.--%>
+                                    </audio>
+                                </td>
+                                <td><c:out value="${ curSong.cost }$" /></td>
+                                <%--<td>  <img src = "img/plus.png" alt = "Add to basket." height="20" width="20"> </td>--%>
+                                <td><a href="controller?command=add_to_basket&songId=${curSong.id}&userId=${sessionScope.currentUser.id}"><span class="glyphicon glyphicon-plus-sign"></span></a></td>
                             </tr>
                         </c:forEach>
                         </tbody>

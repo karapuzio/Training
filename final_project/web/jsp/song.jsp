@@ -10,12 +10,14 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <f:setLocale value="${requestScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
+<f:message bundle="${locale}" key="locale.song" var="song"/>
+<f:message bundle="${locale}" key="locale.commentary" var="commentary"/>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
     <link href="<c:url value="/css/style.css" />" rel="stylesheet">
-    <title>Song</title>
+    <title>${song}</title>
 </head>
 <body>
     <c:import url="header.jsp" />
@@ -43,7 +45,7 @@
                     <form action="/controller" method="POST">
                         <input type="hidden" name="command" value="add_comment" />
                         <div class="form-group">
-                            <label for="comment">Comment:</label>
+                            <label for="comment">${commentary}:</label>
                             <textarea class="form-control" rows="5" name="comment" id="comment"></textarea>
                         </div>
                     </form>

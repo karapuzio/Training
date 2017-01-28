@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
  */
 public class ConfigurationManager {
     private static final Logger LOGGER = LogManager.getLogger(ConfigurationManager.class);
-    private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("resources.config");
+    private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("config");
     // class get information from file config.properties
     private ConfigurationManager() { }
     public static String getProperty(String key) {

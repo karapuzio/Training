@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +21,7 @@ import java.io.IOException;
 public class Controller extends HttpServlet{
     private static final Logger LOGGER = LogManager.getLogger(Controller.class);
     private static final String JSP_ERROR = "/jsp/error.jsp";
-    private static final String JSP_MAIN = "/jsp/home.jsp";
+    private static final String JSP_HOME = "/jsp/home.jsp";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -53,9 +52,11 @@ public class Controller extends HttpServlet{
             // page = null;
             LOGGER.log(Level.DEBUG, "Page " + page);
             if (page != null) {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+                //RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/jsp/home.jsp");
                 // call answer page on request
-                dispatcher.forward(request, response);
+                //dispatcher.forward(request, response);
+                //response.sendRedirect(JSP_MAIN);
+                request.getRequestDispatcher(page).forward(request, response);
             } else {
                 // install page with the error message
                 //page = ConfigurationManager.getProperty("path.page.index");

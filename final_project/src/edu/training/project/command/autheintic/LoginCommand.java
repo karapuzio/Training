@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by Dell on 20.01.2017.
@@ -22,6 +23,8 @@ public class LoginCommand extends AbstractCommand {
     private static final int MAX_PASS_LENGTH = 20;
     private static final String JSP_ERROR = "/jsp/error.jsp";
     private static final String JSP_MAIN = "/jsp/home.jsp";
+    private static final String JSP_ADMIN = "/jsp/admin.jsp";
+    private static final String SESSION_USER = "currentUser";
 
     @Override
     public String execute(HttpServletRequest request) throws ServiceException{
@@ -46,11 +49,18 @@ public class LoginCommand extends AbstractCommand {
                 //return page;
                 //TO DO
             }
-            page = JSP_MAIN;
+            String role = user.getRole();
+            if (role.equalsIgnoreCase("user")){
+                page = JSP_MAIN;
+            }
+            else {
+                page = JSP_ADMIN;
+            }
             //page = ConfigurationManager.getProperty("path.page.main");
             LOGGER.log(Level.DEBUG, "Page " + page);
-        /*    HttpSession session = request.getSession(true);
-            session.setAttribute(USER_ID_SESSION_ATTRIBUTE, user.getId());
+            HttpSession session = request.getSession(true);
+            session.setAttribute(SESSION_USER, user);
+         /*   session.setAttribute(USER_ID_SESSION_ATTRIBUTE, user.getId());
             session.setAttribute(USER_STATUS_SESSION_ATTRIBUTE, user.getStatus());
             session.setAttribute(LANGUAGE_ID_SESSION_ATTRIBUTE, user.getLanguageId()); */
         }

@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * Created by Dell on 26.12.2016.*/
 public class Song {
+    private int DEFAULT_VALUE_IN_DB = 1;
     private int id;
     private String name;
     private Date releaseDate;
@@ -15,8 +16,11 @@ public class Song {
     private String pathToText;
     private int discountForSong;
     private double cost;
+    private int genreId = DEFAULT_VALUE_IN_DB;
+    private int performanceId = DEFAULT_VALUE_IN_DB;
+    private MusicalPerformance performance;
+    private double coeffJakkara;
 
-    private List<MusicGenre> genres;
     private List<Comment> comments;
 
     public Song(){
@@ -31,6 +35,8 @@ public class Song {
         this.pathToText = pathToText;
         this.discountForSong = discountForSong;
         this.cost = cost;
+        this.genreId = genreId;
+        this.performanceId = performanceId;
     }
 
     public int getId() {
@@ -97,14 +103,6 @@ public class Song {
         this.cost = cost;
     }
 
-    public List<MusicGenre> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(List<MusicGenre> genres) {
-        this.genres = genres;
-    }
-
     public List<Comment> getComments() {
         return comments;
     }
@@ -113,17 +111,51 @@ public class Song {
         this.comments = comments;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public int getGenreId() {
+        return genreId;
+    }
 
-        Song song = (Song) o;
+    public void setGenreId(int genreId) {
+        this.genreId = genreId;
+    }
+
+    public int getPerformanceId() {
+        return performanceId;
+    }
+
+    public void setPerformanceId(int performanceId) {
+        this.performanceId = performanceId;
+    }
+
+    public MusicalPerformance getPerformance() {
+        return performance;
+    }
+
+    public void setPerformance(MusicalPerformance performance) {
+        this.performance = performance;
+    }
+
+    public double getCoeffJakkara() {
+        return coeffJakkara;
+    }
+
+    public void setCoeffJakkara(double coeffJakkara) {
+        this.coeffJakkara = coeffJakkara;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+
+        Song song = (Song) object;
 
         if (id != song.id) return false;
         if (numberOfOrders != song.numberOfOrders) return false;
         if (discountForSong != song.discountForSong) return false;
         if (Double.compare(song.cost, cost) != 0) return false;
+        if (genreId != song.genreId) return false;
+        if (performanceId != song.performanceId) return false;
         if (name != null ? !name.equals(song.name) : song.name != null) return false;
         if (releaseDate != null ? !releaseDate.equals(song.releaseDate) : song.releaseDate != null) return false;
         if (pathToDemo != null ? !pathToDemo.equals(song.pathToDemo) : song.pathToDemo != null) return false;
@@ -143,6 +175,8 @@ public class Song {
         result = 31 * result + discountForSong;
         temp = Double.doubleToLongBits(cost);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + genreId;
+        result = 31 * result + performanceId;
         return result;
     }
 
@@ -157,6 +191,9 @@ public class Song {
                 ", pathToText='" + pathToText + '\'' +
                 ", discountForSong=" + discountForSong +
                 ", cost=" + cost +
+                ", genreId=" + genreId +
+                ", performanceId=" + performanceId +
+                ", comments=" + comments +
                 '}';
     }
 }

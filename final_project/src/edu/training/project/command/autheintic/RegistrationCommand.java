@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by Dell on 20.01.2017.
@@ -24,6 +25,7 @@ public class RegistrationCommand extends AbstractCommand {
     private static final int MAX_PASS_LENGTH = 20;
     private static final String JSP_ERROR = "/jsp/error.jsp";
     private static final String JSP_MAIN = "/jsp/home.jsp";
+    private static final String SESSION_USER = "currentUser";
 
     @Override
     public String execute(HttpServletRequest request) throws ServiceException {
@@ -54,8 +56,10 @@ public class RegistrationCommand extends AbstractCommand {
 
             userDAO.addUser(user);
 
-            LOGGER.log(Level.DEBUG, "Added ser " + user);
+            LOGGER.log(Level.DEBUG, "Added user " + user);
             //page = ConfigurationManager.getProperty("path.page.main");
+            HttpSession session = request.getSession(true);
+            session.setAttribute(SESSION_USER, user);
             page = JSP_MAIN;
         } catch (DAOException e) {
             throw new ServiceException("Service error: registration is failed", e);

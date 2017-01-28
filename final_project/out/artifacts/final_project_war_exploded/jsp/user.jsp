@@ -10,6 +10,9 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <f:setLocale value="${requestScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
+<f:message bundle="${locale}" key="locale.numberOfOrders" var="numberOfOrders"/>
+<f:message bundle="${locale}" key="locale.discount" var="discount"/>
+<f:message bundle="${locale}" key="locale.cash" var="cash"/>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,23 +36,24 @@
                         <tbody>
                         <tr>
                             <td>Login :</td>
-                            <td><c:out value="${sessionScope.user.login}" /></td>
+                            <td><c:out value="${sessionScope.currentUser.login}" /></td>
                         </tr>
                         <tr>
                             <td>Email :</td>
-                            <td><c:out value="${sessionScope.user.email}" /></td>
+                            <td><c:out value="${sessionScope.currentUser.email}" /></td>
                         </tr>
                         <tr>
-                            <td>Number of Oders : :</td>
-                            <td><c:out value="${sessionScope.user.numberOfOrders}" /></td>
+                            <td>${numberOfOrders} : :</td>
+                            <td><c:out value="${sessionScope.currentUser.numberOfOrders}" /></td>
                         </tr>
                         <tr>
-                            <td>Discount :</td>
-                            <td><c:out value="${sessionScope.user.discount}" /></td>
+                            <td>${discount} :</td>
+                            <td><c:out value="${sessionScope.currentUser.discount}" /></td>
                         </tr>
                         <tr>
-                            <td>Cash : <img src = "img/plus.png" alt = "Add to basket." height="20" width="20"></td>
-                            <td><c:out value="${sessionScope.user.cash}" /></td>
+                            <td>${cash} :  <a href="controller?command=add_funds"><span class="glyphicon glyphicon-plus-sign"></span></a></td>
+                            <%--<td><img src = "img/plus.png" alt = "Add to basket." height="20" width="20"></td>--%>
+                            <td><c:out value="${sessionScope.currentUser.cash}" /></td>
                         </tr>
                         </tbody>
                     </table>

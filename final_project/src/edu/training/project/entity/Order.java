@@ -1,21 +1,26 @@
 package edu.training.project.entity;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Dell on 04.01.2017.
  */
 public class Order {
     private int id;
-    private double cost;
+    private int userId;
+    private int songId;
+    private int isPayed;
     private Date dateOfOrder;
+    private Song song;
 
-    private List<Song> songs;
+    public Order() {
+    }
 
-    public Order(int id, int userId, double cost, Date dateOfOrder) {
+    public Order(int id, int userId, int songId, int isPayed, Date dateOfOrder) {
         this.id = id;
-        this.cost = cost;
+        this.userId = userId;
+        this.songId = songId;
+        this.isPayed = isPayed;
         this.dateOfOrder = dateOfOrder;
     }
 
@@ -27,12 +32,29 @@ public class Order {
         this.id = id;
     }
 
-    public double getCost() {
-        return cost;
+
+    public int getUserId() {
+        return userId;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getSongId() {
+        return songId;
+    }
+
+    public void setSongId(int songId) {
+        this.songId = songId;
+    }
+
+    public int getIsPayed() {
+        return isPayed;
+    }
+
+    public void setIsPayed(int isPayed) {
+        this.isPayed = isPayed;
     }
 
     public Date getDateOfOrder() {
@@ -43,12 +65,12 @@ public class Order {
         this.dateOfOrder = dateOfOrder;
     }
 
-    public List<Song> getSongs() {
-        return songs;
+    public Song getSong() {
+        return song;
     }
 
-    public void setSongs(List<Song> songs) {
-        this.songs = songs;
+    public void setSong(Song song) {
+        this.song = song;
     }
 
     @Override
@@ -59,17 +81,18 @@ public class Order {
         Order order = (Order) o;
 
         if (id != order.id) return false;
-        if (Double.compare(order.cost, cost) != 0) return false;
+        if (userId != order.userId) return false;
+        if (songId != order.songId) return false;
+        if (isPayed != order.isPayed) return false;
         return dateOfOrder != null ? dateOfOrder.equals(order.dateOfOrder) : order.dateOfOrder == null;
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = id;
-        temp = Double.doubleToLongBits(cost);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        int result = id;
+        result = 31 * result + userId;
+        result = 31 * result + songId;
+        result = 31 * result + isPayed;
         result = 31 * result + (dateOfOrder != null ? dateOfOrder.hashCode() : 0);
         return result;
     }
@@ -78,7 +101,9 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", cost=" + cost +
+                ", userId=" + userId +
+                ", songId=" + songId +
+                ", isPayed=" + isPayed +
                 ", dateOfOrder=" + dateOfOrder +
                 '}';
     }

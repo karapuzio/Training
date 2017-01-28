@@ -7,11 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<f:setLocale value="en" scope="session"/>
+<f:setBundle basename="locale" var="locale"/>
 <html>
   <head>
     <title>$Title$</title>
   </head>
   <body>
     <c:redirect url="jsp/login.jsp"> </c:redirect>
+    <%--<jsp:forward page="jsp/login.jsp"/>--%>
   </body>
 </html>

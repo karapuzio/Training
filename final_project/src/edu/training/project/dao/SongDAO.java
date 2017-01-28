@@ -3,6 +3,9 @@ package edu.training.project.dao;
 import edu.training.project.dao.exception.DAOException;
 import edu.training.project.dao.pool.ConnectionPool;
 import edu.training.project.entity.Song;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,8 +15,9 @@ import java.util.List;
  * Created by Dell on 05.01.2017.
  */
 public class SongDAO {
-    private static final String SQL_ADD_SONG = "INSERT INTO songs (id, name, release_date, number_of_orders, path_to_demo, " +
-            "path_to_text,, discount_for_song, song_cost) VALUES (?,?,?,?,?,?,?,?)";
+    private static final Logger LOGGER = LogManager.getLogger(SongDAO.class);
+    private static final String SQL_ADD_SONG = "INSERT INTO songs (name, release_date, number_of_orders, path_to_demo, " +
+            "path_to_text, discount_for_song, song_cost, musical_genre_id, performance_id) VALUES (?,?,?,?,?,?,?,?,?)";
     private static final String SQL_GET_ALL_SONG = "SELECT * FROM songs";
     private static final String SQL_GET_SONG_BY_ID = "SELECT * FROM songs WHERE id = ?";
     private static final String SQL_DELETE_SONG_BY_ID = "DELETE FROM songs WHERE id = ?";
@@ -23,16 +27,19 @@ public class SongDAO {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
+        LOGGER.log(Level.DEBUG, "Get Connection" + " " + connection);
         try {
             statement = connection.prepareStatement(SQL_ADD_SONG);
-            statement.setInt(1, song.getId());
-            statement.setString(2, song.getName());
-            statement.setDate(3, new Date(song.getReleaseDate().getTime()));
-            statement.setInt(4, song.getNumberOfOrders());
-            statement.setString(5, song.getPathToDemo());
-            statement.setString(6, song.getPathToText());
-            statement.setInt(7, song.getDiscountForSong());
-            statement.setDouble(8, song.getCost());
+            statement.setString(1, song.getName());
+            statement.setDate(2, new Date(song.getReleaseDate().getTime()));
+            statement.setInt(3, song.getNumberOfOrders());
+            statement.setString(4, song.getPathToDemo());
+            statement.setString(5, song.getPathToText());
+            statement.setInt(6, song.getDiscountForSong());
+            statement.setDouble(7, song.getCost());
+            statement.setInt(8, song.getGenreId());
+            statement.setInt(9, song.getPerformanceId());
+            LOGGER.log(Level.DEBUG, "Get statement" + " " + statement);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Exception in DAO : add song.");
@@ -59,6 +66,8 @@ public class SongDAO {
                 song.setPathToText(resultSet.getString(6));
                 song.setDiscountForSong(resultSet.getInt(7));
                 song.setCost(resultSet.getDouble(8));
+                song.setGenreId(resultSet.getInt(9));
+                song.setPerformanceId(resultSet.getInt(10));
                 allSongs.add(song);
             }
         } catch (SQLException e) {
@@ -88,6 +97,8 @@ public class SongDAO {
                 song.setPathToText(resultSet.getString(6));
                 song.setDiscountForSong(resultSet.getInt(7));
                 song.setCost(resultSet.getDouble(8));
+                song.setGenreId(resultSet.getInt(9));
+                song.setPerformanceId(resultSet.getInt(10));
             }
         } catch (SQLException e) {
             throw new DAOException("Exception in DAO : get song by id.");

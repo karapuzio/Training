@@ -10,16 +10,17 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <f:setLocale value="${requestScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
+<f:message bundle="${locale}" key="locale.topSong" var="topSong"/>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
     <link href="<c:url value="/css/style.css" />" rel="stylesheet">
-    <title>Top Song</title>
+    <title>${topSong}</title>
 </head>
 <body>
 <aside class = "top_chart">
-    <h3> Top songs.</h3>
+    <h3> ${topSong}.</h3>
     <div class="list-group">
         <a href="#" class="list-group-item">Anberlin - Feel The Good Drag</a>
         <a href="#" class="list-group-item">Anberlin - True Fait</a>

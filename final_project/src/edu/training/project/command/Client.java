@@ -5,8 +5,13 @@ import edu.training.project.command.autheintic.LoginCommand;
 import edu.training.project.command.autheintic.LogoutCommand;
 import edu.training.project.command.autheintic.RegistrationCommand;
 import edu.training.project.command.comment.AddCommentCommand;
+import edu.training.project.command.genre.GenreAddCommand;
+import edu.training.project.command.order.BasketReplinishCommand;
+import edu.training.project.command.order.SongOrderCommand;
+import edu.training.project.command.performer.PerformerAddCommand;
 import edu.training.project.command.song.SearchCommand;
 import edu.training.project.command.song.SongAddCommand;
+import edu.training.project.command.view.*;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -47,7 +52,7 @@ public class Client {
             //request.setAttribute("wrongAction", command
                 //    + MessageManager.getProperty("message.wrongaction"));
         }
-        LOGGER.log(Level.DEBUG, "Parse command.");
+        LOGGER.log(Level.DEBUG, "Parse command. " + currentCommand);
         switch (currentCommand) {
             case LOGIN:
                 command = new LoginCommand();
@@ -55,7 +60,7 @@ public class Client {
             case LOGOUT:
                 command = new LogoutCommand();
                 break;
-            case SONG_ADD:
+            case ADD_SONG:
                 command = new SongAddCommand();
                 break;
             case REGISTRATION:
@@ -70,6 +75,34 @@ public class Client {
                 break;
             case ADD_COMMENT:
                 command = new AddCommentCommand();
+                break;
+            case ADD_GENRE:
+                command = new GenreAddCommand();
+                break;
+            case ADD_PERFORMER:
+                command = new PerformerAddCommand();
+                break;
+            case VIEW_BASKET:
+                command = new ViewBasketCommand();
+                break;
+            case VIEW_CONTACT:
+                command = new ViewContactCommand();
+                break;
+            case VIEW_USER:
+                command = new ViewUserCommand();
+                break;
+            case VIEW_SONG:
+                command = new ViewSongCommand();
+                break;
+            case VIEW_HOME:
+                LOGGER.log(Level.DEBUG, "Choose view home command.");
+                command = new ViewHomeCommand();
+                break;
+            case ADD_TO_BASKET:
+                command = new BasketReplinishCommand();
+                break;
+            case SONG_ORDER:
+                command = new SongOrderCommand();
                 break;
         }
         return command;

@@ -7,6 +7,9 @@ public class MusicalPerformance {
     private int id;
     private String name;
 
+    public MusicalPerformance() {
+    }
+
     public MusicalPerformance(int id, String name) {
         this.id = id;
         this.name = name;

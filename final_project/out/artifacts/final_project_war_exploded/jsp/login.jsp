@@ -8,16 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%--<c:choose>--%>
-    <%--<c:when test="${languege == 'nl'}">--%>
-        <%--<f:setLocale value="nl"/>--%>
-    <%--</c:when>--%>
-    <%--<c:otherwise>--%>
-        <%--<f:setLocale value="en"/>--%>
-    <%--</c:otherwise>--%>
-<%--</c:choose>--%>
-<%--<c:set var="language" scope="request">en_US</c:set>--%>
-<f:setLocale value="en" scope="session"/>
+<f:setLocale value="${requestScope.language}" scope="session"/>
 <f:setBundle basename="locale" var="locale"/>
 <f:message bundle="${locale}" key="locale.password" var="password"/>
 <f:message bundle="${locale}" key="locale.registration" var="registration"/>
@@ -53,6 +44,7 @@
                         <input type="submit" class="btn btn-block btn-lg btn-primary" value="Login"/>
                     </div>
                     <div class="login-register">
+                        <%--<a href="controller?command=registration"><span class="glyphicon glyphicon-user"></span> ${registration}</a>--%>
                         <a href="registration.jsp">${registration}</a>
                     </div>
                 </form>
