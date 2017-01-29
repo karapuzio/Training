@@ -11,6 +11,8 @@ import edu.training.project.command.order.SongOrderCommand;
 import edu.training.project.command.performer.PerformerAddCommand;
 import edu.training.project.command.song.SearchCommand;
 import edu.training.project.command.song.SongAddCommand;
+import edu.training.project.command.song.SongDeleteCommand;
+import edu.training.project.command.song.SongEditCommand;
 import edu.training.project.command.view.*;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -103,6 +105,18 @@ public class Client {
                 break;
             case SONG_ORDER:
                 command = new SongOrderCommand();
+                break;
+            case EDIT_SONG:
+                command = new SongEditCommand();
+                break;
+            case DELETE_SONG:
+                command = new SongDeleteCommand();
+                break;
+            case VIEW_LOGIN:
+                command = new ViewLoginCommand();
+                break;
+            case VIEW_REGISTRATION:
+                command = new ViewRegistrationCommand();
                 break;
         }
         return command;

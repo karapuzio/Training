@@ -15,6 +15,7 @@
 <f:message bundle="${locale}" key="locale.performance" var="performance"/>
 <f:message bundle="${locale}" key="locale.close" var="close"/>
 <f:message bundle="${locale}" key="locale.add" var="add"/>
+<f:message bundle="${locale}" key="locale.edit" var="edit"/>
 <f:message bundle="${locale}" key="locale.name" var="name"/>
 <f:message bundle="${locale}" key="locale.release" var="release"/>
 <f:message bundle="${locale}" key="locale.selectDemo" var="selectDemo"/>
@@ -22,6 +23,7 @@
 <f:message bundle="${locale}" key="locale.discount" var="discount"/>
 <f:message bundle="${locale}" key="locale.cost" var="cost"/>
 <f:message bundle="${locale}" key="locale.genre" var="genre"/>
+<f:message bundle="${locale}" key="locale.search" var="search"/>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,7 +36,7 @@
 <body>
     <div class="container">
 
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editSongModal">${editSong}</button>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editSongModal"><span class="glyphicon glyphicon-edit"></span></button>
 
         <!-- Modal -->
         <div class="modal fade" id="editSongModal" role="dialog">
@@ -42,12 +44,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h1 class="text-center">${addSong}</h1>
+                        <h1 class="text-center">${editSong}</h1>
                     </div>
                     <div class="modal-body">
-                        <form class="modal-body" name="AddSongForm" enctype="multipart/form-data" action="controller" method="POST">
+                        <form class="modal-body" name="EditSongForm" enctype="multipart/form-data" action="controller" method="POST">
 
-                            <input type="hidden" name="command" value="add_song" />
+                            <input type="hidden" name="command" value="edit_song" />
+                            <input type="hidden" name="editSongId" value="${curSong.id}}" />
 
                             <div class="form-group">
                                 <input type="text" class="form-control input-lg" name="performance" id="performance" placeholder="${performance}"/>
@@ -94,7 +97,7 @@
                             </div>
 
                             <div class="form-group">
-                                <input type="submit" class="btn btn-block btn-lg btn-primary" value="${add}"/>
+                                <input type="submit" class="btn btn-block btn-lg btn-primary" value="${edit}"/>
                             </div>
                         </form>
                     </div>

@@ -19,5 +19,9 @@ public enum TypeCommand {
     VIEW_SONG,
     VIEW_HOME,
     ADD_TO_BASKET,
-    SONG_ORDER;
+    SONG_ORDER,
+    EDIT_SONG,
+    DELETE_SONG,
+    VIEW_LOGIN,
+    VIEW_REGISTRATION;
 }

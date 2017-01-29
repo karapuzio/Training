@@ -34,15 +34,15 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="password" class="form-control input-lg" name="password" id="password" placeholder=${password}/>
+                        <input type="password" class="form-control input-lg" name="password" id="password" placeholder="${password}"/>
                     </div>
 
                     <div class="form-group">
-                        <input type="password" class="form-control input-lg" name="confirm" id="confirm"  placeholder=${confirm}/>
+                        <input type="password" class="form-control input-lg" name="confirm" id="confirm"  placeholder="${confirm}"/>
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" class="btn btn-block btn-lg btn-primary" value=${registration}/>
+                        <input type="submit" class="btn btn-block btn-lg btn-primary" value="${registration}"/>
                     </div>
                     <div class="login-register">
                         <a href="login.jsp">Login</a>

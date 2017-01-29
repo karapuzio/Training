@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
- * Created by Dell on 20.01.2017.
+ * Created by Dell on 28.01.2017.
  */
-public class SongAddCommand extends AbstractCommand {
-    private static final Logger LOGGER = LogManager.getLogger(SongAddCommand.class);
+public class SongEditCommand extends AbstractCommand{
+    private static final Logger LOGGER = LogManager.getLogger(SongEditCommand.class);
     private static final String PARAM_NAME_SONG_PERFORMANCE = "performance";
     private static final String PARAM_NAME_SONG_NAME = "name";
     private static final String PARAM_NAME_RELEASE = "release";
@@ -30,16 +30,13 @@ public class SongAddCommand extends AbstractCommand {
     private static final String PARAM_NAME_TEXT_PATH = "pathToText";
     private static final String PARAM_NAME_DISCOUNT = "discount";
     private static final String PARAM_NAME_COST = "cost";
+    private static final String PARAM_NAME_EDIT_SONG_ID = "editSongId";
     private static final int MAX_NAME_LENGTH = 255;
 
-    private static final String JSP_ERROR = "/jsp/error.jsp";
-    private static final String JSP_MAIN = "/jsp/home.jsp";
-    private static final String JSP_ADMIN = "/jsp/admin.jsp";
-
     @Override
-    public String execute(HttpServletRequest request) throws ServiceException{
+    public String execute(HttpServletRequest request) throws ServiceException {
         String page = null;
-        LOGGER.log(Level.DEBUG, "Begin execute song add command");
+        LOGGER.log(Level.DEBUG, "Begin execute song edit command");
         // extract from request parameters
         String performance = request.getParameter(PARAM_NAME_SONG_PERFORMANCE);
         String name = request.getParameter(PARAM_NAME_SONG_NAME);
@@ -49,6 +46,7 @@ public class SongAddCommand extends AbstractCommand {
         String pathToText = request.getParameter(PARAM_NAME_TEXT_PATH);
         int discount = Integer.parseInt(request.getParameter(PARAM_NAME_DISCOUNT));
         double cost = Double.parseDouble(request.getParameter(PARAM_NAME_COST));
+        int editSongId = Integer.parseInt(request.getParameter(PARAM_NAME_EDIT_SONG_ID));
         LOGGER.log(Level.DEBUG, "Song parse " + name + " " + releaseDate + " " + pathToDemo + " " + discount +
                 " " + cost);
         if (name.isEmpty() || name.length() > MAX_NAME_LENGTH) {
@@ -58,40 +56,52 @@ public class SongAddCommand extends AbstractCommand {
                 " " + cost);
         try {
             SongDAO songDAO = new SongDAO();
-            Song song = new Song();
-            MusicalPerformanceDAO musicalPerformanceDAO = new MusicalPerformanceDAO();
-            MusicalPerformance musicalPerformance = musicalPerformanceDAO.getPerformanceByName(performance);
-            if (musicalPerformance == null){
-                MusicalPerformance newPerformance = new MusicalPerformance();
-                newPerformance.setName(performance);
-                musicalPerformanceDAO.addPerformance(newPerformance);
-                musicalPerformance = musicalPerformanceDAO.getPerformanceByName(performance);
+            Song song = songDAO.getSongById(editSongId);
+            if (!performance.isEmpty()) {
+                MusicalPerformanceDAO musicalPerformanceDAO = new MusicalPerformanceDAO();
+                MusicalPerformance musicalPerformance = musicalPerformanceDAO.getPerformanceByName(performance);
+                if (musicalPerformance == null) {
+                    MusicalPerformance newPerformance = new MusicalPerformance();
+                    newPerformance.setName(performance);
+                    musicalPerformanceDAO.addPerformance(newPerformance);
+                    musicalPerformance = musicalPerformanceDAO.getPerformanceByName(performance);
+                }
+                song.setPerformanceId(musicalPerformance.getId());
             }
-            MusicGenreDAO musicGenreDAO = new MusicGenreDAO();
-            MusicGenre musicGenre = musicGenreDAO.getGenreByName(genre);
-            if (musicGenre == null){
-                MusicGenre newGenre = new MusicGenre();
-                newGenre.setGenre(genre);
-                musicGenreDAO.addGenre(newGenre);
-                musicGenre = musicGenreDAO.getGenreByName(genre);
+            if (!genre.isEmpty()) {
+                MusicGenreDAO musicGenreDAO = new MusicGenreDAO();
+                MusicGenre musicGenre = musicGenreDAO.getGenreByName(genre);
+                if (musicGenre == null) {
+                    MusicGenre newGenre = new MusicGenre();
+                    newGenre.setGenre(genre);
+                    musicGenreDAO.addGenre(newGenre);
+                    musicGenre = musicGenreDAO.getGenreByName(genre);
+                }
+                song.setGenreId(musicGenre.getId());
             }
-            song.setName(name);
-            song.setReleaseDate(new Date());
-            song.setPathToText(pathToText);
-            song.setPathToDemo(pathToDemo);
+            if (!name.isEmpty()){
+                song.setName(name);
+            }
+            if (!releaseDate.isEmpty()){
+                song.setReleaseDate(new Date());
+            }
+            if (!pathToText.isEmpty()){
+                song.setPathToText(pathToText);
+            }
+            if (!pathToDemo.isEmpty()){
+                song.setPathToDemo(pathToDemo);
+            }
             song.setDiscountForSong(discount);
             song.setCost(cost);
-            song.setPerformanceId(musicalPerformance.getId());
-            song.setGenreId(musicGenre.getId());
 
-            LOGGER.log(Level.DEBUG, "Song to add " + song);
+            LOGGER.log(Level.DEBUG, "Song to edit " + song);
 
-            songDAO.addSong(song);
+            songDAO.editSongById(song);
 
             LOGGER.log(Level.DEBUG, "Added song " + song);
             page = ConfigurationManager.getProperty("path.page.admin");
         } catch (DAOException e) {
-            throw new ServiceException("Service error: registration is failed", e);
+            throw new ServiceException("Service error: edit song is failed", e);
         }
         return page;
     }

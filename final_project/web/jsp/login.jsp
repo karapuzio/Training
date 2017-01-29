@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>,
 <f:setLocale value="${requestScope.language}" scope="session"/>
 <f:setBundle basename="locale" var="locale"/>
 <f:message bundle="${locale}" key="locale.password" var="password"/>
@@ -37,7 +38,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="password" class="form-control input-lg" name="password" id="password" placeholder=${password}/>
+                        <input type="password" class="form-control input-lg" name="password" id="password" placeholder="${password}"/>
                     </div>
 
                     <div class="form-group">

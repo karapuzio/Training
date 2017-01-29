@@ -3,3 +3,13 @@
     width: 70%;
     margin: auto;
 }
+
+.a{
+    color: black;
+    background-color: black;
+    text-decoration-color: black;
+}
+
+.btn, .btn-block, .btn-primary{
+    background-color : black;
+}

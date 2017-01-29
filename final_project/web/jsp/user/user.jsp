@@ -21,11 +21,11 @@
     <title>User</title>
 </head>
 <body>
-    <c:import url="header.jsp" />
+    <c:import url="../additional/header.jsp" />
     <div class="container-fluid text-center">
         <div class="row content">
             <div class="col-sm-3 sidenav">
-                <c:import url="carousel.jsp" />
+                <c:import url="../additional/carousel.jsp" />
                 <p><a href="#">Link</a></p>
                 <p><a href="#">Link</a></p>
                 <p><a href="#">Link</a></p>
@@ -60,7 +60,7 @@
                 </section>
             </div>
             <div class="col-sm-3 sidenav">
-                <c:import url="topsong.jsp"/>
+                <c:import url="../song/topsong.jsp"/>
                 <div class="well">
                     <p>ADS</p>
                 </div>

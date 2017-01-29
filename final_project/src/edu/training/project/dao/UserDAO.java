@@ -21,7 +21,7 @@ public class UserDAO {
     private static final Logger LOGGER = LogManager.getLogger(UserDAO.class);
     private static final String SQL_ADD_USER = "INSERT INTO users (login, password, email, role," +
             "number_of_orders, discount_for_order, cash) VALUES (?,?,?,?,?,?,?)";
-    private static final String SQL_UPDATE_USER = "UPDATE user " +
+    private static final String SQL_UPDATE_USER = "UPDATE users " +
             "SET login = ?, password = ?, email = ?, number_of_orders = ?, discount_for_orders = ?, " +
             "cash = ?";
     private static final String SQL_GET_ALL_USERS = "SELECT * FROM users";

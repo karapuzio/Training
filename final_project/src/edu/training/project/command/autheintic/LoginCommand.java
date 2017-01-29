@@ -2,6 +2,7 @@ package edu.training.project.command.autheintic;
 
 import edu.training.project.command.AbstractCommand;
 import edu.training.project.command.exception.ServiceException;
+import edu.training.project.controller.ConfigurationManager;
 import edu.training.project.dao.UserDAO;
 import edu.training.project.dao.exception.DAOException;
 import edu.training.project.entity.User;
@@ -51,18 +52,15 @@ public class LoginCommand extends AbstractCommand {
             }
             String role = user.getRole();
             if (role.equalsIgnoreCase("user")){
-                page = JSP_MAIN;
+                page = ConfigurationManager.getProperty("path.page.home");
             }
             else {
-                page = JSP_ADMIN;
+                page = ConfigurationManager.getProperty("path.page.admin");
             }
             //page = ConfigurationManager.getProperty("path.page.main");
             LOGGER.log(Level.DEBUG, "Page " + page);
             HttpSession session = request.getSession(true);
             session.setAttribute(SESSION_USER, user);
-         /*   session.setAttribute(USER_ID_SESSION_ATTRIBUTE, user.getId());
-            session.setAttribute(USER_STATUS_SESSION_ATTRIBUTE, user.getStatus());
-            session.setAttribute(LANGUAGE_ID_SESSION_ATTRIBUTE, user.getLanguageId()); */
         }
         catch (DAOException e){
             throw new ServiceException("Service error : fall login operation.", e);

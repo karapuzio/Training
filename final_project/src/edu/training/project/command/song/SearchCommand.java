@@ -2,6 +2,7 @@ package edu.training.project.command.song;
 
 import edu.training.project.command.AbstractCommand;
 import edu.training.project.command.exception.ServiceException;
+import edu.training.project.controller.ConfigurationManager;
 import edu.training.project.dao.MusicalPerformanceDAO;
 import edu.training.project.dao.SongDAO;
 import edu.training.project.dao.exception.DAOException;
@@ -23,6 +24,7 @@ import java.util.List;
 public class SearchCommand extends AbstractCommand{
     private static final Logger LOGGER = LogManager.getLogger(SearchCommand.class);
     private static final String PARAM_NAME_SEARCH = "search";
+    private static final String PARAM_NAME_USER_ROLE = "role";
     private static final String JSP_ERROR = "/jsp/error.jsp";
     private static final String JSP_MAIN = "/jsp/home.jsp";
     private static final double PERCENTAGE_MATCH = 0.5;
@@ -32,6 +34,7 @@ public class SearchCommand extends AbstractCommand{
         String page = null;
         // extract search parameters from request
         String search = request.getParameter(PARAM_NAME_SEARCH);
+        String role = request.getParameter(PARAM_NAME_USER_ROLE);
         try {
             SongDAO songDAO = new SongDAO();
             LOGGER.log(Level.DEBUG, "Begin execute search command" + " " + search);
@@ -61,7 +64,7 @@ public class SearchCommand extends AbstractCommand{
             }
             HttpSession session = request.getSession(true);
             session.setAttribute("songs", suitableSong);
-            page = JSP_MAIN;
+            page = role.equalsIgnoreCase("admin") ? ConfigurationManager.getProperty("path.page.admin") : ConfigurationManager.getProperty("path.page.home");
             LOGGER.log(Level.DEBUG, "Page " + page);
         }
         catch (DAOException e){

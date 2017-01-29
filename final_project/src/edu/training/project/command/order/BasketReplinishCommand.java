@@ -2,6 +2,7 @@ package edu.training.project.command.order;
 
 import edu.training.project.command.AbstractCommand;
 import edu.training.project.command.exception.ServiceException;
+import edu.training.project.controller.ConfigurationManager;
 import edu.training.project.dao.OrderDAO;
 import edu.training.project.dao.exception.DAOException;
 import edu.training.project.entity.Order;
@@ -52,9 +53,8 @@ public class BasketReplinishCommand extends AbstractCommand{
 
             LOGGER.log(Level.DEBUG, "Order to add " + order);
 
-
             orderDAO.addOrder(order);
-            page = JSP_HOME;
+            page = ConfigurationManager.getProperty("path.page.home");
         }
         catch (DAOException e){
             throw new ServiceException("Service error : fall login operation.", e);

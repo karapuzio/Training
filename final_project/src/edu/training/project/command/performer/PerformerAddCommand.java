@@ -2,6 +2,7 @@ package edu.training.project.command.performer;
 
 import edu.training.project.command.AbstractCommand;
 import edu.training.project.command.exception.ServiceException;
+import edu.training.project.controller.ConfigurationManager;
 import edu.training.project.dao.MusicalPerformanceDAO;
 import edu.training.project.dao.exception.DAOException;
 import edu.training.project.entity.MusicalPerformance;
@@ -42,8 +43,7 @@ public class PerformerAddCommand extends AbstractCommand{
 
             musicalPerformanceDAO.addPerformance(musicalPerformance);
 
-            //page = ConfigurationManager.getProperty("path.page.main");
-            page = JSP_ADMIN;
+            page = ConfigurationManager.getProperty("path.page.admin");
         } catch (DAOException e) {
             throw new ServiceException("Service error: registration is failed", e);
         }

@@ -2,6 +2,7 @@ package edu.training.project.command.autheintic;
 
 import edu.training.project.command.AbstractCommand;
 import edu.training.project.command.exception.ServiceException;
+import edu.training.project.controller.ConfigurationManager;
 import edu.training.project.dao.UserDAO;
 import edu.training.project.dao.exception.DAOException;
 import edu.training.project.entity.User;
@@ -60,7 +61,7 @@ public class RegistrationCommand extends AbstractCommand {
             //page = ConfigurationManager.getProperty("path.page.main");
             HttpSession session = request.getSession(true);
             session.setAttribute(SESSION_USER, user);
-            page = JSP_MAIN;
+            page = ConfigurationManager.getProperty("path.page.home");
         } catch (DAOException e) {
             throw new ServiceException("Service error: registration is failed", e);
         }
