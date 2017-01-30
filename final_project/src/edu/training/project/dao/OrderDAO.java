@@ -22,6 +22,7 @@ public class OrderDAO {
     private static final String SQL_GET_ORDERS_BY_USER_ID = "SELECT * FROM orders WHERE user_id = ?";
     private static final String SQL_GET_ORDERS_BY_USER_ID_AND_SONG_ID = "SELECT * FROM orders WHERE user_id = ? AND song_id = ?";
     private static final String SQL_DELETE_ORDER_BY_ID = "DELETE FROM orders WHERE id = ?";
+    private static final String SQL_UPDATE_ORDER = "UPDATE orders SET is_payed = ?, data_of_order = ? WHERE id = ?";
 
     public void addOrder(Order order) throws DAOException {
         ConnectionPool pool = ConnectionPool.getInstance();
@@ -160,6 +161,25 @@ public class OrderDAO {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Exception in DAO : delete performance by id.");
+        } finally {
+            pool.closeConnection(connection);
+        }
+    }
+
+    public void editOrderById(Order order) throws DAOException{
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement statement = null;
+        try {
+            LOGGER.log(Level.DEBUG, "Edit order");
+            statement = connection.prepareStatement(SQL_UPDATE_ORDER);
+            statement.setInt(1, order.getIsPayed());
+            statement.setDate(2, new Date(order.getDateOfOrder().getTime()));
+            statement.setInt(3, order.getId());
+            LOGGER.log(Level.DEBUG, "Statement" + " " + statement);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Exception in DAO : update user by id.");
         } finally {
             pool.closeConnection(connection);
         }

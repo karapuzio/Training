@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ctg" uri="customtags" %>
-<f:setLocale value="${requestScope.language}"/>
+<f:setLocale value="${sessionScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
 <f:message bundle="${locale}" key="locale.song" var="song"/>
 <f:message bundle="${locale}" key="locale.commentary" var="commentary"/>
@@ -27,7 +27,6 @@
     <div class="row content">
         <div class="col-sm-3 sidenav">
             <c:import url="../additional/carousel.jsp" />
-            <p><a href="#">Link</a></p>
         </div>
         <div class="col-sm-6 text-left">
             <section>
@@ -58,7 +57,7 @@
                     <c:forEach var="comment" items="${comments}" varStatus="status">
                         <li class="list-group-item">
                             <h5><b>${comment.user.login}, ${comment.date}</b></h5>
-                                ${comment.content}<span class="badge"></span>
+                                ${comment.content}<span class="badge"><a href="controller?command=delete_comment&commentId=${comment.id}&songId=${selectedSong.id}"><span class="glyphicon glyphicon-minus"></span></a></span>
                         </li>
                     </c:forEach>
                 </ul>

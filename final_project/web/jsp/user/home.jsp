@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ctg" uri="customtags" %>
-<f:setLocale value="${requestScope.language}"/>
+<f:setLocale value="${sessionScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
 <f:message bundle="${locale}" key="locale.musicCenter" var="musicCenter"/>
 <f:message bundle="${locale}" key="locale.search" var="search"/>
@@ -53,7 +53,7 @@
                                 <td>
                                     <audio controls>
                                         <%--<source src="audio/music.ogg" type="audio/ogg; codecs=vorbis">--%>
-                                        <source src="/music/5.mp3" type="audio/mpeg">
+                                        <source src="/music/${curSong.pathToDemo}" type="audio/mp3">
                                         <%--<a href="3.mp3">Скачайте музыку</a>.--%>
                                     </audio>
                                 </td>

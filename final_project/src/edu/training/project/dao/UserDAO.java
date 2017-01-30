@@ -21,9 +21,10 @@ public class UserDAO {
     private static final Logger LOGGER = LogManager.getLogger(UserDAO.class);
     private static final String SQL_ADD_USER = "INSERT INTO users (login, password, email, role," +
             "number_of_orders, discount_for_order, cash) VALUES (?,?,?,?,?,?,?)";
-    private static final String SQL_UPDATE_USER = "UPDATE users " +
-            "SET login = ?, password = ?, email = ?, number_of_orders = ?, discount_for_orders = ?, " +
-            "cash = ?";
+//    private static final String SQL_UPDATE_USER = "UPDATE users " +
+//            "SET login = ?, password = ?, email = ?, role = ?, number_of_orders = ?, discount_for_order = ?, " +
+//            "cash = ? WHERE id = ?";
+    private static final String SQL_UPDATE_USER = "UPDATE users SET cash = ? WHERE id = ?";
     private static final String SQL_GET_ALL_USERS = "SELECT * FROM users";
     private static final String SQL_GET_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
     private static final String SQL_GET_USER_BY_LOGIN = "SELECT * FROM users WHERE login = ?";
@@ -152,6 +153,31 @@ public class UserDAO {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Exception in DAO : delete user by id.");
+        } finally {
+            pool.closeConnection(connection);
+        }
+    }
+
+    public void editUserById(User user) throws DAOException{
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(SQL_UPDATE_USER);
+//            statement.setString(1, user.getLogin());
+//            statement.setString(2, user.getPassword());
+//            statement.setString(3, user.getEmail());
+//            statement.setString(4, user.getRole());
+//            statement.setInt(5, user.getNumberOfOrders());
+//            statement.setInt(6, user.getDiscount());
+//            statement.setDouble(7, user.getCash());
+//            statement.setInt(8, user.getId());
+            statement.setDouble(1, user.getCash());
+            statement.setInt(2, user.getId());
+            LOGGER.log(Level.DEBUG, "Statement" + " " + statement);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Exception in DAO : update user by id.");
         } finally {
             pool.closeConnection(connection);
         }

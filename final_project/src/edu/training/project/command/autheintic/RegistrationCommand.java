@@ -56,6 +56,7 @@ public class RegistrationCommand extends AbstractCommand {
             LOGGER.log(Level.DEBUG, "User to add " + user);
 
             userDAO.addUser(user);
+            user = userDAO.getUserByLogin(user.getLogin());
 
             LOGGER.log(Level.DEBUG, "Added user " + user);
             //page = ConfigurationManager.getProperty("path.page.main");

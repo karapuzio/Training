@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ctg" uri="customtags" %>
-<f:setLocale value="${requestScope.language}"/>
+<f:setLocale value="${sessionScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
 <f:message bundle="${locale}" key="locale.genre" var="genre"/>
 <f:message bundle="${locale}" key="locale.addGenre" var="addGenre"/>
@@ -70,13 +70,12 @@
                                 <td>
                                     <audio controls>
                                             <%--<source src="audio/music.ogg" type="audio/ogg; codecs=vorbis">--%>
-                                        <source src="/music/3.mp3" type="audio/mpeg">
+                                        <source src="/music/${curSong.pathToDemo}" type="audio/mpeg">
                                             <%--<a href="3.mp3">Скачайте музыку</a>.--%>
                                     </audio>
                                 </td>
 
                                 <td><c:out value="${ curSong.cost }$" /></td>
-                                <%--<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editSongModal"><span class="glyphicon glyphicon-edit"></span></button></td>--%>
 
                                 <td><c:import url="editSong.jsp" /></td>
 

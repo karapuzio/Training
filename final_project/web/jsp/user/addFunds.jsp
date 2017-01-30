@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<f:setLocale value="${requestScope.language}"/>
+<f:setLocale value="${sessionScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
 <f:message bundle="${locale}" key="locale.addFunds" var="addFunds"/>
 <f:message bundle="${locale}" key="locale.close" var="close"/>
@@ -26,9 +26,7 @@
     <title>${addFunds}</title>
 </head>
 <body>
-    <div class="container">
-
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addFundsModal">${addFunds}</button>
+        <button type="button" class="btn btn-block btn-mg btn-link" data-toggle="modal" data-target="#addFundsModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
 
         <!-- Modal -->
         <div class="modal fade" id="addFundsModal" role="dialog">
@@ -44,11 +42,11 @@
                             <input type="hidden" name="command" value="add_funds" />
 
                             <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="card" id="card" placeholder=${cardNumber}/>
+                                <input type="number" class="form-control input-lg" name="card" id="card" placeholder="${card}"/>
                             </div>
 
                             <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="cvc" id="cvc" placeholder=${cvc}/>
+                                <input type="number" class="form-control input-lg" name="cvv" id="cvv" placeholder="CVV"/>
                             </div>
 
                             <div class="form-group">
@@ -56,7 +54,7 @@
                             </div>
 
                             <div class="form-group">
-                                <input type="submit" class="btn btn-block btn-lg btn-primary" value=${add}/>
+                                <input type="submit" class="btn btn-block btn-lg btn-primary" value="${add}"/>
                             </div>
                         </form>
                     </div>
@@ -67,6 +65,5 @@
             </div>
         </div>
 
-    </div>
 </body>
 </html>

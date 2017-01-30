@@ -1,4 +1,6 @@
 function validateRegistrationForm(){
+    alert("Sign Up successful");
+    console.log("What?");
     var result = true;
     var FILL_FIELD = "*Fill field.";
     var BAD_LOGIN = "*Min.length - 5. Can contain a-zA-Z0-9_";
@@ -14,6 +16,7 @@ function validateRegistrationForm(){
     errConfirm.innerHTML = "";
     errEmail.innerHTML = "";
     var login = document.forms[0]["login"].value;
+    // var login = f.login;
     var password = document.forms[0]["password"].value;
     var password_confirm = document.forms[0]["confirm"].value;
     var email = document.forms[0]["email"].value;

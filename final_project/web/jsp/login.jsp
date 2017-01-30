@@ -8,11 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="ctg" uri="customtags" %>,
-<f:setLocale value="${requestScope.language}" scope="session"/>
+<%@ taglib prefix="ctg" uri="customtags" %>
+<f:setLocale value="${sessionScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
 <f:message bundle="${locale}" key="locale.password" var="password"/>
 <f:message bundle="${locale}" key="locale.registration" var="registration"/>
+<f:message bundle="${locale}" key="locale.welcome" var="welcome"/>
 <html>
 <head>
     <head>
@@ -23,34 +24,37 @@
     </head>
 </head>
 <body>
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="text-center">Welcome to Music Center</h1>
-            </div>
-            <div class="modal-body">
-                <form class="modal-body" name="LoginForm" action="/controller" method="POST">
+    <section>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="text-center">${welcome}</h1>
+                </div>
+                <div class="modal-body">
+                    <form class="modal-body" name="LoginForm" action="controller" method="POST">
 
-                    <input type="hidden" name="command" value="login" />
+                        <input type="hidden" name="command" value="login" />
 
-                    <div class="form-group">
-                        <input type="text" class="form-control input-lg" name="login" id="login" placeholder="Login"/>
-                    </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" name="login" id="login" placeholder="Login"/>
+                        </div>
 
-                    <div class="form-group">
-                        <input type="password" class="form-control input-lg" name="password" id="password" placeholder="${password}"/>
-                    </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control input-lg" name="password" id="password" placeholder="${password}"/>
+                        </div>
 
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-block btn-lg btn-primary" value="Login"/>
-                    </div>
-                    <div class="login-register">
-                        <%--<a href="controller?command=registration"><span class="glyphicon glyphicon-user"></span> ${registration}</a>--%>
-                        <a href="registration.jsp">${registration}</a>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-block btn-lg btn-primary" value="Login"/>
+                        </div>
+
+                        <div class="login-register">
+                            <a href="controller?command=view_registration"><span class="glyphicon glyphicon-user"></span> ${registration}</a>
+                            <%--<a href="controller?command=registration">${registration}</a>--%>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 </body>
 </html>

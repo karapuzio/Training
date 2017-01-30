@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ctg" uri="customtags" %>
-<f:setLocale value="${requestScope.language}"/>
+<f:setLocale value="${sessionScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
 <f:message bundle="${locale}" key="locale.numberOfOrders" var="numberOfOrders"/>
 <f:message bundle="${locale}" key="locale.discount" var="discount"/>
@@ -28,9 +28,6 @@
         <div class="row content">
             <div class="col-sm-3 sidenav">
                 <c:import url="../additional/carousel.jsp" />
-                <p><a href="#">Link</a></p>
-                <p><a href="#">Link</a></p>
-                <p><a href="#">Link</a></p>
             </div>
             <div class="col-sm-6 text-left">
                 <section>
@@ -50,12 +47,14 @@
                         </tr>
                         <tr>
                             <td>${discount} :</td>
-                            <td><c:out value="${sessionScope.currentUser.discount}" /></td>
+                            <td><c:out value="${sessionScope.currentUser.discount} %" /></td>
                         </tr>
                         <tr>
-                            <td>${cash} :  <a href="controller?command=add_funds"><span class="glyphicon glyphicon-plus-sign"></span></a></td>
-                            <%--<td><img src = "img/plus.png" alt = "Add to basket." height="20" width="20"></td>--%>
-                            <td><c:out value="${sessionScope.currentUser.cash}" /></td>
+                            <%--<td>${cash} :  <a href="controller?command=add_funds"><span class="glyphicon glyphicon-plus-sign"></span></a></td>--%>
+                            <td>${cash} :  <c:import url="addFunds.jsp" /></a></td>
+
+                            <%--<c:import url="addFunds.jsp" />--%>
+                            <td><c:out value="${sessionScope.currentUser.cash} $"/></td>
                         </tr>
                         </tbody>
                     </table>

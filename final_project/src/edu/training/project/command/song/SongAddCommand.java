@@ -29,10 +29,6 @@ public class SongAddCommand extends AbstractCommand {
     private static final String PARAM_NAME_COST = "cost";
     private static final int MAX_NAME_LENGTH = 255;
 
-    private static final String JSP_ERROR = "/jsp/error.jsp";
-    private static final String JSP_MAIN = "/jsp/home.jsp";
-    private static final String JSP_ADMIN = "/jsp/admin.jsp";
-
     @Override
     public String execute(HttpServletRequest request) throws ServiceException{
         String page = null;

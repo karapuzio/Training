@@ -30,7 +30,7 @@ public class LanguageChangeCommand extends AbstractCommand{
         session.setAttribute("language", selectedLanguage);
         String query = request.getQueryString();
         LOGGER.log(Level.DEBUG, "Path : " + path);
-        page = ConfigurationManager.getProperty("path.page.home");
+        page = ConfigurationManager.getProperty("path.page.login");
         return page;
     }
 }

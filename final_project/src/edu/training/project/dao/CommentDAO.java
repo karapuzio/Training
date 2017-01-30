@@ -57,7 +57,7 @@ public class CommentDAO {
                 allComments.add(comment);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception in DAO : get all user.");
+            throw new DAOException("Exception in DAO : get all comments.");
         } finally {
             pool.closeConnection(connection);
         }
@@ -83,10 +83,25 @@ public class CommentDAO {
                 songComments.add(comment);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception in DAO : get all performances.");
+            throw new DAOException("Exception in DAO : get comments by song id.");
         } finally {
             pool.closeConnection(connection);
         }
         return songComments;
+    }
+
+    public void deleteCommentById(int id) throws DAOException{
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(SQL_DELETE_COMMENT_BY_ID);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Exception in DAO : delete comment by id.");
+        } finally {
+            pool.closeConnection(connection);
+        }
     }
 }

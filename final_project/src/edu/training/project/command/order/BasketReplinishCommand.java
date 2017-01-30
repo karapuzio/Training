@@ -33,7 +33,7 @@ public class BasketReplinishCommand extends AbstractCommand{
         int songId = Integer.parseInt(request.getParameter(PARAM_NAME_SONG_ID));
         LOGGER.log(Level.DEBUG, "Begin execute add to basket command" + " " + songId);
         //HttpSession session = request.getSession(true);
-//        Object userId = session.getAttribute(PARAM_NAME_USER_ID);
+//        Object userId = session.getAttribute(SESSION_USER);
         int userId = Integer.parseInt(request.getParameter(PARAM_NAME_USER_ID));
         LOGGER.log(Level.DEBUG, "Begin execute add to basket command" + " " + songId + " " + userId);
         if (songId == 0 || userId == 0){

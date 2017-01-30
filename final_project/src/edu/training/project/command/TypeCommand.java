@@ -23,5 +23,7 @@ public enum TypeCommand {
     EDIT_SONG,
     DELETE_SONG,
     VIEW_LOGIN,
-    VIEW_REGISTRATION;
+    VIEW_REGISTRATION,
+    DELETE_COMMENT,
+    ADD_FUNDS;
 }

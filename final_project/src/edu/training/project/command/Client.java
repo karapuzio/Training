@@ -5,7 +5,9 @@ import edu.training.project.command.autheintic.LoginCommand;
 import edu.training.project.command.autheintic.LogoutCommand;
 import edu.training.project.command.autheintic.RegistrationCommand;
 import edu.training.project.command.comment.AddCommentCommand;
+import edu.training.project.command.comment.DeleteCommentCommand;
 import edu.training.project.command.genre.GenreAddCommand;
+import edu.training.project.command.order.AddFundsCommand;
 import edu.training.project.command.order.BasketReplinishCommand;
 import edu.training.project.command.order.SongOrderCommand;
 import edu.training.project.command.performer.PerformerAddCommand;
@@ -118,6 +120,12 @@ public class Client {
                 break;
             case VIEW_REGISTRATION:
                 command = new ViewRegistrationCommand();
+                break;
+            case DELETE_COMMENT:
+                command = new DeleteCommentCommand();
+                break;
+            case ADD_FUNDS:
+                command = new AddFundsCommand();
                 break;
         }
         return command;

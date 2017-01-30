@@ -148,7 +148,7 @@ public class SongDAO {
         }
     }
 
-    public Song editSongById(Song song) throws DAOException{
+    public void editSongById(Song song) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
@@ -168,6 +168,5 @@ public class SongDAO {
         } finally {
             pool.closeConnection(connection);
         }
-        return song;
     }
 }
