@@ -6,10 +6,7 @@ import edu.training.project.entity.Comment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +15,7 @@ import java.util.List;
  */
 public class CommentDAO {
     private static final Logger LOGGER = LogManager.getLogger(CommentDAO.class);
-    private static final String SQL_ADD_COMMENT = "INSERT INTO comments (comment, user_id, song_id) VALUES (?,?,?)";
+    private static final String SQL_ADD_COMMENT = "INSERT INTO comments (comment, user_id, song_id, date) VALUES (?,?,?,?)";
     private static final String SQL_GET_ALL_COMMENTS = "SELECT * FROM comments";
     private static final String SQL_GET_COMMENT_BY_ID = "SELECT * FROM comments WHERE id = ?";
     private static final String SQL_GET_COMMENTS_BY_SONG_ID = "SELECT * FROM comments WHERE song_id = ?";
@@ -33,6 +30,7 @@ public class CommentDAO {
             statement.setString(1, comment.getContent());
             statement.setInt(2, comment.getUserId());
             statement.setInt(3, comment.getSongId());
+            statement.setDate(4, new Date(comment.getDate().getTime()));
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Exception in DAO : add comment.");
@@ -55,6 +53,7 @@ public class CommentDAO {
                 comment.setContent(resultSet.getString(2));
                 comment.setUserId(Integer.parseInt(resultSet.getString(3)));
                 comment.setSongId(Integer.parseInt(resultSet.getString(4)));
+                comment.setDate(resultSet.getDate(5));
                 allComments.add(comment);
             }
         } catch (SQLException e) {
@@ -80,6 +79,7 @@ public class CommentDAO {
                 comment.setContent(resultSet.getString(2));
                 comment.setUserId(Integer.parseInt(resultSet.getString(3)));
                 comment.setSongId(Integer.parseInt(resultSet.getString(4)));
+                comment.setDate(resultSet.getDate(5));
                 songComments.add(comment);
             }
         } catch (SQLException e) {

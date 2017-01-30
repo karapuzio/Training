@@ -21,24 +21,28 @@
                 <h1 class="text-center">Welcome to Music Center</h1>
             </div>
             <div class="modal-body">
-                <form name="RegistrationForm" class="modal-body" method="post" action="/controller">
+                <form name="RegistrationForm" class="modal-body" onsubmit="return validateRegistrationForm()" method="post" action="/controller">
 
                     <input type="hidden" name="command" value="registration" />
 
                     <div class="form-group">
                         <input type="text" class="form-control input-lg" name="email" id="email"  placeholder="Email"/>
+                        <span class="err" id="err-email"></span>
                     </div>
 
                     <div class="form-group">
                         <input type="text" class="form-control input-lg" name="login" id="login" placeholder="Login"/>
+                        <span class="err" id="err-login"></span>
                     </div>
 
                     <div class="form-group">
                         <input type="password" class="form-control input-lg" name="password" id="password" placeholder="${password}"/>
+                        <span class="err" id="err-password"></span>
                     </div>
 
                     <div class="form-group">
                         <input type="password" class="form-control input-lg" name="confirm" id="confirm"  placeholder="${confirm}"/>
+                        <span class="err" id="err-confirm"></span>
                     </div>
 
                     <div class="form-group">
@@ -51,5 +55,6 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="js/registration.js"></script>
 </body>
 </html>

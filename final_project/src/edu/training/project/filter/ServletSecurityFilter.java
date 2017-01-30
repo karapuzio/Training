@@ -2,6 +2,9 @@ package edu.training.project.filter;
 
 import edu.training.project.controller.ConfigurationManager;
 import edu.training.project.entity.User;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -14,7 +17,9 @@ import java.io.IOException;
  * Created by Dell on 29.01.2017.
  */
 @WebFilter(urlPatterns = {"/jsp/admin/*", "/jsp/song/*", "/jsp/user/*", "/jsp/additional/*", "/jsp/error.jsp"})
-public class ServletSecurityFilter implements Filter {
+public class ServletSecurityFilter implements Filter{
+    private static final Logger LOGGER = LogManager.getLogger(ServletSecurityFilter.class);
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -25,6 +30,7 @@ public class ServletSecurityFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse)servletResponse;
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("currentUser");
+        LOGGER.log(Level.DEBUG, "In security filter : " + user);
         if (user == null) {
 //            RequestDispatcher dispatcher = servletRequest.getServletContext()
 //                    .getRequestDispatcher(ConfigurationManager.getProperty("path.page.login"));

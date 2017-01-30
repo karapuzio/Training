@@ -8,10 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <f:setLocale value="${requestScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
 <f:message bundle="${locale}" key="locale.basket" var="basket"/>
 <f:message bundle="${locale}" key="locale.pay" var="pay"/>
+<f:message bundle="${locale}" key="locale.randomSong" var="randSong"/>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +22,7 @@
     <title>${basket}</title>
 </head>
 <body>
-    <c:import url="../additional/header.jsp" />
+    <c:import url="header.jsp" />
     <div class="container-fluid text-center">
         <div class="row content">
             <div class="col-sm-3 sidenav">
@@ -50,22 +52,20 @@
                             </tbody>
                         </table>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-block btn-lg btn-primary" value=${pay}/>
+                            <input type="submit" class="btn btn-block btn-lg btn-primary" value="${pay}"/>
                         </div>
                     </form>
                 </section>
             </div>
             <div class="col-sm-3 sidenav">
-                <c:import url="../song/topsong.jsp"/>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
+                <p>${randSong}</p>
+                <ctg:randomSong/>
             </div>
         </div>
     </div>
 
     <footer class="container-fluid text-center">
-        <p>Footer Text</p>
+        <ctg:footer/>
     </footer>
 </body>
 </html>

@@ -34,7 +34,7 @@
     <title>${editSong}</title>
 </head>
 <body>
-    <div class="container">
+    <%--<div class="container">--%>
 
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editSongModal"><span class="glyphicon glyphicon-edit"></span></button>
 
@@ -53,47 +53,27 @@
                             <input type="hidden" name="editSongId" value="${curSong.id}}" />
 
                             <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="performance" id="performance" placeholder="${performance}"/>
+                                <input type="text" class="form-control input-lg" name="performance" id="performance" placeholder="${curSong.performance.name}"/>
                             </div>
 
                             <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="name" id="name" placeholder="${name}"/>
+                                <input type="text" class="form-control input-lg" name="name" id="name" placeholder="${curSong.name}"/>
                             </div>
 
                             <div class="form-group">
-                                <input type="date" class="form-control input-lg" name="release" id="release" placeholder="${release}"/>
+                                <input type="text" class="form-control input-lg" name="genre" id="genre" placeholder="${curSong.genre}"/>
                             </div>
 
                             <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="genre" id="genre" placeholder="${genre}"/>
+                                <input type="file" accept="audio/*" class="form-control input-lg" name="pathToDemo" id="pathToDemo" placeholder="${curSong.pathToDemo}"/>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label">${selectDemo}</label>
-                                <input id="pathToDemo" name="pathToDemo[]" type="file" multiple class="file-loading">
-                                <script>
-                                    $(document).on('ready', function() {
-                                        $("#pathToDemo").fileinput({showCaption: false});
-                                    });
-                                </script>
+                                <input type="number" class="form-control input-lg" name="discount" id="discount" placeholder="${curSong.discount}"/>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label">${selectText}</label>
-                                <input id="pathToText" name="pathToText[]" type="file" multiple class="file-loading">
-                                <script>
-                                    $(document).on('ready', function() {
-                                        $("#pathToText").fileinput({showCaption: false});
-                                    });
-                                </script>
-                            </div>
-
-                            <div class="form-group">
-                                <input type="number" class="form-control input-lg" name="discount" id="discount" placeholder="${discount}"/>
-                            </div>
-
-                            <div class="form-group">
-                                <input type="number" class="form-control input-lg" name="cost" id="cost" placeholder="${cost}"/>
+                                <input type="number" class="form-control input-lg" name="cost" id="cost" placeholder="${curSong.cost}"/>
                             </div>
 
                             <div class="form-group">
@@ -108,6 +88,6 @@
             </div>
         </div>
 
-    </div>
+    <%--</div>--%>
 </body>
 </html>

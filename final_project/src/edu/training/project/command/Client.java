@@ -42,6 +42,7 @@ public class Client {
     }
 
     public AbstractCommand defineCommand(HttpServletRequest request){
+        LOGGER.log(Level.DEBUG, "Define command. ");
         AbstractCommand command = null;
         String cmd = request.getParameter(COMMAND);
         if (cmd == null){

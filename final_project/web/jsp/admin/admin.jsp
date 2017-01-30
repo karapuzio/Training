@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <f:setLocale value="${requestScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
 <f:message bundle="${locale}" key="locale.genre" var="genre"/>
@@ -19,6 +20,7 @@
 <f:message bundle="${locale}" key="locale.close" var="close"/>
 <f:message bundle="${locale}" key="locale.add" var="add"/>
 <f:message bundle="${locale}" key="locale.administration" var="administration"/>
+<f:message bundle="${locale}" key="locale.randomSong" var="randSong"/>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,18 +32,18 @@
 
 </head>
 <body>
-    <c:import url="../additional/header.jsp" />
+    <c:import url="headerAdmin.jsp" />
 
     <div class="container-fluid text-center">
         <div class="row content">
             <div class="col-sm-3 sidenav">
                 <c:import url="../additional/carousel.jsp" />
+                <br/>
                 <c:import url="addSong.jsp" />
+                <br/>
                 <c:import url="addGenre.jsp" />
+                <br/>
                 <c:import url="addPerformer.jsp" />
-                <%--<br/>--%>
-                <%--<c:import url="addFunds.jsp" />--%>
-                <p><a href="#">Link</a></p>
             </div>
             <div class="col-sm-6 text-left">
                 <section>
@@ -49,7 +51,7 @@
                         <input type="hidden" name="command" value="search" />
                         <input type="hidden" name="role" value="${sessionScope.currentUser.role}" />
                         <div class="input-group">
-                            <input type="text" class="form-control" name="search" id="search" placeholder=${search}>
+                            <input type="text" class="form-control" name="search" id="search" placeholder="${search}">
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit">
                                     <i class="glyphicon glyphicon-search"></i>
@@ -72,9 +74,12 @@
                                             <%--<a href="3.mp3">Скачайте музыку</a>.--%>
                                     </audio>
                                 </td>
+
                                 <td><c:out value="${ curSong.cost }$" /></td>
-                                    <%--<td>  <img src = "img/plus.png" alt = "Add to basket." height="20" width="20"> </td>--%>
+                                <%--<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editSongModal"><span class="glyphicon glyphicon-edit"></span></button></td>--%>
+
                                 <td><c:import url="editSong.jsp" /></td>
+
                                 <td><a href="controller?command=delete_song&songId=${curSong.id}"><span class="glyphicon glyphicon-minus"></span></a></td>
                             </tr>
                         </c:forEach>
@@ -83,16 +88,14 @@
                 </section>
             </div>
             <div class="col-sm-3 sidenav">
-                <c:import url="../song/topsong.jsp"/>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
+                <h3>${randSong}</h3>
+                <ctg:randomSong/>
             </div>
         </div>
     </div>
 
     <footer class="container-fluid text-center">
-        <p>Footer Text</p>
+        <ctg:footer/>
     </footer>
 </body>
 </html>

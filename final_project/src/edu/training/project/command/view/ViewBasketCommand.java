@@ -22,6 +22,7 @@ import java.util.List;
 public class ViewBasketCommand extends AbstractCommand{
     private static final Logger LOGGER = LogManager.getLogger(ViewBasketCommand.class);
     private static final String PARAM_NAME_USER_ID = "userId";
+    private static final String SESSION_USER = "currentUser";
 
     @Override
     public String execute(HttpServletRequest request) throws ServiceException {
@@ -37,7 +38,6 @@ public class ViewBasketCommand extends AbstractCommand{
                 order.getSong().setPerformance(performance);
             }
             LOGGER.log(Level.DEBUG, "Order get by user id " + orders);
-
             request.setAttribute("userOrders", orders);
         } catch (DAOException e) {
             throw new ServiceException("Service error: registration is failed", e);

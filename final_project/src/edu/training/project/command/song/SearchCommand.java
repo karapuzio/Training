@@ -74,6 +74,8 @@ public class SearchCommand extends AbstractCommand{
     }
 
     private double howManyMatches(String first, String second){
+        first = first.toUpperCase();
+        second = second.toUpperCase();
         List<Character> firstList = new ArrayList<>();
         List<Character> secondList = new ArrayList<>();
         for (int i = 0; i < first.length(); i++){

@@ -15,7 +15,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 /**
  * Created by Dell on 20.01.2017.
@@ -24,10 +23,8 @@ public class SongAddCommand extends AbstractCommand {
     private static final Logger LOGGER = LogManager.getLogger(SongAddCommand.class);
     private static final String PARAM_NAME_SONG_PERFORMANCE = "performance";
     private static final String PARAM_NAME_SONG_NAME = "name";
-    private static final String PARAM_NAME_RELEASE = "release";
     private static final String PARAM_NAME_GENRE = "genre";
     private static final String PARAM_NAME_DEMO_PATH = "pathToDemo";
-    private static final String PARAM_NAME_TEXT_PATH = "pathToText";
     private static final String PARAM_NAME_DISCOUNT = "discount";
     private static final String PARAM_NAME_COST = "cost";
     private static final int MAX_NAME_LENGTH = 255;
@@ -43,18 +40,16 @@ public class SongAddCommand extends AbstractCommand {
         // extract from request parameters
         String performance = request.getParameter(PARAM_NAME_SONG_PERFORMANCE);
         String name = request.getParameter(PARAM_NAME_SONG_NAME);
-        String releaseDate = request.getParameter(PARAM_NAME_RELEASE);
         String genre = request.getParameter(PARAM_NAME_GENRE);
         String pathToDemo = request.getParameter(PARAM_NAME_DEMO_PATH);
-        String pathToText = request.getParameter(PARAM_NAME_TEXT_PATH);
         int discount = Integer.parseInt(request.getParameter(PARAM_NAME_DISCOUNT));
         double cost = Double.parseDouble(request.getParameter(PARAM_NAME_COST));
-        LOGGER.log(Level.DEBUG, "Song parse " + name + " " + releaseDate + " " + pathToDemo + " " + discount +
+        LOGGER.log(Level.DEBUG, "Song parse " + name + " " + pathToDemo + " " + discount +
                 " " + cost);
         if (name.isEmpty() || name.length() > MAX_NAME_LENGTH) {
             throw new ServiceException("Service error : not correct parameters for add song.");
         }
-        LOGGER.log(Level.DEBUG, "Song parse " + name + " " + releaseDate + " " + pathToDemo + " " + discount +
+        LOGGER.log(Level.DEBUG, "Song parse " + name + " " + pathToDemo + " " + discount +
                 " " + cost);
         try {
             SongDAO songDAO = new SongDAO();
@@ -76,8 +71,6 @@ public class SongAddCommand extends AbstractCommand {
                 musicGenre = musicGenreDAO.getGenreByName(genre);
             }
             song.setName(name);
-            song.setReleaseDate(new Date());
-            song.setPathToText(pathToText);
             song.setPathToDemo(pathToDemo);
             song.setDiscountForSong(discount);
             song.setCost(cost);

@@ -25,7 +25,7 @@
 </head>
 <body>
 
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addPerformanceModal">${addPerformance}</button>
+    <button type="button" class="btn btn-block btn-mg btn-link" data-toggle="modal" data-target="#addPerformanceModal">${addPerformance}</button>
 
     <!-- Modal -->
     <div class="modal fade" id="addPerformanceModal" role="dialog">
@@ -41,11 +41,11 @@
                         <input type="hidden" name="command" value="add_performer" />
 
                         <div class="form-group">
-                            <input type="text" class="form-control input-lg" name="performer" id="performer" placeholder=${performance}/>
+                            <input type="text" class="form-control input-lg" name="performer" id="performer" placeholder="${performance}"/>
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" class="btn btn-block btn-lg btn-primary" value=${add}/>
+                            <input type="submit" class="btn btn-block btn-lg btn-primary" value="${add}"/>
                         </div>
                     </form>
                 </div>

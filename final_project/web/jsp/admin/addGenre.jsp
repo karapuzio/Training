@@ -25,7 +25,7 @@
 </head>
 <body>
 
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addGenreModal">${addGenre}</button>
+    <button type="button" class="btn btn-block btn-mg btn-link" data-toggle="modal" data-target="#addGenreModal">${addGenre}</button>
 
     <!-- Modal -->
     <div class="modal fade" id="addGenreModal" role="dialog">
@@ -41,11 +41,11 @@
                         <input type="hidden" name="command" value="add_genre" />
 
                         <div class="form-group">
-                            <input type="text" class="form-control input-lg" name="genre" id="genre" placeholder=${genre}/>
+                            <input type="text" class="form-control input-lg" name="genre" id="genre" placeholder="${genre}"/>
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" class="btn btn-block btn-lg btn-primary" value=${add}/>
+                            <input type="submit" class="btn btn-block btn-lg btn-primary" value="${add}"/>
                         </div>
                     </form>
                 </div>

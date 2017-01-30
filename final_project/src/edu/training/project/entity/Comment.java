@@ -1,5 +1,7 @@
 package edu.training.project.entity;
 
+import java.util.Date;
+
 /**
  * Created by Dell on 26.12.2016.
  */
@@ -9,6 +11,8 @@ public class Comment {
     private String content;
     private int userId;
     private int songId;
+    private Date date;
+    private User user;
 
     public Comment(){
     }
@@ -50,6 +54,22 @@ public class Comment {
 
     public void setSongId(int songId) {
         this.songId = songId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

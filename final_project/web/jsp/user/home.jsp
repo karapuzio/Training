@@ -8,11 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="ctg" uri="customtags" %>,
+<%@ taglib prefix="ctg" uri="customtags" %>
 <f:setLocale value="${requestScope.language}"/>
 <f:setBundle basename="locale" var="locale"/>
 <f:message bundle="${locale}" key="locale.musicCenter" var="musicCenter"/>
 <f:message bundle="${locale}" key="locale.search" var="search"/>
+<f:message bundle="${locale}" key="locale.randomSong" var="randSong"/>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,14 +22,11 @@
     <title>${musicCenter}</title>
 </head>
 <body>
-    <c:import url="../additional/header.jsp" />
+    <c:import url="header.jsp" />
     <div class="container-fluid text-center">
         <div class="row content">
             <div class="col-sm-3 sidenav">
                 <c:import url="../additional/carousel.jsp" />
-                <p><a href="#">Link</a></p>
-                <p><a href="#">Link</a></p>
-                <p><a href="#">Link</a></p>
             </div>
             <div class="col-sm-6 text-left">
                 <section>
@@ -55,7 +53,7 @@
                                 <td>
                                     <audio controls>
                                         <%--<source src="audio/music.ogg" type="audio/ogg; codecs=vorbis">--%>
-                                        <source src="/music/3.mp3" type="audio/mpeg">
+                                        <source src="/music/5.mp3" type="audio/mpeg">
                                         <%--<a href="3.mp3">Скачайте музыку</a>.--%>
                                     </audio>
                                 </td>
@@ -69,11 +67,8 @@
                 </section>
             </div>
             <div class="col-sm-3 sidenav">
+                <h3>${randSong}</h3>
                 <ctg:randomSong/>
-                <c:import url="../song/topsong.jsp"/>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
             </div>
         </div>
     </div>

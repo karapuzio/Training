@@ -18,6 +18,6 @@
     <title>Contact Us</title>
 </head>
 <body>
-    <c:import url="../additional/header.jsp" />
+    <c:import url="header.jsp" />
 </body>
 </html>

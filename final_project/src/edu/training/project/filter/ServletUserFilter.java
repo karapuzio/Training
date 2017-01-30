@@ -2,6 +2,9 @@ package edu.training.project.filter;
 
 import edu.training.project.controller.ConfigurationManager;
 import edu.training.project.entity.User;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -15,6 +18,8 @@ import java.io.IOException;
  */
 @WebFilter(urlPatterns = {"/jsp/*"})
 public class ServletUserFilter implements Filter{
+    private static final Logger LOGGER = LogManager.getLogger(ServletUserFilter.class);
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -25,6 +30,7 @@ public class ServletUserFilter implements Filter{
         HttpServletResponse resp = (HttpServletResponse)servletResponse;
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("currentUser");
+        LOGGER.log(Level.DEBUG, "In user filter : " + user);
         if (user != null) {
             String page = user.getRole().equalsIgnoreCase("admin") ? ConfigurationManager.getProperty("path.page.admin") : ConfigurationManager.getProperty("path.page.home");
 //            RequestDispatcher dispatcher = servletRequest.getServletContext().getRequestDispatcher(page);

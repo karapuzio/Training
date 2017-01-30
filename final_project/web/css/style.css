@@ -13,3 +13,7 @@
 .btn, .btn-block, .btn-primary{
     background-color : black;
 }
+
+.err {
+    color : firebrick;
+}

@@ -6,15 +6,18 @@ import edu.training.project.controller.ConfigurationManager;
 import edu.training.project.dao.CommentDAO;
 import edu.training.project.dao.MusicalPerformanceDAO;
 import edu.training.project.dao.SongDAO;
+import edu.training.project.dao.UserDAO;
 import edu.training.project.dao.exception.DAOException;
 import edu.training.project.entity.Comment;
 import edu.training.project.entity.MusicalPerformance;
 import edu.training.project.entity.Song;
+import edu.training.project.entity.User;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,11 +50,17 @@ public class AddCommentCommand extends AbstractCommand{
             comment.setContent(commentContent);
             comment.setSongId(songId);
             comment.setUserId(userId);
+            comment.setDate(new Date());
 
             LOGGER.log(Level.DEBUG, "Comment to add " + comment);
 
             commentDAO.addComment(comment);
             List<Comment> comments = commentDAO.getCommentBySongId(songId);
+            UserDAO userDAO = new UserDAO();
+            for (Comment commentary : comments){
+                User user = userDAO.getUserById(commentary.getUserId());
+                commentary.setUser(user);
+            }
             request.setAttribute("comments", comments);
 
             SongDAO songDAO = new SongDAO();
