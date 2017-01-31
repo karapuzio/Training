@@ -8,7 +8,6 @@ import edu.training.project.dao.SongDAO;
 import edu.training.project.dao.exception.DAOException;
 import edu.training.project.entity.MusicalPerformance;
 import edu.training.project.entity.Song;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,15 +18,15 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by Dell on 22.01.2017.
+ * Class is used to search similar by title song.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class SearchCommand extends AbstractCommand{
     private static final Logger LOGGER = LogManager.getLogger(SearchCommand.class);
     private static final String PARAM_NAME_SEARCH = "search";
     private static final String PARAM_NAME_USER_ROLE = "role";
-    private static final String JSP_ERROR = "/jsp/error.jsp";
-    private static final String JSP_MAIN = "/jsp/home.jsp";
-    private static final double PERCENTAGE_MATCH = 0.5;
 
     @Override
     public String execute(HttpServletRequest request) throws ServiceException {
@@ -37,42 +36,40 @@ public class SearchCommand extends AbstractCommand{
         String role = request.getParameter(PARAM_NAME_USER_ROLE);
         try {
             SongDAO songDAO = new SongDAO();
-            LOGGER.log(Level.DEBUG, "Begin execute search command" + " " + search);
             List<Song> allSong = songDAO.getAllSongs();
-            LOGGER.log(Level.DEBUG, "Get all songs " + allSong);
             MusicalPerformanceDAO musicalPerformanceDAO = new MusicalPerformanceDAO();
             for (Song song : allSong){
-                LOGGER.log(Level.DEBUG, "Get perfomance by Id " + song.getPerformanceId());
                 MusicalPerformance performance = musicalPerformanceDAO.getPerformanceById(song.getPerformanceId());
-                LOGGER.log(Level.DEBUG, "Get perfomance by Id " + performance);
                 song.setPerformance(performance);
             }
             //Have list of all songs with performance
             //Search the suitable songs
             List<Song> suitableSong = new ArrayList<>();
             for (Song song : allSong){
-//                if (howManyMatches(song.getPerformance().getName() + " " + song.getName(), search) > PERCENTAGE_MATCH){
-//                    suitableSong.add(song);
-//                }
                 song.setCoeffJakkara(howManyMatches(song.getPerformance().getName() + " " + song.getName(), search));
             }
             SongComparator comparator = new SongComparator();
             Collections.sort(allSong, comparator);
-            LOGGER.log(Level.DEBUG, "Get all sorted " + allSong);
             for (int i = 0; i < allSong.size() && i < 10; i++){
                 suitableSong.add(allSong.get(i));
             }
             HttpSession session = request.getSession(true);
             session.setAttribute("songs", suitableSong);
             page = role.equalsIgnoreCase("admin") ? ConfigurationManager.getProperty("path.page.admin") : ConfigurationManager.getProperty("path.page.home");
-            LOGGER.log(Level.DEBUG, "Page " + page);
         }
         catch (DAOException e){
-            throw new ServiceException("Service error : fall login operation.", e);
+            throw new ServiceException("Service error : fall search operation.", e);
         }
         return page;
     }
 
+    /**
+     *It finds the similarity coefficient between the lines
+     *
+     * @param first performance and song name
+     * @param second search query
+     * @return similarity coefficient between 0 and 1
+     */
     private double howManyMatches(String first, String second){
         first = first.toUpperCase();
         second = second.toUpperCase();

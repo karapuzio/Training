@@ -3,15 +3,35 @@ package edu.training.project.entity;
 import java.util.Date;
 
 /**
- * Created by Dell on 26.12.2016.
+ * Class is used to store Comment object.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class Comment {
+    /**
+     * The comment's id.
+     */
     private int id;
-//    private int like;
+    /**
+     * The comment's content.
+     */
     private String content;
+    /**
+     * The user id, who left comment.
+     */
     private int userId;
+    /**
+     * The song id, which was to comment.
+     */
     private int songId;
+    /**
+     * The date of comment.
+     */
     private Date date;
+    /**
+     * The user, which was to comment.
+     */
     private User user;
 
     public Comment(){

@@ -52,7 +52,7 @@ public class ViewSongCommand extends AbstractCommand{
             User user = (User)session.getAttribute("currentUser");
             page = user.getRole().equalsIgnoreCase("admin") ? ConfigurationManager.getProperty("path.page.songAdmin") : ConfigurationManager.getProperty("path.page.song");
         } catch (DAOException e) {
-            throw new ServiceException("Service error: registration is failed", e);
+            throw new ServiceException("Service error: view song is failed", e);
         }
         return page;
     }

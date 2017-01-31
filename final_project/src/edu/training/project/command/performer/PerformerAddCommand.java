@@ -13,16 +13,15 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by Dell on 24.01.2017.
+ * Class is used to add new performance.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class PerformerAddCommand extends AbstractCommand{
     private static final Logger LOGGER = LogManager.getLogger(PerformerAddCommand.class);
     private static final String PARAM_NAME_PERFORMER = "performer";
-    private static final int MAX_PERFORMER_LENGTH = 255;
-
-    private static final String JSP_ERROR = "/jsp/error.jsp";
-    private static final String JSP_MAIN = "/jsp/home.jsp";
-    private static final String JSP_ADMIN = "/jsp/admin.jsp";
+    private static final int MAX_PERFORMER_LENGTH = 45;
 
     @Override
     public String execute(HttpServletRequest request) throws ServiceException {
@@ -31,7 +30,7 @@ public class PerformerAddCommand extends AbstractCommand{
         // extract from request parameters
         String performer = request.getParameter(PARAM_NAME_PERFORMER);
         if (performer.isEmpty() || performer.length() > MAX_PERFORMER_LENGTH) {
-            throw new ServiceException("Service error : not correct parameters for add song.");
+            throw new ServiceException("Service error : not correct parameters for add performance.");
         }
         LOGGER.log(Level.DEBUG, "Performer parse " + performer);
         try {
@@ -39,13 +38,11 @@ public class PerformerAddCommand extends AbstractCommand{
             MusicalPerformance musicalPerformance = new MusicalPerformance();
             musicalPerformance.setName(performer);
 
-            LOGGER.log(Level.DEBUG, "Performance to add " + musicalPerformance);
-
             musicalPerformanceDAO.addPerformance(musicalPerformance);
 
             page = ConfigurationManager.getProperty("path.page.admin");
         } catch (DAOException e) {
-            throw new ServiceException("Service error: registration is failed", e);
+            throw new ServiceException("Service error: add performance is failed", e);
         }
         return page;
     }

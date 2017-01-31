@@ -3,14 +3,35 @@ package edu.training.project.entity;
 import java.util.Date;
 
 /**
- * Created by Dell on 04.01.2017.
+ * Class is used to store Order object.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class Order {
+    /**
+     * The order's id.
+     */
     private int id;
+    /**
+     * The user id, who order song.
+     */
     private int userId;
+    /**
+     * The song id, which was order.
+     */
     private int songId;
+    /**
+     * The flags show order is payed.
+     */
     private int isPayed;
+    /**
+     * The date of order song.
+     */
     private Date dateOfOrder;
+    /**
+     * The song, which was order.
+     */
     private Song song;
 
     public Order() {

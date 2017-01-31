@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Dell on 05.01.2017.
+ * Provides a DAO-logic for the Order entity for the MySQL Database.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class OrderDAO {
     private static final Logger LOGGER = LogManager.getLogger(OrderDAO.class);
@@ -24,6 +27,12 @@ public class OrderDAO {
     private static final String SQL_DELETE_ORDER_BY_ID = "DELETE FROM orders WHERE id = ?";
     private static final String SQL_UPDATE_ORDER = "UPDATE orders SET is_payed = ?, data_of_order = ? WHERE id = ?";
 
+    /**
+     * Add new order to database.
+     *
+     * @param order a Order object to added.
+     * @throws DAOException
+     */
     public void addOrder(Order order) throws DAOException {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -34,8 +43,8 @@ public class OrderDAO {
             statement.setInt(2, order.getSongId());
             statement.setInt(3, order.getIsPayed());
             statement.setDate(4, new Date(order.getDateOfOrder().getTime()));
-            LOGGER.log(Level.DEBUG, "Add order by id in statement" + " " + statement);
             statement.executeUpdate();
+            LOGGER.log(Level.DEBUG, "Add order by id in statement" + " " + statement);
         } catch (SQLException e) {
             throw new DAOException("Exception in DAO : add order.");
         } finally {
@@ -43,6 +52,12 @@ public class OrderDAO {
         }
     }
 
+    /**
+     * Gets all orders from database.
+     *
+     * @return all orders.
+     * @throws DAOException
+     */
     public List<Order> getAllOrders() throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -61,15 +76,21 @@ public class OrderDAO {
                 allOrders.add(order);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception in DAO : get all performances.");
+            throw new DAOException("Exception in DAO : get all orders.");
         } finally {
             pool.closeConnection(connection);
         }
         return allOrders;
     }
 
+    /**
+     * Gets order with concrete id from database.
+     *
+     * @param id a order id.
+     * @return a Order object with concrete id from database.
+     * @throws DAOException
+     */
     public Order getOrderById(int id) throws DAOException{
-        LOGGER.log(Level.DEBUG, "Get order by id in OrderDao" + " " + id);
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
@@ -87,16 +108,22 @@ public class OrderDAO {
                 order.setDateOfOrder(resultSet.getDate(5));
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception in DAO : get performance by id.");
+            throw new DAOException("Exception in DAO : get order by id.");
         } finally {
             pool.closeConnection(connection);
         }
-        LOGGER.log(Level.DEBUG, "Order ready" + " " + order);
         return order;
     }
 
+    /**
+     * Get order with concrete user's ans song's ids from database.
+     *
+     * @param userId a user id.
+     * @param songId a song id.
+     * @return a Order object with concrete user's and song's ids.
+     * @throws DAOException
+     */
     public Order getOrderByUserIdAndSongId(int userId, int songId) throws DAOException{
-        LOGGER.log(Level.DEBUG, "Get order by user and song id in OrderDao" + " " + userId + " " + songId);
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
@@ -113,16 +140,23 @@ public class OrderDAO {
                 order.setSongId(resultSet.getInt(3));
                 order.setIsPayed(resultSet.getInt(4));
                 order.setDateOfOrder(resultSet.getDate(5));
+                LOGGER.log(Level.DEBUG, "Order with concrete user's and song's ids : " + order);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception in DAO : get performance by id.");
+            throw new DAOException("Exception in DAO : get order by user's and song's ids.");
         } finally {
             pool.closeConnection(connection);
         }
-        LOGGER.log(Level.DEBUG, "Order ready" + " " + order);
         return order;
     }
 
+    /**
+     * Gets all orders to concrete user from database.
+     *
+     * @param userId a user id.
+     * @return all orders from concrete user.
+     * @throws DAOException
+     */
     public List<Order> getOrdersByUserId(int userId) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -131,7 +165,6 @@ public class OrderDAO {
         try {
             statement = connection.prepareStatement(SQL_GET_ORDERS_BY_USER_ID);
             statement.setInt(1, userId);
-            LOGGER.log(Level.DEBUG, "Get orders by user id in OrderDao, statement : " + " " + statement);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 Order order = new Order();
@@ -140,17 +173,22 @@ public class OrderDAO {
                 order.setSongId(resultSet.getInt(3));
                 order.setIsPayed(resultSet.getInt(4));
                 order.setDateOfOrder(resultSet.getDate(5));
-                LOGGER.log(Level.DEBUG, "Get orders by user id in OrderDao" + " " + order);
                 userOrders.add(order);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception in DAO : get all performances.");
+            throw new DAOException("Exception in DAO : get orders by user's id.");
         } finally {
             pool.closeConnection(connection);
         }
         return userOrders;
     }
 
+    /**
+     * Delete order by id in database.
+     *
+     * @param id a oreder id.
+     * @throws DAOException
+     */
     public void deleteOrderById(int id) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -160,18 +198,23 @@ public class OrderDAO {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception in DAO : delete performance by id.");
+            throw new DAOException("Exception in DAO : delete order by id.");
         } finally {
             pool.closeConnection(connection);
         }
     }
 
+    /**
+     * Updates song by id in database.
+     *
+     * @param order a Order object to update.
+     * @throws DAOException
+     */
     public void editOrderById(Order order) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
         try {
-            LOGGER.log(Level.DEBUG, "Edit order");
             statement = connection.prepareStatement(SQL_UPDATE_ORDER);
             statement.setInt(1, order.getIsPayed());
             statement.setDate(2, new Date(order.getDateOfOrder().getTime()));
@@ -179,7 +222,7 @@ public class OrderDAO {
             LOGGER.log(Level.DEBUG, "Statement" + " " + statement);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception in DAO : update user by id.");
+            throw new DAOException("Exception in DAO : update order by id.");
         } finally {
             pool.closeConnection(connection);
         }

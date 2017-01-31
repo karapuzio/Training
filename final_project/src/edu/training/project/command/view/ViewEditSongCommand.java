@@ -30,7 +30,7 @@ public class ViewEditSongCommand extends AbstractCommand{
             request.setAttribute("selectedSong", song);
             page = ConfigurationManager.getProperty("path.page.editSong");
         } catch (DAOException e) {
-            throw new ServiceException("Service error: registration is failed", e);
+            throw new ServiceException("Service error: view edit song is failed", e);
         }
         return page;
     }

@@ -17,7 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * Created by Dell on 30.01.2017.
+ * Class is used to delete comment.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class DeleteCommentCommand extends AbstractCommand{
     private static final String PARAM_NAME_COMMENT_ID = "commentId";

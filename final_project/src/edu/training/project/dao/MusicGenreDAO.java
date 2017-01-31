@@ -3,7 +3,6 @@ package edu.training.project.dao;
 import edu.training.project.dao.exception.DAOException;
 import edu.training.project.dao.pool.ConnectionPool;
 import edu.training.project.entity.MusicGenre;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,7 +12,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by Dell on 05.01.2017.
+ * Provides a DAO-logic for the MusicGenre entity for the MySQL Database.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class MusicGenreDAO {
     private static final Logger LOGGER = LogManager.getLogger(MusicGenre.class);
@@ -22,6 +24,12 @@ public class MusicGenreDAO {
     private static final String SQL_GET_GENRE_BY_NAME = "SELECT * FROM musical_genres WHERE genre = ?";
     private static final String SQL_DELETE_GENRE_BY_ID = "DELETE FROM musical_genres WHERE id = ?";
 
+    /**
+     * Adds music genre to database.
+     *
+     * @param genre a MusicGenre object to add.
+     * @throws DAOException
+     */
     public void addGenre(MusicGenre genre) throws DAOException {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -37,8 +45,14 @@ public class MusicGenreDAO {
         }
     }
 
-    public MusicGenre getPerformanceById(int id) throws DAOException{
-        LOGGER.log(Level.DEBUG, "Get genre by id in MusicGenreDao" + " " + id);
+    /**
+     * Gets music genre by id from database.
+     *
+     * @param id a genre id.
+     * @return a MusicGenre object.
+     * @throws DAOException
+     */
+    public MusicGenre getGenreById(int id) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
@@ -57,12 +71,17 @@ public class MusicGenreDAO {
         } finally {
             pool.closeConnection(connection);
         }
-        LOGGER.log(Level.DEBUG, "Music genre ready" + " " + musicGenre);
         return musicGenre;
     }
 
+    /**
+     * Gets music genre by genre name from database.
+     *
+     * @param name a genre name.
+     * @return a MusicGenre object.
+     * @throws DAOException
+     */
     public MusicGenre getGenreByName(String name) throws DAOException{
-        LOGGER.log(Level.DEBUG, "Get genre by name in MusicGenreDao" + " " + name);
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
@@ -81,11 +100,16 @@ public class MusicGenreDAO {
         } finally {
             pool.closeConnection(connection);
         }
-        LOGGER.log(Level.DEBUG, "Music genre ready" + " " + musicGenre);
         return musicGenre;
     }
 
-    public void deletePerformanceById(int id) throws DAOException{
+    /**
+     * Deletes music genre by id in database.
+     *
+     * @param id a music genre id.
+     * @throws DAOException
+     */
+    public void deleteGenreById(int id) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;

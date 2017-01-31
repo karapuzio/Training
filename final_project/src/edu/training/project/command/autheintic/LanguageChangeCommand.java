@@ -3,7 +3,6 @@ package edu.training.project.command.autheintic;
 import edu.training.project.command.AbstractCommand;
 import edu.training.project.command.exception.ServiceException;
 import edu.training.project.controller.ConfigurationManager;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by Dell on 22.01.2017.
+ * Class is used to choose language for further work with app.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class LanguageChangeCommand extends AbstractCommand{
     private static final Logger LOGGER = LogManager.getLogger(LanguageChangeCommand.class);
@@ -29,7 +31,6 @@ public class LanguageChangeCommand extends AbstractCommand{
         String selectedLanguage = language.equalsIgnoreCase("NL") ? NETHERLANDISH : ENGLISH;
         session.setAttribute("language", selectedLanguage);
         String query = request.getQueryString();
-        LOGGER.log(Level.DEBUG, "Path : " + path);
         page = ConfigurationManager.getProperty("path.page.login");
         return page;
     }

@@ -5,7 +5,10 @@ import edu.training.project.command.exception.ServiceException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by Dell on 20.01.2017.
+ * Abstract class is used to execute command.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public abstract class AbstractCommand {
     abstract public String execute(HttpServletRequest request) throws ServiceException;

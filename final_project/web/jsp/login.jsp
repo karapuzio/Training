@@ -14,6 +14,7 @@
 <f:message bundle="${locale}" key="locale.password" var="password"/>
 <f:message bundle="${locale}" key="locale.registration" var="registration"/>
 <f:message bundle="${locale}" key="locale.welcome" var="welcome"/>
+<f:message bundle="${locale}" key="locale.notCorrect" var="notCorrect"/>
 <html>
 <head>
     <head>
@@ -51,6 +52,9 @@
                             <a href="controller?command=view_registration"><span class="glyphicon glyphicon-user"></span> ${registration}</a>
                         </div>
                     </form>
+                    <c:if test="${isCorrect eq '0'}">
+                        <h3 class="err text-center">${notCorrect}</h3>
+                    </c:if>
                 </div>
             </div>
         </div>

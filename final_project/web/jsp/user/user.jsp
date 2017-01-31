@@ -15,6 +15,11 @@
 <f:message bundle="${locale}" key="locale.discount" var="discount"/>
 <f:message bundle="${locale}" key="locale.cash" var="cash"/>
 <f:message bundle="${locale}" key="locale.randomSong" var="randSong"/>
+<f:message bundle="${locale}" key="locale.addFunds" var="addFunds"/>
+<f:message bundle="${locale}" key="locale.close" var="close"/>
+<f:message bundle="${locale}" key="locale.add" var="add"/>
+<f:message bundle="${locale}" key="locale.cost" var="cost"/>
+<f:message bundle="${locale}" key="locale.card" var="card"/>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -55,6 +60,40 @@
                         </tr>
                         </tbody>
                     </table>
+                    <%--<div class="modal-content">--%>
+                        <%--<div class="modal-header">--%>
+                            <%--<button type="button" class="close" data-dismiss="modal">&times;</button>--%>
+                            <%--<h1 class="text-center">${addFunds}</h1>--%>
+                        <%--</div>--%>
+                        <%--<div class="modal-body">--%>
+                            <%--<form class="modal-body" name="AddFundsForm" action="controller" method="POST" onsubmit="validateFundsForm();">--%>
+
+                                <%--<input type="hidden" name="command" value="add_funds" />--%>
+
+                                <%--<div class="form-group">--%>
+                                    <%--<input type="number" class="form-control input-lg" name="card" id="card" placeholder="${card}"/>--%>
+                                    <%--<span class="err" id="err-card"></span>--%>
+                                <%--</div>--%>
+
+                                <%--<div class="form-group">--%>
+                                    <%--<input type="number" class="form-control input-lg" name="cvv" id="cvv" placeholder="CVV"/>--%>
+                                    <%--<span class="err" id="err-cvv"></span>--%>
+                                <%--</div>--%>
+
+                                <%--<div class="form-group">--%>
+                                    <%--<input type="number" step="0.01" min="0.01" max="100" class="form-control input-lg" name="cash" id="cash" placeholder="${cash}"/>--%>
+                                    <%--<span class="err" id="err-cash"></span>--%>
+                                <%--</div>--%>
+
+                                <%--<div class="form-group">--%>
+                                    <%--<input type="submit" class="btn btn-block btn-lg btn-primary" value="${add}"/>--%>
+                                <%--</div>--%>
+                            <%--</form>--%>
+                        <%--</div>--%>
+                        <%--<div class="modal-footer">--%>
+                            <%--<button type="button" class="btn btn-block btn-lg btn-primary" data-dismiss="modal">${close}</button>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
                 </section>
             </div>
             <div class="col-sm-3 sidenav">
@@ -67,5 +106,6 @@
     <footer class="container-fluid text-center">
         <ctg:footer/>
     </footer>
+    <script type="text/javascript" src="js/funds.js"></script>
 </body>
 </html>

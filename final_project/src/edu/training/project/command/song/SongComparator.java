@@ -5,7 +5,11 @@ import edu.training.project.entity.Song;
 import java.util.Comparator;
 
 /**
- * Created by Dell on 26.01.2017.
+ * Class is used to compare song at similarity coefficient.
+ *
+ * @author Skidan Olya
+ * @version 1.0
+ * @see Comparator
  */
 public class SongComparator implements Comparator<Song> {
     @Override

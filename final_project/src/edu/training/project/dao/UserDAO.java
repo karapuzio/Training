@@ -15,37 +15,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Dell on 05.01.2017.
+ * Provides a DAO-logic for the User entity for the MySQL Database.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class UserDAO {
     private static final Logger LOGGER = LogManager.getLogger(UserDAO.class);
     private static final String SQL_ADD_USER = "INSERT INTO users (login, password, email, role," +
             "number_of_orders, discount_for_order, cash) VALUES (?,?,?,?,?,?,?)";
-//    private static final String SQL_UPDATE_USER = "UPDATE users " +
-//            "SET login = ?, password = ?, email = ?, role = ?, number_of_orders = ?, discount_for_order = ?, " +
-//            "cash = ? WHERE id = ?";
     private static final String SQL_UPDATE_USER = "UPDATE users SET cash = ?, number_of_orders = ?, discount_for_order = ? WHERE id = ?";
     private static final String SQL_GET_ALL_USERS = "SELECT * FROM users";
     private static final String SQL_GET_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
     private static final String SQL_GET_USER_BY_LOGIN = "SELECT * FROM users WHERE login = ?";
     private static final String SQL_DELETE_USER_BY_ID = "DELETE FROM user WHERE id = ?";
 
+    /**
+     * Adds new user to database.
+     *
+     * @param user a User object to add.
+     * @throws DAOException
+     */
     public void addUser(User user) throws DAOException {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(SQL_ADD_USER);
-            LOGGER.log(Level.DEBUG, "Statement " + statement);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
-            LOGGER.log(Level.DEBUG, "Statement " + statement);
             statement.setString(4, user.getRole());
             statement.setInt(5, user.getNumberOfOrders());
             statement.setInt(6, user.getDiscount());
             statement.setDouble(7, user.getCash());
-            LOGGER.log(Level.DEBUG, "Statement " + statement);
             statement.executeUpdate();
             LOGGER.log(Level.DEBUG, "Statement execute");
         } catch (SQLException e) {
@@ -55,6 +58,12 @@ public class UserDAO {
         }
     }
 
+    /**
+     * Returns all users from database.
+     *
+     * @return all users from database.
+     * @throws DAOException
+     */
     public List<User> getAllUsers() throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -83,6 +92,13 @@ public class UserDAO {
         return allUsers;
     }
 
+    /**
+     * Gets user with concrete id from database.
+     *
+     * @param id a user id.
+     * @return a User object with concrete id.
+     * @throws DAOException
+     */
     public User getUserById(int id) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -111,12 +127,16 @@ public class UserDAO {
         return user;
     }
 
+    /**
+     * Gets user by login from database.
+     *
+     * @param login a user login.
+     * @return a User object with concrete login.
+     * @throws DAOException
+     */
     public User getUserByLogin(String login) throws DAOException{
-        LOGGER.log(Level.DEBUG, "Get user by id in UserDao" + " " + login);
         ConnectionPool pool = ConnectionPool.getInstance();
-        LOGGER.log(Level.DEBUG, "Get ConnectionPool" + " " + pool);
         Connection connection = pool.getConnection();
-        LOGGER.log(Level.DEBUG, "Get Connection" + " " + connection);
         PreparedStatement statement = null;
         User user = null;
         try {
@@ -133,16 +153,22 @@ public class UserDAO {
                 user.setNumberOfOrders(resultSet.getInt(6));
                 user.setDiscount(resultSet.getInt(7));
                 user.setCash(resultSet.getDouble(8));
+                LOGGER.log(Level.DEBUG, "Get user by login " + login +" : " + user);
             }
         } catch (SQLException e) {
             throw new DAOException("Exception in DAO : get user by login.");
         } finally {
             pool.closeConnection(connection);
         }
-        LOGGER.log(Level.DEBUG, "User ready" + " " + user);
         return user;
     }
 
+    /**
+     * Delete user by id in database.
+     *
+     * @param id a user id.
+     * @throws DAOException
+     */
     public void deleteUserById(int id) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -158,6 +184,12 @@ public class UserDAO {
         }
     }
 
+    /**
+     * Update user by id in database.
+     *
+     * @param user a User object to update.
+     * @throws DAOException
+     */
     public void editUserById(User user) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();

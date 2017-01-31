@@ -1,7 +1,10 @@
 package edu.training.project.command;
 
 /**
- * Created by Dell on 20.01.2017.
+ * Enum of all command.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public enum TypeCommand {
     LOGIN,

@@ -25,7 +25,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Created by Dell on 20.01.2017.
+ * Class is used to define command.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class Client {
     private static final Logger LOGGER = LogManager.getLogger(Client.class);
@@ -36,6 +39,11 @@ public class Client {
     private Client(){
     }
 
+    /**
+     * Get instance of Client class to define command.
+     *
+     * @return instance of class
+     */
     public static Client getInstance(){
         if (!instanceCreated.getAndSet(true)){
             instance = new Client();
@@ -43,6 +51,12 @@ public class Client {
         return instance;
     }
 
+    /**
+     * Returns a command object by the name.
+     *
+     * @param request a request object
+     * @return a command object
+     */
     public AbstractCommand defineCommand(HttpServletRequest request){
         LOGGER.log(Level.DEBUG, "Define command. ");
         AbstractCommand command = null;

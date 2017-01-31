@@ -11,7 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Dell on 05.01.2017.
+ * Provides a DAO-logic for the Comment entity for the MySQL Database.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class CommentDAO {
     private static final Logger LOGGER = LogManager.getLogger(CommentDAO.class);
@@ -21,6 +24,12 @@ public class CommentDAO {
     private static final String SQL_GET_COMMENTS_BY_SONG_ID = "SELECT * FROM comments WHERE song_id = ?";
     private static final String SQL_DELETE_COMMENT_BY_ID = "DELETE FROM comments WHERE id = ?";
 
+    /**
+     * Adds a comment to the database.
+     *
+     * @param comment a comment object
+     * @throws DAOException
+     */
     public void addComment(Comment comment) throws DAOException {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -39,6 +48,12 @@ public class CommentDAO {
         }
     }
 
+    /**
+     * Gets all the comments from datebase.
+     *
+     * @return all the comments from data base.
+     * @throws DAOException
+     */
     public List<Comment> getAllComments() throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -64,6 +79,13 @@ public class CommentDAO {
         return allComments;
     }
 
+    /**
+     * Gets all comments to concrete song by id.
+     *
+     * @param songId a song id.
+     * @return all comments from data base to concrete song.
+     * @throws DAOException
+     */
     public List<Comment> getCommentBySongId(int songId) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -90,6 +112,12 @@ public class CommentDAO {
         return songComments;
     }
 
+    /**
+     * Deletes comment from database by id.
+     *
+     * @param id a comment id.
+     * @throws DAOException
+     */
     public void deleteCommentById(int id) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();

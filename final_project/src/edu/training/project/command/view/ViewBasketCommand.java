@@ -40,7 +40,7 @@ public class ViewBasketCommand extends AbstractCommand{
             LOGGER.log(Level.DEBUG, "Order get by user id " + orders);
             request.setAttribute("userOrders", orders);
         } catch (DAOException e) {
-            throw new ServiceException("Service error: registration is failed", e);
+            throw new ServiceException("Service error: view basket is failed", e);
         }
         return ConfigurationManager.getProperty("path.page.basket");
     }

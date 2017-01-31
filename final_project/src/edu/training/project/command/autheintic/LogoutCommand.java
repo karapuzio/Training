@@ -8,8 +8,12 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+
 /**
- * Created by Dell on 20.01.2017.
+ * Class is used to log out and destroy session.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class LogoutCommand extends AbstractCommand {
     private static final Logger LOGGER = LogManager.getLogger(LogoutCommand.class);

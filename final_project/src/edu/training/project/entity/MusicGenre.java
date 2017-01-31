@@ -1,10 +1,19 @@
 package edu.training.project.entity;
 
 /**
- * Created by Dell on 26.12.2016.
+ * Class is used to store MusicGenre object.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class MusicGenre {
+    /**
+     * The music genre's id.
+     */
     private int id;
+    /**
+     * Name of music genre.
+     */
     private String genre;
 
     public MusicGenre() {

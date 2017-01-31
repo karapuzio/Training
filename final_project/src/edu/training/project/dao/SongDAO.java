@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Dell on 05.01.2017.
+ * Provides a DAO-logic for the Song entity for the MySQL Database.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class SongDAO {
     private static final Logger LOGGER = LogManager.getLogger(SongDAO.class);
@@ -26,11 +29,16 @@ public class SongDAO {
             "SET name = ?, number_of_orders = ?, path_to_demo = ?, discount_for_song = ?, " +
             "song_cost = ?, musical_genre_id = ?, performance_id = ? WHERE id = ?";
 
+    /**
+     * Adds new song to database.
+     *
+     * @param song a Song object to add.
+     * @throws DAOException
+     */
     public void addSong(Song song) throws DAOException {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
-        LOGGER.log(Level.DEBUG, "Get Connection" + " " + connection);
         try {
             statement = connection.prepareStatement(SQL_ADD_SONG);
             statement.setString(1, song.getName());
@@ -40,8 +48,8 @@ public class SongDAO {
             statement.setDouble(5, song.getCost());
             statement.setInt(6, song.getGenreId());
             statement.setInt(7, song.getPerformanceId());
-            LOGGER.log(Level.DEBUG, "Get statement" + " " + statement);
             statement.executeUpdate();
+            LOGGER.log(Level.DEBUG, "Get statement" + " " + statement);
         } catch (SQLException e) {
             throw new DAOException("Exception in DAO : add song.");
         } finally {
@@ -49,6 +57,12 @@ public class SongDAO {
         }
     }
 
+    /**
+     * Gets all songs from database.
+     *
+     * @return all song from database.
+     * @throws DAOException
+     */
     public List<Song> getAllSongs() throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -77,6 +91,12 @@ public class SongDAO {
         return allSongs;
     }
 
+    /**
+     * Gets random songs from database.
+     *
+     * @return the random songs from database.
+     * @throws DAOException
+     */
     public List<Song> getRandomSong() throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -105,6 +125,13 @@ public class SongDAO {
         return randomSongs;
     }
 
+    /**
+     * Gets song with concrete id from database.
+     *
+     * @param id a song id.
+     * @return a Song object with concrete id.
+     * @throws DAOException
+     */
     public Song getSongById(int id) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -133,6 +160,12 @@ public class SongDAO {
         return song;
     }
 
+    /**
+     * Deletes song by id in database.
+     *
+     * @param id a song id.
+     * @throws DAOException
+     */
     public void deleteSongById(int id) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -148,6 +181,12 @@ public class SongDAO {
         }
     }
 
+    /**
+     * Update song with concrete id in database.
+     *
+     * @param song a Song object from update.
+     * @throws DAOException
+     */
     public void editSongById(Song song) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -161,10 +200,9 @@ public class SongDAO {
             statement.setInt(6, song.getGenreId());
             statement.setInt(7, song.getPerformanceId());
             statement.setInt(8, song.getId());
-            LOGGER.log(Level.DEBUG, "Get statement" + " " + statement);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception in DAO : get song by id.");
+            throw new DAOException("Exception in DAO : update song by id.");
         } finally {
             pool.closeConnection(connection);
         }

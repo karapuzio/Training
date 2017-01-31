@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by Dell on 20.01.2017.
+ * Class is used to add new user.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class RegistrationCommand extends AbstractCommand {
     private static final Logger LOGGER = LogManager.getLogger(RegistrationCommand.class);
@@ -24,8 +27,6 @@ public class RegistrationCommand extends AbstractCommand {
     private static final String PARAM_NAME_EMAIL = "email";
     private static final int MAX_LOGIN_LENGTH = 45;
     private static final int MAX_PASS_LENGTH = 20;
-    private static final String JSP_ERROR = "/jsp/error.jsp";
-    private static final String JSP_MAIN = "/jsp/home.jsp";
     private static final String SESSION_USER = "currentUser";
 
     @Override

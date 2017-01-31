@@ -1,10 +1,19 @@
 package edu.training.project.entity;
 
 /**
- * Created by Dell on 26.12.2016.
+ * Class is used to store MusicalPerformance object.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class MusicalPerformance {
+    /**
+     * The musical performance's id.
+     */
     private int id;
+    /**
+     * The musical performance's name.
+     */
     private String name;
 
     public MusicalPerformance() {

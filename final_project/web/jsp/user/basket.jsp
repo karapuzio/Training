@@ -14,6 +14,7 @@
 <f:message bundle="${locale}" key="locale.basket" var="basket"/>
 <f:message bundle="${locale}" key="locale.pay" var="pay"/>
 <f:message bundle="${locale}" key="locale.randomSong" var="randSong"/>
+<f:message bundle="${locale}" key="locale.notEnough" var="notEnought"/>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,6 +59,9 @@
                             <input type="submit" class="btn btn-block btn-lg btn-primary" value="${pay}"/>
                         </div>
                     </form>
+                    <c:if test="${transit eq '0'}">
+                        <h3 class="err text-center">${notEnought}</h3>
+                    </c:if>
                     <br/>
                     <table class="table table-hover">
                         <tbody>

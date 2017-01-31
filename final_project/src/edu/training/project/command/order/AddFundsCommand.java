@@ -6,7 +6,6 @@ import edu.training.project.controller.ConfigurationManager;
 import edu.training.project.dao.UserDAO;
 import edu.training.project.dao.exception.DAOException;
 import edu.training.project.entity.User;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by Dell on 30.01.2017.
+ * Class is used to add user's funds.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class AddFundsCommand extends AbstractCommand{
     private static final Logger LOGGER = LogManager.getLogger(AddFundsCommand.class);
@@ -34,19 +36,17 @@ public class AddFundsCommand extends AbstractCommand{
         if (card.isEmpty() || card.length() != CARD_LENGTH || cvv.isEmpty() || cvv.length() != CVV_LENGTH) {
             throw new ServiceException("Service error : not correct parameters for add funds.");
         }
-        LOGGER.log(Level.DEBUG, "Begin add funds" + " " + card + " " + cvv + " " + cash);
         try {
             UserDAO userDAO = new UserDAO();
             HttpSession session = request.getSession();
             User user = (User)session.getAttribute("currentUser");
-            LOGGER.log(Level.DEBUG, "User : " + user);
             user.setCash(user.getCash() + cash);
 
             userDAO.editUserById(user);
 
             page = ConfigurationManager.getProperty("path.page.user");
         } catch (DAOException e) {
-            throw new ServiceException("Service error: registration is failed", e);
+            throw new ServiceException("Service error: add funds is failed", e);
         }
         return page;
     }

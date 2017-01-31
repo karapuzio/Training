@@ -12,7 +12,6 @@ import edu.training.project.entity.Comment;
 import edu.training.project.entity.MusicalPerformance;
 import edu.training.project.entity.Song;
 import edu.training.project.entity.User;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,21 +20,21 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Dell on 23.01.2017.
+ * Class is used to add new comment.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class AddCommentCommand extends AbstractCommand{
     private static final Logger LOGGER = LogManager.getLogger(AddCommentCommand.class);
     private static final String PARAM_NAME_COMMENT = "comment";
     private static final String PARAM_NAME_SONG_ID = "songId";
     private static final String PARAM_NAME_USER_ID = "userId";
-    private static final String JSP_ERROR = "/jsp/error.jsp";
-    private static final String JSP_SONG = "/jsp/song.jsp";
     private static final int MAX_COMMENT_LENGTH = 255;
 
     @Override
     public String execute(HttpServletRequest request) throws ServiceException {
         String page = null;
-        LOGGER.log(Level.DEBUG, "Begin execute add commentContent command");
         // extract from request parameters
         String commentContent = request.getParameter(PARAM_NAME_COMMENT);
         int userId = Integer.parseInt(request.getParameter(PARAM_NAME_USER_ID));
@@ -43,7 +42,6 @@ public class AddCommentCommand extends AbstractCommand{
         if (commentContent.isEmpty() || commentContent.length() > MAX_COMMENT_LENGTH) {
             throw new ServiceException("Service error : not correct parameters for add commentContent.");
         }
-        LOGGER.log(Level.DEBUG, "Param " + commentContent + " " + userId + " " + songId);
         try {
             CommentDAO commentDAO = new CommentDAO();
             Comment comment = new Comment();
@@ -51,8 +49,6 @@ public class AddCommentCommand extends AbstractCommand{
             comment.setSongId(songId);
             comment.setUserId(userId);
             comment.setDate(new Date());
-
-            LOGGER.log(Level.DEBUG, "Comment to add " + comment);
 
             commentDAO.addComment(comment);
             List<Comment> comments = commentDAO.getCommentBySongId(songId);
@@ -70,9 +66,9 @@ public class AddCommentCommand extends AbstractCommand{
             song.setPerformance(musicalPerformance);
             request.setAttribute("selectedSong", song);
 
-            page = ConfigurationManager.getProperty("path.page.song");;
+            page = ConfigurationManager.getProperty("path.page.song");
         } catch (DAOException e) {
-            throw new ServiceException("Service error: registration is failed", e);
+            throw new ServiceException("Service error: add comment is failed", e);
         }
         return page;
     }

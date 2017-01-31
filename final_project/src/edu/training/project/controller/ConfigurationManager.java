@@ -7,7 +7,10 @@ import org.apache.logging.log4j.Logger;
 import java.util.ResourceBundle;
 
 /**
- * Created by Dell on 20.01.2017.
+ * Class is used to get resources.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class ConfigurationManager {
     private static final Logger LOGGER = LogManager.getLogger(ConfigurationManager.class);

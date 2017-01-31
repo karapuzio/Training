@@ -3,7 +3,6 @@ package edu.training.project.dao;
 import edu.training.project.dao.exception.DAOException;
 import edu.training.project.dao.pool.ConnectionPool;
 import edu.training.project.entity.MusicalPerformance;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Dell on 05.01.2017.
+ * Provides a DAO-logic for the MusicalPerformance entity for the MySQL Database.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class MusicalPerformanceDAO {
     private static final Logger LOGGER = LogManager.getLogger(MusicalPerformanceDAO.class);
@@ -25,6 +27,12 @@ public class MusicalPerformanceDAO {
     private static final String SQL_GET_PERFORMANCE_BY_NAME = "SELECT * FROM musician_performers WHERE name = ?";
     private static final String SQL_DELETE_PERFORMANCE_BY_ID = "DELETE FROM musician_performers WHERE id = ?";
 
+    /**
+     * Adds musical performance to database.
+     *
+     * @param performance a musical performance object.
+     * @throws DAOException
+     */
     public void addPerformance(MusicalPerformance performance) throws DAOException {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -40,6 +48,12 @@ public class MusicalPerformanceDAO {
         }
     }
 
+    /**
+     * Gets all musical performance from database.
+     *
+     * @return all musical performance.
+     * @throws DAOException
+     */
     public List<MusicalPerformance> getAllPerformances() throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -62,8 +76,14 @@ public class MusicalPerformanceDAO {
         return allPerformances;
     }
 
+    /**
+     * Gets musical performance by id from database.
+     *
+     * @param id a musical performance id.
+     * @return a MsicalPerformance object with concrete id from database.
+     * @throws DAOException
+     */
     public MusicalPerformance getPerformanceById(int id) throws DAOException{
-        LOGGER.log(Level.DEBUG, "Get user by id in MusicalPerformanceDao" + " " + id);
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
@@ -82,12 +102,17 @@ public class MusicalPerformanceDAO {
         } finally {
             pool.closeConnection(connection);
         }
-        LOGGER.log(Level.DEBUG, "Performance ready" + " " + performance);
         return performance;
     }
 
+    /**
+     * Gets musical performance by name from database.
+     *
+     * @param name a musical performance name.
+     * @return a MusicalPerformance object with concrete name from database.
+     * @throws DAOException
+     */
     public MusicalPerformance getPerformanceByName(String name) throws DAOException{
-        LOGGER.log(Level.DEBUG, "Get user by name in MusicalPerformanceDao" + " " + name);
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
@@ -106,10 +131,15 @@ public class MusicalPerformanceDAO {
         } finally {
             pool.closeConnection(connection);
         }
-        LOGGER.log(Level.DEBUG, "Performance ready" + " " + performance);
         return performance;
     }
 
+    /**
+     * Deletes musical performance by id in database.
+     *
+     * @param id a musical performance id.
+     * @throws DAOException
+     */
     public void deletePerformanceById(int id) throws DAOException{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();

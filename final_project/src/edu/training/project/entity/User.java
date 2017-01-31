@@ -3,16 +3,43 @@ package edu.training.project.entity;
 import java.util.List;
 
 /**
- * Created by Dell on 04.01.2017.
+ * Class is used to store User object.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class User {
+    /**
+     * The user's id.
+     */
     private int id;
+    /**
+     * The user's login.
+     */
     private String login;
+    /**
+     * The user's password.
+     */
     private String password;
+    /**
+     * The user's email.
+     */
     private String email;
+    /**
+     * The user's role.
+     */
     private String role = "user";
+    /**
+     * The user's number of orders.
+     */
     private int numberOfOrders;
+    /**
+     * The user's discount, what depending from number of orders.
+     */
     private int discount;
+    /**
+     * The user's cash.
+     */
     private double cash;
 
     private List<Order> orders;

@@ -11,7 +11,10 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Created by Dell on 05.01.2017.
+ * Stores a limit number of connections to the MySQL Database.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
@@ -24,8 +27,10 @@ public class ConnectionPool {
         init();
     }
 
+    /**
+     * Creates a limit number of connections with the MySQL Database.
+     */
     private void init() {
-        LOGGER.log(Level.DEBUG, "Init connection pool" + " " + pool);
         pool = new ArrayBlockingQueue<Connection>(POOL_SIZE);
         try {
             ConnectorDB connector = new ConnectorDB();
@@ -37,14 +42,18 @@ public class ConnectionPool {
                 pool.offer(connection);
             }
         }catch (SQLException e){
-            //TO DO FATALL LOG
+            LOGGER.log(Level.FATAL, e, e);
             throw new RuntimeException();
         }
         LOGGER.log(Level.DEBUG, "Init connection pool" + " " + pool);
     }
 
+    /**
+     * Gets instance from ConnectionPool class.
+     *
+     * @return a ConnectionPool object.
+     */
     public static ConnectionPool getInstance(){
-        LOGGER.log(Level.DEBUG, "Get instance of connection pool" + " " + instanceCreated);
         if (!instanceCreated.getAndSet(true)){
             instance = new ConnectionPool();
         }
@@ -52,17 +61,27 @@ public class ConnectionPool {
         return instance;
     }
 
+    /**
+     * Gets connection from connection pool.
+     *
+     * @return a Connection object.
+     */
     public Connection getConnection(){
         Connection cn = null;
         try{
             cn = pool.take();
         }
         catch (InterruptedException e){
-            // TO DO LOGGER
+            LOGGER.log(Level.ERROR, "Exception in get connection layer.", e);
         }
         return cn;
     }
 
+    /**
+     * Closes connection.
+     *
+     * @param connection a Connection object to close.
+     */
     public void closeConnection(Connection connection){
         pool.offer(connection);
     }

@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by Dell on 20.01.2017.
+ * Class is used to log in.
+ *
+ * @author Skidan Olya
+ * @version 1.0
  */
 public class LoginCommand extends AbstractCommand {
     private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
@@ -22,9 +25,6 @@ public class LoginCommand extends AbstractCommand {
     private static final String PARAM_NAME_PASSWORD = "password";
     private static final int MAX_LOGIN_LENGTH = 45;
     private static final int MAX_PASS_LENGTH = 20;
-    private static final String JSP_ERROR = "/jsp/error.jsp";
-    private static final String JSP_MAIN = "/jsp/home.jsp";
-    private static final String JSP_ADMIN = "/jsp/admin.jsp";
     private static final String SESSION_USER = "currentUser";
 
     @Override
@@ -39,17 +39,19 @@ public class LoginCommand extends AbstractCommand {
         }
         try {
             UserDAO userDAO = new UserDAO();
-            LOGGER.log(Level.DEBUG, "Begin execute login command" + " " + login + " " + pass);
             User user = userDAO.getUserByLogin(login);
             LOGGER.log(Level.DEBUG, "Check login ans password" + user + " " + login + " " + pass);
             if (user == null) {
-                //  throw new
+                page = ConfigurationManager.getProperty("path.page.login");
+                request.setAttribute("isCorrect", 0);
+                return page;
             }
             if (!user.getPassword().equals(pass)){
-                //page = JSP_ERROR;
-                //return page;
-                //TO DO
+                page = ConfigurationManager.getProperty("path.page.login");
+                request.setAttribute("isCorrect", 0);
+                return page;
             }
+            request.setAttribute("wrongParam", 1);
             String role = user.getRole();
             if (role.equalsIgnoreCase("user")){
                 page = ConfigurationManager.getProperty("path.page.home");
@@ -57,8 +59,6 @@ public class LoginCommand extends AbstractCommand {
             else {
                 page = ConfigurationManager.getProperty("path.page.admin");
             }
-            //page = ConfigurationManager.getProperty("path.page.main");
-            LOGGER.log(Level.DEBUG, "Page " + page);
             HttpSession session = request.getSession(true);
             session.setAttribute(SESSION_USER, user);
         }
