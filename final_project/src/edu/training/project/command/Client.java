@@ -9,6 +9,7 @@ import edu.training.project.command.comment.DeleteCommentCommand;
 import edu.training.project.command.genre.GenreAddCommand;
 import edu.training.project.command.order.AddFundsCommand;
 import edu.training.project.command.order.BasketReplinishCommand;
+import edu.training.project.command.order.DeleteOrderCommand;
 import edu.training.project.command.order.SongOrderCommand;
 import edu.training.project.command.performer.PerformerAddCommand;
 import edu.training.project.command.song.SearchCommand;
@@ -33,7 +34,6 @@ public class Client {
     private static AtomicBoolean instanceCreated = new AtomicBoolean();
 
     private Client(){
-        //TO DO
     }
 
     public static Client getInstance(){
@@ -50,12 +50,13 @@ public class Client {
         if (cmd == null){
             return command;
         }
+        LOGGER.log(Level.DEBUG, "Define command. " + cmd);
         TypeCommand currentCommand = null;
         try {
             currentCommand = TypeCommand.valueOf(cmd.toUpperCase());
         } catch (IllegalArgumentException e) {
-            //request.setAttribute("wrongAction", command
-                //    + MessageManager.getProperty("message.wrongaction"));
+            LOGGER.log(Level.ERROR, "Wrong action." ,e);
+            request.setAttribute("wrongAction", command + " is not exist.");
         }
         LOGGER.log(Level.DEBUG, "Parse command. " + currentCommand);
         switch (currentCommand) {
@@ -126,6 +127,12 @@ public class Client {
                 break;
             case ADD_FUNDS:
                 command = new AddFundsCommand();
+                break;
+            case VIEW_EDIT_SONG:
+                command = new ViewEditSongCommand();
+                break;
+            case DELETE_ORDER:
+                command = new DeleteOrderCommand();
                 break;
         }
         return command;

@@ -27,5 +27,6 @@
     Exception: ${pageContext.errorData.throwable}
     <br/>
     Message from exception: ${pageContext.exception.message}
+
 </body>
 </html>

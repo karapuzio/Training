@@ -69,15 +69,13 @@
                                 </td>
                                 <td>
                                     <audio controls>
-                                            <%--<source src="audio/music.ogg" type="audio/ogg; codecs=vorbis">--%>
                                         <source src="/music/${curSong.pathToDemo}" type="audio/mpeg">
-                                            <%--<a href="3.mp3">Скачайте музыку</a>.--%>
                                     </audio>
                                 </td>
 
                                 <td><c:out value="${ curSong.cost }$" /></td>
 
-                                <td><c:import url="editSong.jsp" /></td>
+                                <td><a href="controller?command=view_edit_song&songId=${curSong.id}"><span class="glyphicon glyphicon-edit"></span></a></td>
 
                                 <td><a href="controller?command=delete_song&songId=${curSong.id}"><span class="glyphicon glyphicon-minus"></span></a></td>
                             </tr>

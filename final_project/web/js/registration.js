@@ -1,11 +1,9 @@
 function validateRegistrationForm(){
-    alert("Sign Up successful");
-    console.log("What?");
     var result = true;
     var FILL_FIELD = "*Fill field.";
     var BAD_LOGIN = "*Min.length - 5. Can contain a-zA-Z0-9_";
     var PWD_NOT_EQUAL = "*Passwords are'n same.";
-    var BAD_PASSWORD = "*Not good enough password. Min.length - 8. It should content one big and small letter.";
+    var BAD_PASSWORD = "*Not good enough password. Min.length - 8. It should content one big and small letter, and one digit.";
     var BAD_EMAIL = "*Not correct email.";
     var errLogin = document.getElementById("err-login");
     var errPassword = document.getElementById("err-password");
@@ -16,7 +14,6 @@ function validateRegistrationForm(){
     errConfirm.innerHTML = "";
     errEmail.innerHTML = "";
     var login = document.forms[0]["login"].value;
-    // var login = f.login;
     var password = document.forms[0]["password"].value;
     var password_confirm = document.forms[0]["confirm"].value;
     var email = document.forms[0]["email"].value;

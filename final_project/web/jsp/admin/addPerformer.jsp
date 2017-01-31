@@ -36,12 +36,13 @@
                     <h1 class="text-center">${addPerformance}</h1>
                 </div>
                 <div class="modal-body">
-                    <form class="modal-body" name="AddGenreForm" action="controller" method="POST">
+                    <form class="modal-body" name="AddPerformanceForm" action="controller" method="POST" onsubmit="validateAddPerformanceForm();">
 
                         <input type="hidden" name="command" value="add_performer" />
 
                         <div class="form-group">
                             <input type="text" class="form-control input-lg" name="performer" id="performer" placeholder="${performance}"/>
+                            <span class="err" id="err-performer"></span>
                         </div>
 
                         <div class="form-group">
@@ -55,6 +56,6 @@
             </div>
         </div>
     </div>
-
+    <script type="text/javascript" src="js/song.js"></script>
 </body>
 </html>

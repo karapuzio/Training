@@ -38,13 +38,12 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="controller?command=view_home"><span class="glyphicon glyphicon-home"></span> ${home}</a></li>
-                <li><a href="controller?command=view_contact">${contact}</a></li>
+                <%--<li><a href="controller?command=view_contact">${contact}</a></li>--%>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><c:import url="addSong.jsp" /></li>
                 <li><c:import url="addGenre.jsp" /></li>
                 <li><c:import url="addPerformer.jsp" /></li>
-                <%--<li><a href="controller?command=view_user"><span class="glyphicon glyphicon-user"></span> ${user} ${sessionScope.currentUser.login}</a></li>--%>
                 <li><a href="controller?command=logout"><span class="glyphicon glyphicon-log-out"></span> ${logout}</a></li>
             </ul>
         </div>

@@ -10,7 +10,11 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 /**
- * Created by Dell on 28.01.2017.
+ * Class is used to to display footer.
+ *
+ * @author Skidan Olya
+ * @version 1.0
+ * @see TagSupport
  */
 public class FooterTag extends TagSupport{
     private static final Logger LOGGER = LogManager.getLogger(FooterTag.class);

@@ -37,20 +37,23 @@
                         <h1 class="text-center">${addFunds}</h1>
                     </div>
                     <div class="modal-body">
-                        <form class="modal-body" name="AddFundsForm" action="controller" method="POST">
+                        <form class="modal-body" name="AddFundsForm" action="controller" method="POST" onsubmit="validateFundsForm();">
 
                             <input type="hidden" name="command" value="add_funds" />
 
                             <div class="form-group">
                                 <input type="number" class="form-control input-lg" name="card" id="card" placeholder="${card}"/>
+                                <span class="err" id="err-card"></span>
                             </div>
 
                             <div class="form-group">
                                 <input type="number" class="form-control input-lg" name="cvv" id="cvv" placeholder="CVV"/>
+                                <span class="err" id="err-cvv"></span>
                             </div>
 
                             <div class="form-group">
-                                <input type="number" class="form-control input-lg" name="cash" id="cash" placeholder="${cash}"/>
+                                <input type="number" step="0.01" min="0.01" max="100" class="form-control input-lg" name="cash" id="cash" placeholder="${cash}"/>
+                                <span class="err" id="err-cash"></span>
                             </div>
 
                             <div class="form-group">
@@ -64,6 +67,6 @@
                 </div>
             </div>
         </div>
-
+        <script type="text/javascript" src="js/funds.js"></script>
 </body>
 </html>

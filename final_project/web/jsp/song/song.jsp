@@ -33,22 +33,13 @@
                 <section>
                     <table class="table table-hover">
                         <tbody>
-                            <%--<tr>--%>
-                                <%--<td>  <img src = "img/play.png" alt = "Play demo." height="20" width="20"> </td>--%>
-                                <%--<td>  <img src = "img/pause.png" alt = "Pause demo." height="20" width="20"> </td>--%>
-                                <%--<td><c:out value="${selectedSong.name}" /></td>--%>
-                                <%--<td><c:out value="${selectedSong.cost}" /></td>--%>
-                                <%--<td>  <img src = "img/plus.png" alt = "Add to basket." height="20" width="20"> </td>--%>
-                            <%--</tr>--%>
                             <tr>
                                 <td><a href="controller?command=view_song&songId=${selectedSong.id}">
                                     <span class="glyphicon glyphicon-music-alt"></span> ${selectedSong.performance.name} - ${selectedSong.name}</a>
                                 </td>
                                 <td>
                                     <audio controls>
-                                        <%--<source src="audio/music.ogg" type="audio/ogg; codecs=vorbis">--%>
-                                        <source src="/music/3.mp3" type="audio/mpeg">
-                                        <%--<a href="3.mp3">Скачайте музыку</a>.--%>
+                                        <source src="/music/${selectedSong.pathToDemo}" type="audio/mpeg">
                                     </audio>
                                 </td>
                                 <td><c:out value="${ selectedSong.cost }$" /></td>
@@ -63,7 +54,6 @@
                         <div class="form-group">
                             <label for="comment">${commentary}:</label>
                             <textarea class="form-control" rows="5" name="comment" id="comment"></textarea>
-                            <%--<input type="text" class="form-control input-lg" name="comment" id="comment" placeholder="${commentary}"/>--%>
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-block btn-mg btn-primary" value="${add}"/>

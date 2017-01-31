@@ -33,7 +33,6 @@
 </head>
 <body>
         <button type="button" class="btn btn-block btn-mg btn-link" data-toggle="modal" data-target="#addSongModal">${addSong}</button>
-        <%--btn btn-info btn-lg--%>
         <!-- Modal -->
         <div class="modal fade" id="addSongModal" role="dialog">
             <div class="modal-dialog">
@@ -43,56 +42,32 @@
                         <h1 class="text-center">${addSong}</h1>
                     </div>
                     <div class="modal-body">
-                        <form class="modal-body" name="AddSongForm" action="controller" method="POST">
+                        <form class="modal-body" name="AddSongForm" action="controller" method="POST" onsubmit="validateAddSongForm();">
 
                             <input type="hidden" name="command" value="add_song" />
 
                             <div class="form-group">
                                 <input type="text" class="form-control input-lg" name="performance" id="performance" placeholder="${performance}"/>
+                                <span class="err" id="err-performance"></span>
                             </div>
 
                             <div class="form-group">
                                 <input type="text" class="form-control input-lg" name="name" id="name" placeholder="${name}"/>
+                                <span class="err" id="err-name"></span>
                             </div>
 
                             <div class="form-group">
                                 <input type="text" class="form-control input-lg" name="genre" id="genre" placeholder="${genre}"/>
+                                <span class="err" id="err-genre"></span>
                             </div>
 
                             <div class="form-group">
                                 <input type="file" accept="audio/*" class="form-control input-lg" name="pathToDemo" id="pathToDemo" placeholder="${selectDemo}"/>
                             </div>
 
-                            <%--<div class="form-group">--%>
-                                <%--<input type="file" accept="text/*" class="form-control input-lg" name="pathToText" id="pathToText" placeholder="${selectText}"/>--%>
-                            <%--</div>--%>
-
-                        <%--<div class="form-group">--%>
-                                <%--<label class="control-label">${selectDemo}</label>--%>
-                                <%--<input id="pathToDemo" name="pathToDemo[]" type="file" multiple class="file-loading">--%>
-                                <%--<script>--%>
-                                    <%--$(document).on('ready', function() {--%>
-                                        <%--$("#pathToDemo").fileinput({showCaption: false});--%>
-                                    <%--});--%>
-                                <%--</script>--%>
-                            <%--</div>--%>
-
-                            <%--<div class="form-group">--%>
-                                <%--<label class="control-label">${selectText}</label>--%>
-                                <%--<input id="pathToText" name="pathToText[]" type="file" multiple class="file-loading">--%>
-                                <%--<script>--%>
-                                    <%--$(document).on('ready', function() {--%>
-                                        <%--$("#pathToText").fileinput({showCaption: false});--%>
-                                    <%--});--%>
-                                <%--</script>--%>
-                            <%--</div>--%>
-
                             <div class="form-group">
-                                <input type="number" class="form-control input-lg" name="discount" id="discount" placeholder="${discount}"/>
-                            </div>
-
-                            <div class="form-group">
-                                <input type="number" class="form-control input-lg" name="cost" id="cost" placeholder="${cost}"/>
+                                <input type="number" step="0.01" min="0.01" max="30" class="form-control input-lg" name="cost" id="cost" placeholder="${cost}"/>
+                                <span class="err" id="err-cost"></span>
                             </div>
 
                             <div class="form-group">
@@ -106,6 +81,6 @@
                 </div>
             </div>
         </div>
-
+        <script type="text/javascript" src="js/song.js"></script>
 </body>
 </html>

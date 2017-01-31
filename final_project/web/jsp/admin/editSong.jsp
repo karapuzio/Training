@@ -34,60 +34,44 @@
     <title>${editSong}</title>
 </head>
 <body>
-    <%--<div class="container">--%>
+    <c:import url="headerAdmin.jsp" />
+    <!-- Modal -->
+    <section>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="text-center">${editSong}</h1>
+                </div>
+                <div class="modal-body">
+                    <form class="modal-body" name="EditSongForm" action="controller" method="POST">
 
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editSongModal"><span class="glyphicon glyphicon-edit"></span></button>
+                        <input type="hidden" name="command" value="edit_song" />
+                        <input type="hidden" name="editSongId" value="${selectedSong.id}" />
 
-        <!-- Modal -->
-        <div class="modal fade" id="editSongModal" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h1 class="text-center">${editSong}</h1>
-                    </div>
-                    <div class="modal-body">
-                        <form class="modal-body" name="EditSongForm" enctype="multipart/form-data" action="controller" method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" name="performance" id="performance" placeholder="${selectedSong.performance.name}"/>
+                        </div>
 
-                            <input type="hidden" name="command" value="edit_song" />
-                            <input type="hidden" name="editSongId" value="${curSong.id}}" />
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" name="name" id="name" placeholder="${selectedSong.name}"/>
+                        </div>
 
-                            <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="performance" id="performance" placeholder="${curSong.performance.name}"/>
-                            </div>
+                        <div class="form-group">
+                            <input type="file" accept="audio/*" class="form-control input-lg" name="pathToDemo" id="pathToDemo" placeholder="${selectDemo}"/>
+                        </div>
 
-                            <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="name" id="name" placeholder="${curSong.name}"/>
-                            </div>
+                        <div class="form-group">
+                            <input type="number" step="0.01" class="form-control input-lg" name="cost" id="cost" placeholder="${selectedSong.cost}"/>
+                        </div>
 
-                            <div class="form-group">
-                                <input type="text" class="form-control input-lg" name="genre" id="genre" placeholder="${curSong.genre}"/>
-                            </div>
-
-                            <div class="form-group">
-                                <input type="file" accept="audio/*" class="form-control input-lg" name="pathToDemo" id="pathToDemo" placeholder="${curSong.pathToDemo}"/>
-                            </div>
-
-                            <div class="form-group">
-                                <input type="number" class="form-control input-lg" name="discount" id="discount" placeholder="${curSong.discount}"/>
-                            </div>
-
-                            <div class="form-group">
-                                <input type="number" class="form-control input-lg" name="cost" id="cost" placeholder="${curSong.cost}"/>
-                            </div>
-
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-block btn-lg btn-primary" value="${edit}"/>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-block btn-lg btn-primary" data-dismiss="modal">${close}</button>
-                    </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-block btn-lg btn-primary" value="${edit}"/>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </section>>
 
-    <%--</div>--%>
 </body>
 </html>

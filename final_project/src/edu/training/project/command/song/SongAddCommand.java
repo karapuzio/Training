@@ -25,7 +25,6 @@ public class SongAddCommand extends AbstractCommand {
     private static final String PARAM_NAME_SONG_NAME = "name";
     private static final String PARAM_NAME_GENRE = "genre";
     private static final String PARAM_NAME_DEMO_PATH = "pathToDemo";
-    private static final String PARAM_NAME_DISCOUNT = "discount";
     private static final String PARAM_NAME_COST = "cost";
     private static final int MAX_NAME_LENGTH = 255;
 
@@ -38,15 +37,12 @@ public class SongAddCommand extends AbstractCommand {
         String name = request.getParameter(PARAM_NAME_SONG_NAME);
         String genre = request.getParameter(PARAM_NAME_GENRE);
         String pathToDemo = request.getParameter(PARAM_NAME_DEMO_PATH);
-        int discount = Integer.parseInt(request.getParameter(PARAM_NAME_DISCOUNT));
         double cost = Double.parseDouble(request.getParameter(PARAM_NAME_COST));
-        LOGGER.log(Level.DEBUG, "Song parse " + name + " " + pathToDemo + " " + discount +
-                " " + cost);
+        LOGGER.log(Level.DEBUG, "Song parse " + name + " " + pathToDemo + " " + cost);
         if (name.isEmpty() || name.length() > MAX_NAME_LENGTH) {
             throw new ServiceException("Service error : not correct parameters for add song.");
         }
-        LOGGER.log(Level.DEBUG, "Song parse " + name + " " + pathToDemo + " " + discount +
-                " " + cost);
+        LOGGER.log(Level.DEBUG, "Song parse " + name + " " + pathToDemo + " " + cost);
         try {
             SongDAO songDAO = new SongDAO();
             Song song = new Song();
@@ -68,7 +64,6 @@ public class SongAddCommand extends AbstractCommand {
             }
             song.setName(name);
             song.setPathToDemo(pathToDemo);
-            song.setDiscountForSong(discount);
             song.setCost(cost);
             song.setPerformanceId(musicalPerformance.getId());
             song.setGenreId(musicGenre.getId());

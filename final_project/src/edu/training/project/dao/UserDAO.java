@@ -24,7 +24,7 @@ public class UserDAO {
 //    private static final String SQL_UPDATE_USER = "UPDATE users " +
 //            "SET login = ?, password = ?, email = ?, role = ?, number_of_orders = ?, discount_for_order = ?, " +
 //            "cash = ? WHERE id = ?";
-    private static final String SQL_UPDATE_USER = "UPDATE users SET cash = ? WHERE id = ?";
+    private static final String SQL_UPDATE_USER = "UPDATE users SET cash = ?, number_of_orders = ?, discount_for_order = ? WHERE id = ?";
     private static final String SQL_GET_ALL_USERS = "SELECT * FROM users";
     private static final String SQL_GET_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
     private static final String SQL_GET_USER_BY_LOGIN = "SELECT * FROM users WHERE login = ?";
@@ -164,16 +164,10 @@ public class UserDAO {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(SQL_UPDATE_USER);
-//            statement.setString(1, user.getLogin());
-//            statement.setString(2, user.getPassword());
-//            statement.setString(3, user.getEmail());
-//            statement.setString(4, user.getRole());
-//            statement.setInt(5, user.getNumberOfOrders());
-//            statement.setInt(6, user.getDiscount());
-//            statement.setDouble(7, user.getCash());
-//            statement.setInt(8, user.getId());
             statement.setDouble(1, user.getCash());
-            statement.setInt(2, user.getId());
+            statement.setInt(2, user.getNumberOfOrders());
+           statement.setInt(3, user.getDiscount());
+            statement.setInt(4, user.getId());
             LOGGER.log(Level.DEBUG, "Statement" + " " + statement);
             statement.executeUpdate();
         } catch (SQLException e) {

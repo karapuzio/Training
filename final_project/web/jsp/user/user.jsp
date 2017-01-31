@@ -50,10 +50,7 @@
                             <td><c:out value="${sessionScope.currentUser.discount} %" /></td>
                         </tr>
                         <tr>
-                            <%--<td>${cash} :  <a href="controller?command=add_funds"><span class="glyphicon glyphicon-plus-sign"></span></a></td>--%>
                             <td>${cash} :  <c:import url="addFunds.jsp" /></a></td>
-
-                            <%--<c:import url="addFunds.jsp" />--%>
                             <td><c:out value="${sessionScope.currentUser.cash} $"/></td>
                         </tr>
                         </tbody>

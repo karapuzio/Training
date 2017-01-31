@@ -46,6 +46,9 @@
                                             <span class="glyphicon glyphicon-music-alt"></span> ${order.song.performance.name} - ${order.song.name}</a>
                                         </td>
                                         <td><c:out value="${ order.song.cost } $" /></td>
+                                        <td><a href="controller?command=delete_order&orderId=${order.id}&userId=${sessionScope.currentUser.id}">
+                                            <span class="glyphicon glyphicon-minus"></span></a>
+                                        </td>
                                     </tr>
                                 </c:if>
                             </c:forEach>

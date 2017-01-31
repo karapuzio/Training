@@ -34,7 +34,7 @@
                         <input type="hidden" name="command" value="search" />
                         <input type="hidden" name="role" value="${sessionScope.currentUser.role}" />
                         <div class="input-group">
-                            <input type="text" class="form-control" name="search" id="search" placeholder=${search}>
+                            <input type="text" class="form-control search" name="search" id="search" placeholder=${search}>
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit">
                                     <i class="glyphicon glyphicon-search"></i>
@@ -52,13 +52,10 @@
                                 </td>
                                 <td>
                                     <audio controls>
-                                        <%--<source src="audio/music.ogg" type="audio/ogg; codecs=vorbis">--%>
                                         <source src="/music/${curSong.pathToDemo}" type="audio/mp3">
-                                        <%--<a href="3.mp3">Скачайте музыку</a>.--%>
                                     </audio>
                                 </td>
                                 <td><c:out value="${ curSong.cost }$" /></td>
-                                <%--<td>  <img src = "img/plus.png" alt = "Add to basket." height="20" width="20"> </td>--%>
                                 <td><a href="controller?command=add_to_basket&songId=${curSong.id}&userId=${sessionScope.currentUser.id}"><span class="glyphicon glyphicon-plus-sign"></span></a></td>
                             </tr>
                         </c:forEach>

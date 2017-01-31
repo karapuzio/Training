@@ -49,7 +49,6 @@
 
                         <div class="login-register">
                             <a href="controller?command=view_registration"><span class="glyphicon glyphicon-user"></span> ${registration}</a>
-                            <%--<a href="controller?command=registration">${registration}</a>--%>
                         </div>
                     </form>
                 </div>

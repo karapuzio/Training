@@ -15,13 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Dell on 20.01.2017.
+ * Class {@code Controller} is a servlet class used as a controller of the application.
+ *
+ * @author Skidan Olya
+ * @see HttpServlet
  */
 @WebServlet("/controller")
 public class Controller extends HttpServlet{
     private static final Logger LOGGER = LogManager.getLogger(Controller.class);
-    private static final String JSP_ERROR = "/jsp/error.jsp";
-    private static final String JSP_HOME = "/jsp/home.jsp";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,9 +32,16 @@ public class Controller extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        //request.getRequestDispatcher("/jsp/home.jsp").forward(request, response);
     }
 
+    /**
+     * Actions after taking request
+     *
+     * @param request  is servlet's request
+     * @param response is servlet's response
+     * @throws ServletException if there are servlet errors
+     * @throws IOException      if there are input/output errors
+     */
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,28 +53,22 @@ public class Controller extends HttpServlet{
         * call realize method execute() and send parameters
         * for defined command class
          */
-        LOGGER.log(Level.DEBUG, "Got define command");
+        LOGGER.log(Level.DEBUG, "Got define command : " + command);
         try {
             page = command.execute(request);
             // method return answer page
-            // page = null;
             LOGGER.log(Level.DEBUG, "Page " + page);
             if (page != null) {
-                //RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/jsp/home.jsp");
-                // call answer page on request
-                //dispatcher.forward(request, response);
-                //response.sendRedirect(JSP_MAIN);
                 request.getRequestDispatcher(page).forward(request, response);
             } else {
                 // install page with the error message
-                //page = ConfigurationManager.getProperty("path.page.index");
-                //request.getSession().setAttribute("nullPage",
-                  //      MessageManager.getProperty("message.nullpage"));
-                response.sendRedirect(request.getContextPath() + JSP_ERROR);
+                request.getSession().setAttribute("nullPage", "Null pointer page");
+                response.sendRedirect(request.getContextPath() + ConfigurationManager.getProperty("path.page.error"));
             }
         }
         catch (ServiceException e){
-            // TO DO
+            LOGGER.log(Level.ERROR, e, e);
+            response.sendRedirect(request.getContextPath() + ConfigurationManager.getProperty("path.page.error"));
         }
     }
 

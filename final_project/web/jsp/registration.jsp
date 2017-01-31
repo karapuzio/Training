@@ -12,7 +12,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
     <link href="<c:url value="/css/style.css" />" rel="stylesheet">
-    <%--<script type="text/javascript" src="js/registration.js"></script>--%>
     <title>Registration</title>
 </head>
 <body>
@@ -51,7 +50,6 @@
                     </div>
                     <div class="login-register">
                         <a href="controller?command=view_login"><span class="glyphicon glyphicon-user"></span> ${registration}</a>
-                        <%--<a href="login.jsp">Login</a>--%>
                     </div>
                 </form>
             </div>
