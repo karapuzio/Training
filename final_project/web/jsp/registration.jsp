@@ -49,7 +49,7 @@
                         <input type="submit" class="btn btn-block btn-lg btn-primary" value="${registration}"/>
                     </div>
                     <div class="login-register">
-                        <a href="controller?command=view_login"><span class="glyphicon glyphicon-user"></span> ${registration}</a>
+                        <a href="controller?command=view_login"><span class="glyphicon glyphicon-user"></span> Login</a>
                     </div>
                 </form>
             </div>

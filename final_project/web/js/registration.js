@@ -1,9 +1,9 @@
 function validateRegistrationForm(){
     var result = true;
     var FILL_FIELD = "*Fill field.";
-    var BAD_LOGIN = "*Min.length - 5. Can contain a-zA-Z0-9_";
+    var BAD_LOGIN = "*Min.length - 5, max - 20. Can contain a-zA-Z0-9_";
     var PWD_NOT_EQUAL = "*Passwords are'n same.";
-    var BAD_PASSWORD = "*Not good enough password. Min.length - 8. It should content one big and small letter, and one digit.";
+    var BAD_PASSWORD = "*Not good enough password. Min.length - 8, max - 20. It should content one big and small letter, and one digit.";
     var BAD_EMAIL = "*Not correct email.";
     var errLogin = document.getElementById("err-login");
     var errPassword = document.getElementById("err-password");
@@ -33,7 +33,7 @@ function validateRegistrationForm(){
         errConfirm.innerHTML = FILL_FIELD;
         result = false;
     }
-    if (password && password_confirm && (password.length < 8 || password.search(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/) !== 0)){
+    if (password && password_confirm && (password.length > 20 || password.length < 8 || password.search(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/) !== 0)){
         errPassword.innerHTML = BAD_PASSWORD;
         errConfirm.innerHTML = BAD_PASSWORD;
         result = false;

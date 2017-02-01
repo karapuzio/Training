@@ -16,6 +16,9 @@
 <f:message bundle="${locale}" key="locale.basket" var="basket"/>
 <f:message bundle="${locale}" key="locale.contact" var="contact"/>
 <f:message bundle="${locale}" key="locale.topSong" var="topSong"/>
+<f:message bundle="${locale}" key="locale.addSong" var="addSong"/>
+<f:message bundle="${locale}" key="locale.addPerformance" var="addPerformance"/>
+<f:message bundle="${locale}" key="locale.addGenre" var="addGenre"/>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,12 +41,11 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="controller?command=view_home"><span class="glyphicon glyphicon-home"></span> ${home}</a></li>
-                <%--<li><a href="controller?command=view_contact">${contact}</a></li>--%>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><c:import url="addSong.jsp" /></li>
-                <li><c:import url="addGenre.jsp" /></li>
-                <li><c:import url="addPerformer.jsp" /></li>
+                <li><a href="controller?command=view_add_song">${addSong}</a></li>
+                <li><a href="controller?command=view_add_genre">${addGenre}</a></li>
+                <li><a href="controller?command=view_add_performance">${addPerformance}</a></li>
                 <li><a href="controller?command=logout"><span class="glyphicon glyphicon-log-out"></span> ${logout}</a></li>
             </ul>
         </div>

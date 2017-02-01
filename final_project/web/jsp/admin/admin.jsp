@@ -21,6 +21,7 @@
 <f:message bundle="${locale}" key="locale.add" var="add"/>
 <f:message bundle="${locale}" key="locale.administration" var="administration"/>
 <f:message bundle="${locale}" key="locale.randomSong" var="randSong"/>
+<f:message bundle="${locale}" key="locale.search" var="search"/>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,11 +40,11 @@
             <div class="col-sm-3 sidenav">
                 <c:import url="../additional/carousel.jsp" />
                 <br/>
-                <c:import url="addSong.jsp" />
-                <br/>
-                <c:import url="addGenre.jsp" />
-                <br/>
-                <c:import url="addPerformer.jsp" />
+                <div class="list-group">
+                    <a href="controller?command=view_add_song" class="list-group-item">${addSong}</a>
+                    <a href="controller?command=view_add_genre" class="list-group-item">${addGenre}</a>
+                    <a href="controller?command=view_add_performance" class="list-group-item">${addPerformance}</a>
+                </div>
             </div>
             <div class="col-sm-6 text-left">
                 <section>
@@ -51,7 +52,7 @@
                         <input type="hidden" name="command" value="search" />
                         <input type="hidden" name="role" value="${sessionScope.currentUser.role}" />
                         <div class="input-group">
-                            <input type="text" class="form-control" name="search" id="search" placeholder="${search}">
+                            <input type="text" size="80" class="form-control" name="search" id="search" placeholder="${search}">
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit">
                                     <i class="glyphicon glyphicon-search"></i>

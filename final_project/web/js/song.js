@@ -18,7 +18,7 @@ function validateAddSongForm(){
         errPerformance.innerHTML = FILL_FIELD;
         result = false;
     }
-    if (performance && performance.length < 45){
+    if (performance && performance.length > 45){
         errPerformance.innerHTML = BAD_LENGTH;
         result = false;
     }
@@ -26,7 +26,7 @@ function validateAddSongForm(){
         errName.innerHTML = FILL_FIELD;
         result = false;
     }
-    if (name && name.length < 45){
+    if (name && name.length > 45){
         errName.innerHTML = BAD_LENGTH;
         result = false;
     }
@@ -34,7 +34,7 @@ function validateAddSongForm(){
         errGenre.innerHTML = FILL_FIELD;
         result = false;
     }
-    if (genre && genre.length < 45){
+    if (genre && genre.length > 45){
         errGenre.innerHTML = BAD_LENGTH;
         result = false;
     }
@@ -56,7 +56,7 @@ function validateAddGenreForm(){
         errGenre.innerHTML = FILL_FIELD;
         result = false;
     }
-    if (genre && genre.length < 45){
+    if (genre && genre.length > 45){
         errGenre.innerHTML = BAD_LENGTH;
         result = false;
     }
@@ -74,7 +74,7 @@ function validateAddPerformanceForm(){
         errPerformance.innerHTML = FILL_FIELD;
         result = false;
     }
-    if (performer && performer.length < 45){
+    if (performer && performer.length > 45){
         errPerformance.innerHTML = BAD_LENGTH;
         result = false;
     }

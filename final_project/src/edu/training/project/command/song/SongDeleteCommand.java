@@ -30,15 +30,19 @@ public class SongDeleteCommand extends AbstractCommand{
         int songId = Integer.parseInt(request.getParameter(PARAM_NAME_SONG_ID));
         try {
             SongDAO songDAO = new SongDAO();
-            songDAO.deleteSongById(songId);
+            Song songDel = songDAO.getSongById(songId);
+            songDel.setIsDeleted(1);
+            songDAO.deleteSongById(songDel);
             page = ConfigurationManager.getProperty("path.page.admin");
             HttpSession session = request.getSession(true);
             List<Song> suitableSong = (List<Song>)session.getAttribute("songs");
             int ind = -1;
-            for (int i = 0; i < suitableSong.size(); i++){
-                Song song = suitableSong.get(i);
-                if (song.getId() == songId){
-                    ind = i;
+            if (suitableSong != null){
+                for (int i = 0; i < suitableSong.size(); i++){
+                    Song song = suitableSong.get(i);
+                    if (song.getId() == songId){
+                        ind = i;
+                    }
                 }
             }
             if (ind != -1){

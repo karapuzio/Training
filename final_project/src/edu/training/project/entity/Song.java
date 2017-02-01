@@ -1,39 +1,58 @@
 package edu.training.project.entity;
 
 
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Dell on 26.12.2016.*/
 public class Song {
     private int DEFAULT_VALUE_IN_DB = 1;
+    /**
+     * The song's id.
+     */
     private int id;
+    /**
+     * The song's name.
+     */
     private String name;
-    private Date releaseDate;
-    private int numberOfOrders;
+    /**
+     * The path to demo version.
+     */
     private String pathToDemo;
-    private String pathToText;
-    private int discountForSong;
+    /**
+     * The song's cost.
+     */
     private double cost;
+    /**
+     * The genre id.
+     */
     private int genreId = DEFAULT_VALUE_IN_DB;
+    /**
+     * The performance id, who sing song.
+     */
     private int performanceId = DEFAULT_VALUE_IN_DB;
+    /**
+     * The performance, whi sing song.
+     */
     private MusicalPerformance performance;
+    /**
+     * The similarity coefficient to search requesr.
+     */
     private double coeffJakkara;
+    /**
+     * The flag of deleted song.
+     */
+    private int isDeleted = 0;
 
     private List<Comment> comments;
 
     public Song(){
     }
 
-    public Song(int id, String name, Date releaseDate, int numberOfOrders, String pathToDemo, String pathToText, int musicalGenreId, int discountForSong, double cost) {
+    public Song(int id, String name, String pathToDemo, double cost, int genreId, int performanceId) {
         this.id = id;
         this.name = name;
-        this.releaseDate = releaseDate;
-        this.numberOfOrders = numberOfOrders;
         this.pathToDemo = pathToDemo;
-        this.pathToText = pathToText;
-        this.discountForSong = discountForSong;
         this.cost = cost;
         this.genreId = genreId;
         this.performanceId = performanceId;
@@ -55,44 +74,12 @@ public class Song {
         this.name = name;
     }
 
-    public Date getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public int getNumberOfOrders() {
-        return numberOfOrders;
-    }
-
-    public void setNumberOfOrders(int numberOfOrders) {
-        this.numberOfOrders = numberOfOrders;
-    }
-
     public String getPathToDemo() {
         return pathToDemo;
     }
 
     public void setPathToDemo(String pathToDemo) {
         this.pathToDemo = pathToDemo;
-    }
-
-    public String getPathToText() {
-        return pathToText;
-    }
-
-    public void setPathToText(String pathToText) {
-        this.pathToText = pathToText;
-    }
-
-    public int getDiscountForSong() {
-        return discountForSong;
-    }
-
-    public void setDiscountForSong(int discountForSong) {
-        this.discountForSong = discountForSong;
     }
 
     public double getCost() {
@@ -143,6 +130,14 @@ public class Song {
         this.coeffJakkara = coeffJakkara;
     }
 
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -151,15 +146,12 @@ public class Song {
         Song song = (Song) object;
 
         if (id != song.id) return false;
-        if (numberOfOrders != song.numberOfOrders) return false;
-        if (discountForSong != song.discountForSong) return false;
         if (Double.compare(song.cost, cost) != 0) return false;
         if (genreId != song.genreId) return false;
         if (performanceId != song.performanceId) return false;
         if (name != null ? !name.equals(song.name) : song.name != null) return false;
-        if (releaseDate != null ? !releaseDate.equals(song.releaseDate) : song.releaseDate != null) return false;
         if (pathToDemo != null ? !pathToDemo.equals(song.pathToDemo) : song.pathToDemo != null) return false;
-        return pathToText != null ? pathToText.equals(song.pathToText) : song.pathToText == null;
+        return true;
     }
 
     @Override
@@ -168,11 +160,7 @@ public class Song {
         long temp;
         result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (releaseDate != null ? releaseDate.hashCode() : 0);
-        result = 31 * result + numberOfOrders;
         result = 31 * result + (pathToDemo != null ? pathToDemo.hashCode() : 0);
-        result = 31 * result + (pathToText != null ? pathToText.hashCode() : 0);
-        result = 31 * result + discountForSong;
         temp = Double.doubleToLongBits(cost);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + genreId;
@@ -185,11 +173,7 @@ public class Song {
         return "Song{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", releaseDate=" + releaseDate +
-                ", numberOfOrders=" + numberOfOrders +
                 ", pathToDemo='" + pathToDemo + '\'' +
-                ", pathToText='" + pathToText + '\'' +
-                ", discountForSong=" + discountForSong +
                 ", cost=" + cost +
                 ", genreId=" + genreId +
                 ", performanceId=" + performanceId +

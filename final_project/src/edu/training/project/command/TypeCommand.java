@@ -30,5 +30,8 @@ public enum TypeCommand {
     DELETE_COMMENT,
     ADD_FUNDS,
     VIEW_EDIT_SONG,
-    DELETE_ORDER;
+    DELETE_ORDER,
+    VIEW_ADD_SONG,
+    VIEW_ADD_GENRE,
+    VIEW_ADD_PERFORMANCE;
 }

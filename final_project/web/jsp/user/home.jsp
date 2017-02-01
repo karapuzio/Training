@@ -34,7 +34,7 @@
                         <input type="hidden" name="command" value="search" />
                         <input type="hidden" name="role" value="${sessionScope.currentUser.role}" />
                         <div class="input-group">
-                            <input type="text" class="form-control search" name="search" id="search" placeholder=${search}>
+                            <input type="text" size="80" class="form-control search" name="search" id="search" placeholder=${search}>
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit">
                                     <i class="glyphicon glyphicon-search"></i>
@@ -56,7 +56,7 @@
                                     </audio>
                                 </td>
                                 <td><c:out value="${ curSong.cost }$" /></td>
-                                <td><a href="controller?command=add_to_basket&songId=${curSong.id}&userId=${sessionScope.currentUser.id}"><span class="glyphicon glyphicon-plus-sign"></span></a></td>
+                                <td><a href="controller?command=add_to_basket&songId=${curSong.id}&userId=${sessionScope.currentUser.id}&curPage=home"><span class="glyphicon glyphicon-plus-sign"></span></a></td>
                             </tr>
                         </c:forEach>
                         </tbody>

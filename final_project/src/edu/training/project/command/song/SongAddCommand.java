@@ -68,7 +68,7 @@ public class SongAddCommand extends AbstractCommand {
             song.setCost(cost);
             song.setPerformanceId(musicalPerformance.getId());
             song.setGenreId(musicGenre.getId());
-
+            LOGGER.log(Level.DEBUG, "New song : " + song);
             songDAO.addSong(song);
 
             page = ConfigurationManager.getProperty("path.page.admin");

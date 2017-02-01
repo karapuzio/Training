@@ -32,16 +32,18 @@
                     <h1 class="text-center">${welcome}</h1>
                 </div>
                 <div class="modal-body">
-                    <form class="modal-body" name="LoginForm" action="controller" method="POST">
+                    <form class="modal-body" name="LoginForm" action="controller" method="POST" onsubmit="return validateLoginForm();">
 
                         <input type="hidden" name="command" value="login" />
 
                         <div class="form-group">
                             <input type="text" class="form-control input-lg" name="login" id="login" placeholder="Login"/>
+                            <span class="err" id="err-login"></span>
                         </div>
 
                         <div class="form-group">
                             <input type="password" class="form-control input-lg" name="password" id="password" placeholder="${password}"/>
+                            <span class="err" id="err-password"></span>
                         </div>
 
                         <div class="form-group">
@@ -59,5 +61,7 @@
             </div>
         </div>
     </section>
+
+    <script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>

@@ -58,7 +58,6 @@ public class Client {
      * @return a command object
      */
     public AbstractCommand defineCommand(HttpServletRequest request){
-        LOGGER.log(Level.DEBUG, "Define command. ");
         AbstractCommand command = null;
         String cmd = request.getParameter(COMMAND);
         if (cmd == null){
@@ -115,7 +114,6 @@ public class Client {
                 command = new ViewSongCommand();
                 break;
             case VIEW_HOME:
-                LOGGER.log(Level.DEBUG, "Choose view home command.");
                 command = new ViewHomeCommand();
                 break;
             case ADD_TO_BASKET:
@@ -147,6 +145,15 @@ public class Client {
                 break;
             case DELETE_ORDER:
                 command = new DeleteOrderCommand();
+                break;
+            case VIEW_ADD_GENRE:
+                command = new ViewAddGenreCommand();
+                break;
+            case VIEW_ADD_PERFORMANCE:
+                command = new ViewAddPerformanceCommand();
+                break;
+            case VIEW_ADD_SONG:
+                command = new ViewAddSongCommand();
                 break;
         }
         return command;

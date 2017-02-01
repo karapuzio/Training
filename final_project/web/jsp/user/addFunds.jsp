@@ -37,7 +37,7 @@
                         <h1 class="text-center">${addFunds}</h1>
                     </div>
                     <div class="modal-body">
-                        <form class="modal-body" name="AddFundsForm" action="controller" method="POST" onsubmit="validateFundsForm();">
+                        <form class="modal-body" name="AddFundsForm" action="controller" method="POST" onsubmit="return validateFundsForm();">
 
                             <input type="hidden" name="command" value="add_funds" />
 

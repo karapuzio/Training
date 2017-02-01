@@ -43,7 +43,7 @@
                                     </audio>
                                 </td>
                                 <td><c:out value="${ selectedSong.cost }$" /></td>
-                                <td><a href="controller?command=add_to_basket&songId=${selectedSong.id}&userId=${sessionScope.currentUser.id}"><span class="glyphicon glyphicon-plus-sign"></span></a></td>
+                                <td><a href="controller?command=add_to_basket&songId=${selectedSong.id}&userId=${sessionScope.currentUser.id}&curPage=song"><span class="glyphicon glyphicon-plus-sign"></span></a></td>
                             </tr>
                         </tbody>
                     </table>

@@ -24,35 +24,27 @@
     <title>${addPerformance}</title>
 </head>
 <body>
-
-    <button type="button" class="btn btn-block btn-mg btn-link" data-toggle="modal" data-target="#addPerformanceModal">${addPerformance}</button>
-
+    <c:import url="headerAdmin.jsp" />
     <!-- Modal -->
-    <div class="modal fade" id="addPerformanceModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h1 class="text-center">${addPerformance}</h1>
-                </div>
-                <div class="modal-body">
-                    <form class="modal-body" name="AddPerformanceForm" action="controller" method="POST" onsubmit="validateAddPerformanceForm();">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="text-center">${addPerformance}</h1>
+            </div>
+            <div class="modal-body">
+                <form class="modal-body" name="AddPerformanceForm" action="controller" method="POST" onSubmit="return validateAddPerformanceForm();">
 
-                        <input type="hidden" name="command" value="add_performer" />
+                    <input type="hidden" name="command" value="add_performer" />
 
-                        <div class="form-group">
-                            <input type="text" class="form-control input-lg" name="performer" id="performer" placeholder="${performance}"/>
-                            <span class="err" id="err-performer"></span>
-                        </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" name="performer" id="performer" placeholder="${performance}"/>
+                        <span class="err" id="err-performer"></span>
+                    </div>
 
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-block btn-lg btn-primary" value="${add}"/>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-block btn-lg btn-primary" data-dismiss="modal">${close}</button>
-                </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-block btn-lg btn-primary" value="${add}"/>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
